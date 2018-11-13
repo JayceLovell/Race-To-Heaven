@@ -1,10 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
+    private string _levelChoice;
+    private string _playerName;
+    private NetworkManager _networkManager;
 
     public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
+
+    public string LevelChoice
+    {
+        get
+        {
+            return _levelChoice;
+        }
+
+        set
+        {
+            _levelChoice = value;
+        }
+    }
+
+    public string PlayerName
+    {
+        get
+        {
+            return _playerName;
+        }
+
+        set
+        {
+            _playerName = value;
+        }
+    }
 
     //Awake is always called before any Start functions
     void Awake()
@@ -25,12 +56,23 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
     }
         // Use this for initialization
-        void Start () {
-		
-	}
+    void Start () {
+        _networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+    public void HostGame()
+    {
+        SceneManager.LoadScene("Test", LoadSceneMode.Single);
+        _networkManager.StartHost();
+        _networkManager.ServerChangeScene("Test");
+    }
+    public void JoinGame()
+    {
+        _networkManager.StartClient();
+    }
 }
