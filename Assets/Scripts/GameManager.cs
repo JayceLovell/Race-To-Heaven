@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour {
     {
         SceneManager.LoadScene("Test", LoadSceneMode.Single);
         _networkManager.StartHost();
-        _networkManager.ServerChangeScene("Test");
+        //_networkManager.ServerChangeScene("Test");
     }
     public void JoinGame()
     {

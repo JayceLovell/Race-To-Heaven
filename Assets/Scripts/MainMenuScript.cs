@@ -60,14 +60,11 @@ public class MainMenuScript : MonoBehaviour {
     {
         switch(_dropdownLevelSelector.value)
         {
-            case 1:
+            case 2:
                 _selectedlevel = "Small Level";
                 break;
-            case 2:
-                _selectedlevel = "Medium Level";
-                break;
             case 3:
-                _selectedlevel = "Big Level";
+                _selectedlevel = "Medium Level";
                 break;
         }
     }
