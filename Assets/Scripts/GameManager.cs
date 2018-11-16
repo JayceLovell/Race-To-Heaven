@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     private string _levelChoice;
@@ -66,9 +65,8 @@ public class GameManager : MonoBehaviour {
 	}
     public void HostGame()
     {
-        //SceneManager.LoadScene("Test", LoadSceneMode.Single);    
-        //_networkManager.ServerChangeScene("Test");
         _networkManager.onlineScene = "Test";
+        //_networkManager.onlineScene = _levelChoice;
         _networkManager.StartHost();
     }
     public void JoinGame()
