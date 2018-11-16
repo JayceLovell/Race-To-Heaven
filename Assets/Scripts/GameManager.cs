@@ -67,9 +67,10 @@ public class GameManager : MonoBehaviour {
 	}
     public void HostGame()
     {
-        SceneManager.LoadScene("Test", LoadSceneMode.Single);
-        _networkManager.StartHost();
+        //SceneManager.LoadScene("Test", LoadSceneMode.Single);    
         //_networkManager.ServerChangeScene("Test");
+        _networkManager.onlineScene = "Test";
+        _networkManager.StartHost();
     }
     public void JoinGame()
     {
