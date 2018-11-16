@@ -2,26 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.UI;
 
-public class PlayerController : NetworkBehaviour {
+public class PlayerController : NetworkBehaviour
+{
 
+    // Public variables
     [Header("Movement Settings")]
     public float speed = 10.0f;
 
     // Private variables
     private Rigidbody2D rBody;
-    private GameManager _gameManager;
+    //private GameManager _gameManager;
 
 
     // Use this for initialization
     void Start () {
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //_gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         rBody = GetComponent<Rigidbody2D>();
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+    // Update is called once per frame
+    void FixedUpdate () {
         if (!isLocalPlayer)
         {
             return;
@@ -34,8 +39,6 @@ public class PlayerController : NetworkBehaviour {
 
         // Assign the movement to the players velocity.
         rBody.velocity = movement;
-
-            Debug.Log(horiz);
 
     }
     public override void OnStartLocalPlayer()

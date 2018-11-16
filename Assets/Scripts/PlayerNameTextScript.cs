@@ -5,8 +5,9 @@ using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class PlayerNameTextScript : NetworkBehaviour {
-    [SyncVar(hook = "SetPlayerName")]
-    public Text PlayerName;
+
+    [SyncVar] public string PlayerName;
+    public Text PlayerNameText;
 
     private GameManager _gameManager;
 
@@ -18,10 +19,12 @@ public class PlayerNameTextScript : NetworkBehaviour {
 
         }
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        SetPlayerName();
+        PlayerName = _gameManager.PlayerName;
+        CmdSetPlayerName(PlayerName);
     }
-    void SetPlayerName()
+    [Command]
+    void CmdSetPlayerName(string PlayerName)
     {
-        PlayerName.text = _gameManager.PlayerName;
+        PlayerNameText.text = PlayerName;
     }
 }
