@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour {
         // Use this for initialization
     void Start () {
         _networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
-
     }
 	
 	// Update is called once per frame
