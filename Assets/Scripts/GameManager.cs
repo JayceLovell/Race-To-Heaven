@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
     private NetworkManager _networkManager;
 
     public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
+    public GameObject playertest;
 
     public string LevelChoice
     {

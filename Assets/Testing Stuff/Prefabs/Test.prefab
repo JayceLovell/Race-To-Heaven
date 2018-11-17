@@ -61,6 +61,8 @@ GameObject:
   - component: {fileID: 114608450657099664}
   - component: {fileID: 114719599831420240}
   - component: {fileID: 114446032534236056}
+  - component: {fileID: 95600769671455852}
+  - component: {fileID: 114993171511310572}
   m_Layer: 0
   m_Name: Test
   m_TagString: Untagged
@@ -101,7 +103,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &60509885267203144
 PolygonCollider2D:
   m_ObjectHideFlags: 1
@@ -167,6 +169,24 @@ PolygonCollider2D:
       - {x: 0.22, y: -0.96}
       - {x: 0.25, y: -0.9}
       - {x: 0.17, y: -0.56}
+--- !u!95 &95600769671455852
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1751761618899206}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8edf8b562e6254c46b29640ae2486ae0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114167482465422452
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -315,6 +335,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerName: $
   PlayerNameText: {fileID: 114651948520815188}
+--- !u!114 &114993171511310572
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1751761618899206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95600769671455852}
+  m_ParameterSendBits: 0
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!212 &212344395073068492
 SpriteRenderer:
   m_ObjectHideFlags: 1
