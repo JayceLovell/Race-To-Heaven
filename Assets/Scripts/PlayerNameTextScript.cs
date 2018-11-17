@@ -14,9 +14,9 @@ public class PlayerNameTextScript : NetworkBehaviour {
     // Use this for initialization
     void Start () {
 
-        if (isLocalPlayer)
+        if (!isLocalPlayer)
         {
-
+            return;
         }
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         PlayerName = _gameManager.PlayerName;

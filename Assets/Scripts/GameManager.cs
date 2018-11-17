@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour {
     private NetworkManager _networkManager;
 
     public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
-    public GameObject playertest;
 
     public string LevelChoice
     {
@@ -55,15 +54,15 @@ public class GameManager : MonoBehaviour {
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
     }
-        // Use this for initialization
-    void Start () {
+    // Use this for initialization
+    void Start() {
         _networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update() {
+
+    }
     public void HostGame()
     {
         _networkManager.onlineScene = "Test";
@@ -74,4 +73,5 @@ public class GameManager : MonoBehaviour {
     {
         _networkManager.StartClient();
     }
+
 }
