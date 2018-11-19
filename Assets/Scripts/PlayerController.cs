@@ -21,18 +21,27 @@ public class PlayerController : NetworkBehaviour
     private NetworkManager _networkManager;
     private NetworkAnimator _networkanimator;
     private GameManager _gameManager;
+    private GameController _gameController;
+    private Vector2 movement;
 
 
     // Use this for initialization
     void Start () {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _rigidBody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
         _networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
         _networkanimator = GetComponent<NetworkAnimator>();
+        _gameController = GameObject.Find("GameController").GetComponent<GameController>();
+
         PlayerName = _gameManager.PlayerName;
         CmdSetPlayerName(PlayerName);
+        movement = new Vector2(1f, 0);
     }
     // Update is called once per frame
     void Update()
@@ -51,18 +60,21 @@ public class PlayerController : NetworkBehaviour
         {
             return;
         }
+        if (_gameController.GameActive)
+        {
+            _animator.SetBool("IsRunning", true);
+            //Vector2 movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            _rigidBody.velocity = movement * speed;
+        }
         _animator.SetBool("IsGrounded", true);
-        Vector2 movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        _rigidBody.velocity = movement * speed;
-
-        if (_rigidBody.velocity.x < 0)
+        /*if (_rigidBody.velocity.x < 0)
             _sprite.flipX = true;
         else
             _sprite.flipX = false;
         if (_rigidBody.velocity.magnitude > 0.1f)
             _animator.SetBool("IsRunning", true);
         else
-            _animator.SetBool("IsRunning", false);
+            _animator.SetBool("IsRunning", false);*/
         //CmdMove(movement);
     }
     [Command]
