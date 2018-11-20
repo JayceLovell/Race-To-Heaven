@@ -7,6 +7,7 @@ public class SkillBarScript : MonoBehaviour {
 
     private Slider _skillbar;
     private bool _isfull;
+    private float _staminaAmount;
 
     public bool Isfull
     {
@@ -21,21 +22,38 @@ public class SkillBarScript : MonoBehaviour {
         }
     }
 
+    public float StaminaAmount
+    {
+        get
+        {
+            return _staminaAmount;
+        }
+
+        set
+        {
+            _staminaAmount = value;
+        }
+    }
+
     // Use this for initialization
     void Start () {
         _skillbar = GameObject.Find("SkillBar").GetComponent<Slider>();
-        _skillbar.value = 0.01f;
+        _skillbar.value = 0.001f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (!_isfull)
         {
-            _skillbar.value+=0.10f;
-            if (_skillbar.value == _skillbar.maxValue)
-            {
-                _isfull = true;
-            }
+            _staminaAmount += 0.10f;
         }
-	}
+        _skillbar.value = _staminaAmount;
+        if (_skillbar.value == _skillbar.maxValue)
+        {
+            _isfull = true;
+        }else
+        {
+            _isfull = false;
+        }
+    }
 }

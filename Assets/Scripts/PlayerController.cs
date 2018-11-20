@@ -1,28 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class PlayerController : NetworkBehaviour
 {
-    [SyncVar] public string PlayerName;
-
     // Public variables
-    [Header("Movement Settings")]
-    public float speed = 10.0f;
+    [Header("Player Name")]
+    [SyncVar] public string PlayerName;
 
     public Text PlayerNameText;
 
+    [Header("Jump Settings")]
+    public float JumpForce;
+    public float JumpTime;
+    public float JumpTimeCounter;
+    public bool Grounded;
+    public LayerMask WhatIsGround;
+    public bool StoppedJumping;
+    public float GroundCheckRadius;
+    [Header("Animator")]
+    public Animator Animator;
+
     // Private variables
     private Rigidbody2D _rigidBody;
-    private Animator _animator;
     private SpriteRenderer _sprite;
     private NetworkManager _networkManager;
     private NetworkAnimator _networkanimator;
     private GameManager _gameManager;
     private GameController _gameController;
-    private Vector2 movement;
+    private Transform _groundCheck;
 
 
     // Use this for initialization
@@ -31,17 +37,24 @@ public class PlayerController : NetworkBehaviour
         {
             return;
         }
+        Initialise();
+
+        PlayerName = _gameManager.PlayerName;
+        CmdSetPlayerName(PlayerName);
+        JumpTimeCounter = JumpTime;
+        WhatIsGround = LayerMask.GetMask("Ground");
+        GroundCheckRadius = 1;
+    }
+    void Initialise()
+    {
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _rigidBody = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
+        Animator = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
         _networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
         _networkanimator = GetComponent<NetworkAnimator>();
         _gameController = GameObject.Find("GameController").GetComponent<GameController>();
-
-        PlayerName = _gameManager.PlayerName;
-        CmdSetPlayerName(PlayerName);
-        movement = new Vector2(1f, 0);
+        _groundCheck = this.gameObject.transform;
     }
     // Update is called once per frame
     void Update()
@@ -50,7 +63,20 @@ public class PlayerController : NetworkBehaviour
         {
             return;
         }
-
+        if (Grounded)
+        {
+            Animator.SetBool("IsGrounded", true);
+            JumpTimeCounter = JumpTime;
+        }
+        else
+        {
+            Animator.SetBool("IsGrounded", false);
+        }
+        if (_gameController.GameActive)
+        {
+            Animator.SetBool("IsRunning", true);
+        }
+        _networkanimator.GetParameterAutoSend(2);
         _networkanimator.GetParameterAutoSend(1);
         _networkanimator.GetParameterAutoSend(0);
     }
@@ -60,46 +86,49 @@ public class PlayerController : NetworkBehaviour
         {
             return;
         }
-        if (_gameController.GameActive)
-        {
-            _animator.SetBool("IsRunning", true);
-            //Vector2 movement = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            _rigidBody.velocity = movement * speed;
-        }
-        _animator.SetBool("IsGrounded", true);
+        Grounded = Physics2D.OverlapCircle(_groundCheck.position, GroundCheckRadius, WhatIsGround);
         if (Input.GetKeyDown("space"))
         {
-            _rigidBody.AddForce(new Vector2(0, 100), ForceMode2D.Impulse);
+            //and you are on the ground...
+            if (Grounded)
+            {
+                //jump!
+                _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
+                StoppedJumping = false;
+            }
             //https://forum.unity.com/threads/mario-style-jumping.381906/
             //use this link to implement mario style jumping
         }
-        /*if (_rigidBody.velocity.x < 0)
-            _sprite.flipX = true;
+        //if you keep holding down the jump button...
+        if (Input.GetKeyDown("space") && !StoppedJumping)
+        {
+            //and your counter hasn't reached zero...
+            if (JumpTimeCounter > 0)
+            {
+                //keep jumping!
+                _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
+                JumpTimeCounter -= Time.deltaTime;
+            }
+        }
+        //if you stop holding down the jump button...
+        if (Input.GetKeyDown("space"))
+        {
+            //stop jumping and set your counter to zero.  The timer will reset once we touch the ground again in the update function.
+            JumpTimeCounter = 0;
+            StoppedJumping = true;
+        }
+        if (_gameController.GameActive)
+        {
+            Animator.SetBool("IsRunning", true);
+        }
         else
-            _sprite.flipX = false;
-        if (_rigidBody.velocity.magnitude > 0.1f)
-            _animator.SetBool("IsRunning", true);
-        else
-            _animator.SetBool("IsRunning", false);*/
-        //CmdMove(movement);
+        {
+            Animator.SetBool("IsRunning", false);
+        }
     }
     [Command]
     void CmdSetPlayerName(string PlayerName)
     {
         PlayerNameText.text = PlayerName;
     }
-    /*[Command]
-    void CmdMove(Vector2 movement)
-    {
-        _rigidBody.velocity = movement * speed;
-
-        if (_rigidBody.velocity.x < 0)
-            _sprite.flipX = true;
-        else
-            _sprite.flipX = false;
-        if (_rigidBody.velocity.magnitude > 0.1f)
-            _animator.SetBool("IsRunning", true);
-        else
-            _animator.SetBool("IsRunning", false);
-    }*/
 }

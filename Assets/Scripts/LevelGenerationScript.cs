@@ -35,6 +35,8 @@ public class LevelGenerationScript : MonoBehaviour {
         if (floor.transform.position.x < cam.transform.position.x + 50)
             floor = Instantiate(floorPrefab, floor.transform.position + new Vector3(floorWidth, 0, 0), Quaternion.identity);
 
+        obstacle.GetComponent<Rigidbody2D>().AddForce(new Vector2(-1f, 0f)*1f);
+
         //if (background.transform.position.x < cam.transform.position.x + 50)
         //    background = Instantiate(backgroundPrefab, background.transform.position + new Vector3(backgroundWidth, 0, 0), Quaternion.identity);
     }
