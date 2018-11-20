@@ -54,6 +54,7 @@ public class MainMenuScript : MonoBehaviour {
     }
     public void JoinGame()
     {
+        _gameManager.LevelChoice = _selectedlevel;
         _gameManager.PlayerName = PlayerName;
         _gameManager.JoinGame();
     }
@@ -71,13 +72,20 @@ public class MainMenuScript : MonoBehaviour {
     }
     public void LevelSelected()
     {
+        //Debug.Log(_dropdownLevelSelector.value);
         switch(_dropdownLevelSelector.value)
         {
-            case 2:
+            case 0:
+                _selectedlevel = "Test";
+                break;
+            case 1:
                 _selectedlevel = "Small Level";
                 break;
-            case 3:
+            case 2:
                 _selectedlevel = "Medium Level";
+                break;
+            case 3:
+                _selectedlevel = "Test";
                 break;
         }
     }

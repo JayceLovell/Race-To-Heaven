@@ -2,15 +2,14 @@
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class GameController : MonoBehaviour {
+public class GameController : NetworkBehaviour {
+
+    [SyncVar] public int _playersConnected;
 
     private GameObject _startButton;
     private Text _txtamountOfPlayers;
     private bool _displayPlayers;
     private bool _gameActive;
-
-    [SyncVar]
-    private int _playersConnected;
 
     public bool GameActive
     {
@@ -37,7 +36,10 @@ public class GameController : MonoBehaviour {
 	void Update () {
         if (_displayPlayers)
         {
-           _playersConnected = NetworkServer.connections.Count;
+            if (isServer)
+            {
+                _playersConnected = NetworkServer.connections.Count;
+            }
             _txtamountOfPlayers.text = "Players Connected: " + _playersConnected+"/4";
         }
     }

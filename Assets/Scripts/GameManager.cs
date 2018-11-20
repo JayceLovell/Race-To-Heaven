@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : NetworkBehaviour {
+
     private string _levelChoice;
     private string _playerName;
     private NetworkManager _networkManager;
@@ -65,12 +66,12 @@ public class GameManager : MonoBehaviour {
     }
     public void HostGame()
     {
-        _networkManager.onlineScene = "Test";
-        //_networkManager.onlineScene = _levelChoice;
+        _networkManager.onlineScene = _levelChoice;
         _networkManager.StartHost();
     }
     public void JoinGame()
     {
+        _networkManager.onlineScene = _levelChoice;
         _networkManager.StartClient();
     }
 
