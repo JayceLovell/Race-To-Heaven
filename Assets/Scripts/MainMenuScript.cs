@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class MainMenuScript : MonoBehaviour {
     private InputField _inputPlayerNameField;
     private GameManager _gameManager;
     private Dropdown _dropdownLevelSelector;
+    private Text _version;
     private string _selectedlevel;
 
     public string PlayerName
@@ -27,10 +29,17 @@ public class MainMenuScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        Initialize();
+        _version.text = "Version :" + Application.version;
+	}
+
+    void Initialize()
+    {
         _inputPlayerNameField = GameObject.Find("InputPlayerName").GetComponent<InputField>();
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _dropdownLevelSelector = GameObject.Find("DropdownLevelSelector").GetComponent<Dropdown>();
-	}
+        _version = GameObject.Find("txtVersion").GetComponent<Text>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -45,6 +54,7 @@ public class MainMenuScript : MonoBehaviour {
     }
     public void JoinGame()
     {
+        _gameManager.LevelChoice = _selectedlevel;
         _gameManager.PlayerName = PlayerName;
         _gameManager.JoinGame();
     }
@@ -52,14 +62,22 @@ public class MainMenuScript : MonoBehaviour {
     {
         Application.Quit();
     }
+    public void ClickOptions()
+    {
+        SceneManager.LoadScene("Options", LoadSceneMode.Additive);
+    }
     public void EnteredName()
     {
         PlayerName=_inputPlayerNameField.text;
     }
     public void LevelSelected()
     {
+        //Debug.Log(_dropdownLevelSelector.value);
         switch(_dropdownLevelSelector.value)
         {
+            case 0:
+                _selectedlevel = "Test";
+                break;
             case 1:
                 _selectedlevel = "Small Level";
                 break;
@@ -67,7 +85,7 @@ public class MainMenuScript : MonoBehaviour {
                 _selectedlevel = "Medium Level";
                 break;
             case 3:
-                _selectedlevel = "Big Level";
+                _selectedlevel = "Test";
                 break;
         }
     }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : NetworkBehaviour {
+
     private string _levelChoice;
     private string _playerName;
     private NetworkManager _networkManager;
@@ -55,24 +55,24 @@ public class GameManager : MonoBehaviour {
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
     }
-        // Use this for initialization
-    void Start () {
+    // Use this for initialization
+    void Start() {
         _networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+    }
+
+    // Update is called once per frame
+    void Update() {
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
     public void HostGame()
     {
-        SceneManager.LoadScene("Test", LoadSceneMode.Single);
+        _networkManager.onlineScene = _levelChoice;
         _networkManager.StartHost();
-        _networkManager.ServerChangeScene("Test");
     }
     public void JoinGame()
     {
+        _networkManager.onlineScene = _levelChoice;
         _networkManager.StartClient();
     }
+
 }
