@@ -31,6 +31,7 @@ public class MainMenuScript : MonoBehaviour {
     void Start () {
         Initialize();
         _version.text = "Version :" + Application.version;
+        _selectedlevel = "Test";
 	}
 
     void Initialize()

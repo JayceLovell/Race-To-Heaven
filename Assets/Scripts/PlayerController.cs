@@ -67,6 +67,12 @@ public class PlayerController : NetworkBehaviour
             _rigidBody.velocity = movement * speed;
         }
         _animator.SetBool("IsGrounded", true);
+        if (Input.GetKeyDown("space"))
+        {
+            _rigidBody.AddForce(new Vector2(0, 100), ForceMode2D.Impulse);
+            //https://forum.unity.com/threads/mario-style-jumping.381906/
+            //use this link to implement mario style jumping
+        }
         /*if (_rigidBody.velocity.x < 0)
             _sprite.flipX = true;
         else
