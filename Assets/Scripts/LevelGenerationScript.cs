@@ -30,7 +30,10 @@ public class LevelGenerationScript : MonoBehaviour {
     private void FixedUpdate()
     {
         if (obstacle.transform.position.x < cam.transform.position.x + 50)
+        {
             obstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length - 1)], obstacle.transform.position + new Vector3(Random.Range(obstacleMinWidth, obstacleMaxWidth), 0, 0), Quaternion.identity);
+        }
+            
 
         if (floor.transform.position.x < cam.transform.position.x + 50)
             floor = Instantiate(floorPrefab, floor.transform.position + new Vector3(floorWidth, 0, 0), Quaternion.identity);

@@ -46,5 +46,6 @@ public class GameController : NetworkBehaviour {
     public void StartGame()
     {
         _startButton.SetActive(false);
+        _gameActive = true;
     }
 }

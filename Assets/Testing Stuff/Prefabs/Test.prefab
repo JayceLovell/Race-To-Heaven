@@ -62,6 +62,8 @@ GameObject:
   - component: {fileID: 114446032534236056}
   - component: {fileID: 95600769671455852}
   - component: {fileID: 114993171511310572}
+  - component: {fileID: 114418270484029074}
+  - component: {fileID: 114292202247969130}
   m_Layer: 0
   m_Name: Test
   m_TagString: Untagged
@@ -76,7 +78,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1751761618899206}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 49.953327, y: 0.76434803, z: 0}
+  m_LocalPosition: {x: -0.26188993, y: -3.0644069, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224115755277342958}
@@ -97,7 +99,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 10
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -207,6 +209,18 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114292202247969130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1751761618899206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b452b37b3830340af53134977ca9ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 1
 --- !u!114 &114365636814867566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -239,6 +253,17 @@ MonoBehaviour:
     i15: 221
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!114 &114418270484029074
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1751761618899206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03f672d7d64b88746b9b798be1e533dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114446032534236056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -251,8 +276,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerName: 
-  speed: 10
   PlayerNameText: {fileID: 114651948520815188}
+  JumpForce: 9
+  JumpTime: 10
+  JumpTimeCounter: 10
+  Grounded: 1
+  WhatIsGround:
+    serializedVersion: 2
+    m_Bits: 256
+  StoppedJumping: 0
+  GroundCheckRadius: 0
+  Animator: {fileID: 0}
 --- !u!114 &114479649817217362
 MonoBehaviour:
   m_ObjectHideFlags: 1
