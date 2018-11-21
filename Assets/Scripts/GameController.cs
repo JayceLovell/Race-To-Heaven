@@ -60,7 +60,10 @@ public class GameController : NetworkBehaviour {
             }
             _txtamountOfPlayers.text = "Players Connected: " + _playersConnected+"/4";
         }
-        IncreaseDiffculty();
+        if(_gameActive)
+        {
+            IncreaseDiffculty();
+        }
     }
     public void StartGame()
     {
