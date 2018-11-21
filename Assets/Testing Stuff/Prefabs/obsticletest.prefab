@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4996382101219892}
   - component: {fileID: 212897140800163662}
   - component: {fileID: 61741024476181520}
-  - component: {fileID: 50202898452633244}
   - component: {fileID: 114808558799903390}
   - component: {fileID: 114517535664698970}
+  - component: {fileID: 50028903876237102}
   m_Layer: 8
   m_Name: obsticletest
   m_TagString: Obsticle
@@ -44,18 +44,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50202898452633244
+--- !u!50 &50028903876237102
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1720846101615166}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1

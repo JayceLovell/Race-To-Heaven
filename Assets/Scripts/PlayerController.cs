@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
@@ -76,6 +77,8 @@ public class PlayerController : NetworkBehaviour
         {
             Animator.SetBool("IsRunning", true);
         }
+
+        _networkanimator.GetParameterAutoSend(3);
         _networkanimator.GetParameterAutoSend(2);
         _networkanimator.GetParameterAutoSend(1);
         _networkanimator.GetParameterAutoSend(0);

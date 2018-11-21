@@ -11,6 +11,9 @@ public class GameController : NetworkBehaviour {
     private Text _txtamountOfPlayers;
     private bool _displayPlayers;
     private bool _gameActive;
+    private float _speed;
+    private float _timer;
+    private LevelGenerationScript _levelGenerationScript;
 
     public bool GameActive
     {
@@ -25,13 +28,27 @@ public class GameController : NetworkBehaviour {
         }
     }
 
+    public float Speed
+    {
+        get
+        {
+            return _speed;
+        }
+
+        set
+        {
+            _speed = value;
+        }
+    }
+
 
     // Use this for initialization
     void Start () {
         _displayPlayers = true;
         _startButton = GameObject.Find("btnStart");
         _txtamountOfPlayers = GameObject.Find("txtAmountOfPlayers").GetComponent<Text>();
-	}
+        _speed = 3.5f;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -43,6 +60,7 @@ public class GameController : NetworkBehaviour {
             }
             _txtamountOfPlayers.text = "Players Connected: " + _playersConnected+"/4";
         }
+        IncreaseDiffculty();
     }
     public void StartGame()
     {
@@ -51,6 +69,17 @@ public class GameController : NetworkBehaviour {
         {
             _startButton.SetActive(false);
             _gameActive = true;
+        }
+    }
+    void IncreaseDiffculty()
+    {
+        _timer += Time.deltaTime;
+        if (_timer >= 20)
+        {
+            _timer = 0;
+            _speed++;
+            _levelGenerationScript.ObstacleMaxWidth++;
+            _levelGenerationScript.ObstacleMinWidth++;
         }
     }
 }

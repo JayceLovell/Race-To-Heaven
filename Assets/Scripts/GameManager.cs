@@ -73,6 +73,7 @@ public class GameManager : NetworkBehaviour {
         switch (_levelChoice)
         {
             case "Test":
+                _networkManager.spawnPrefabs.Add(TestObstible);
                 ClientScene.RegisterPrefab(TestObstible);
                 break;
         }
@@ -81,11 +82,13 @@ public class GameManager : NetworkBehaviour {
     {
         _networkManager.onlineScene = _levelChoice;
         _networkManager.StartHost();
+        PrepareNetWorkManager();
     }
     public void JoinGame()
     {
         _networkManager.onlineScene = _levelChoice;
         _networkManager.StartClient();
+        PrepareNetWorkManager();
     }
 
 }
