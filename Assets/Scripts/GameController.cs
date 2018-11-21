@@ -4,7 +4,8 @@ using UnityEngine.UI;
 
 public class GameController : NetworkBehaviour {
 
-    [SyncVar] public int _playersConnected;
+    [SyncVar] private int _playersConnected;
+    [SyncVar] private int _playersReady;
 
     private GameObject _startButton;
     private Text _txtamountOfPlayers;
@@ -45,7 +46,11 @@ public class GameController : NetworkBehaviour {
     }
     public void StartGame()
     {
-        _startButton.SetActive(false);
-        _gameActive = true;
+        _playersReady++;
+        if(_playersReady == _playersConnected)
+        {
+            _startButton.SetActive(false);
+            _gameActive = true;
+        }
     }
 }
