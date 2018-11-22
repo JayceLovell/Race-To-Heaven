@@ -582,7 +582,7 @@ GameObject:
   - component: {fileID: 761885549}
   m_Layer: 0
   m_Name: GameController
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -603,8 +603,8 @@ MonoBehaviour:
   - {fileID: 1720846101615166, guid: 9b5815bdcbdc8d94cbfb39ca3039e331, type: 2}
   obstavleInitialSpawnLoc: {fileID: 4996382101219892, guid: 9b5815bdcbdc8d94cbfb39ca3039e331,
     type: 2}
-  ObstacleMinWidth: 5
-  ObstacleMaxWidth: 10
+  _obstacleMinWidth: 0
+  _obstacleMaxWidth: 0
   floorPrefab: {fileID: 1123993704995620, guid: feb70f8cf6327b24ab8864aa74da671e,
     type: 2}
   floor: {fileID: 634088508}
@@ -620,6 +620,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e194a8b528295141b511c918a6fef8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayersConnected: 0
+  PlayersReady: 0
+  GameActive: 0
+  Timer: 0
+  Speed: 0
 --- !u!4 &761885548
 Transform:
   m_ObjectHideFlags: 0
