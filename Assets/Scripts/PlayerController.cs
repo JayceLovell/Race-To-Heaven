@@ -7,7 +7,7 @@ public class PlayerController : NetworkBehaviour
 {
     // Public variables
     [Header("Player Name")]
-    [SyncVar] public string PlayerName;
+    [SyncVar(hook = "OnPlayerNameChange")] public string PlayerName;
 
     public Text PlayerNameText;
 
@@ -42,7 +42,7 @@ public class PlayerController : NetworkBehaviour
         Initialise();
 
         PlayerName = _gameManager.PlayerName;
-        CmdSetPlayerName(PlayerName);
+        SetPlayerName(PlayerName);
         JumpTimeCounter = JumpTime;
         WhatIsGround = LayerMask.GetMask("Ground");
         GroundCheckRadius = 1;
@@ -58,13 +58,8 @@ public class PlayerController : NetworkBehaviour
         _gameController = GameObject.Find("GameController").GetComponent<GameController>();
         _groundCheck = this.gameObject.transform;
     }
-    // Update is called once per frame
     void Update()
     {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
         Grounded = Physics2D.OverlapCircle(_groundCheck.position, GroundCheckRadius, WhatIsGround);
         if (Grounded)
         {
@@ -79,7 +74,6 @@ public class PlayerController : NetworkBehaviour
         {
             Animator.SetBool("IsRunning", true);
         }
-
         _networkanimator.GetParameterAutoSend(3);
         _networkanimator.GetParameterAutoSend(2);
         _networkanimator.GetParameterAutoSend(1);
@@ -135,8 +129,7 @@ public class PlayerController : NetworkBehaviour
             Animator.SetBool("IsRunning", false);
         }
     }
-    [Command]
-    void CmdSetPlayerName(string PlayerName)
+    void SetPlayerName(string PlayerName)
     {
         PlayerNameText.text = PlayerName;
     }
@@ -148,10 +141,19 @@ public class PlayerController : NetworkBehaviour
             {
                 _networkManager.StopClient();
             }
-            else if (isServer)
-            {
-                _networkManager.StopHost();
-            }
         }
+    }
+    /*public override void OnStartLocalPlayer()
+    {
+        var otherplayers = GameObject.FindGameObjectsWithTag("Player");
+        foreach (var player in otherplayers)
+        {
+            Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+
+        }
+    }*/
+    void OnPlayerNameChange(string valueToChangeTo)
+    {
+        PlayerName = valueToChangeTo;
     }
 }

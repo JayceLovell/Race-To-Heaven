@@ -5,43 +5,22 @@ using UnityEngine.UI;
 
 public class GameController : NetworkBehaviour {
 
-    [SyncVar] private int _playersConnected;
-    [SyncVar] private int _playersReady;
-    [SyncVar] private float _timer;
-    [SyncVar] private float _speed;
-    [SyncVar] private bool _gameActive;
+    [SyncVar(hook = "OnPlayersConnectedChange")]
+    public int PlayersConnected;
+    [SyncVar(hook = "OnPlayersReadyChange")]
+    public int PlayersReady;
+    [SyncVar(hook = "OnGameActiveChange")]
+    public bool GameActive;
+    [SyncVar(hook = "OnTimerChange")]
+    public float Timer;
+    [SyncVar(hook = "OnSpeedChange")] 
+    public float Speed;
 
     private GameObject _startButton;
     private Text _txtamountOfPlayers;
     private bool _displayPlayers;
     private LevelGenerationScript _levelGenerationScript;
     private NetworkManager _networkManager;
-
-    public bool GameActive
-    {
-        get
-        {
-            return _gameActive;
-        }
-
-        set
-        {
-            _gameActive = value;
-        }
-    }
-
-    public float Speed
-    {
-        get
-        {
-            return _speed;
-        }
-
-        set
-        {
-            _speed = value;
-        }
-    }
 
 
     // Use this for initialization
@@ -50,7 +29,7 @@ public class GameController : NetworkBehaviour {
         _displayPlayers = true;
         _startButton = GameObject.Find("btnStart");
         _txtamountOfPlayers = GameObject.Find("txtAmountOfPlayers").GetComponent<Text>();
-        _speed = 3.5f;
+        Speed = 3.5f;
     }
 
      void Initilize()
@@ -65,36 +44,58 @@ public class GameController : NetworkBehaviour {
         {
             if (isServer)
             {
-                _playersConnected = NetworkServer.connections.Count;
+                PlayersConnected = NetworkServer.connections.Count;
             }
-            _txtamountOfPlayers.text = "Players Connected: " + _playersConnected+"/4";
+            _txtamountOfPlayers.text = "Players Connected: " + PlayersConnected+"/4";
         }
-        if(_gameActive)
+        if(GameActive)
         {
             IncreaseDiffculty();
-            _startButton.SetActive(false);
         }
     }
+
     public void StartGame()
     {
-        _playersReady++;
-        if(_playersReady == _playersConnected)
+        PlayersReady++;
+        _startButton.SetActive(false);
+        if (PlayersReady == PlayersConnected)
         {
-            _gameActive = true;
+            GameActive = true;
         }
     }
     void IncreaseDiffculty()
     {
         if (isServer)
         {
-            _timer += Time.deltaTime;
-            if (_timer >= 10)
+            Timer += Time.deltaTime;
+            if (Timer >= 10)
             {
-                _timer = 0;
-                _speed++;
+                Timer = 0;
+                Speed++;
                 _levelGenerationScript.ObstacleMaxWidth++;
                 _levelGenerationScript.ObstacleMinWidth++;
             }
         }
+    }
+    void OnPlayersConnectedChange(int valueToChangeTo)
+    {
+        PlayersConnected = valueToChangeTo;
+    }
+    void OnPlayersReadyChange(int valueToChangeTo)
+    {
+        Debug.Log("Changing value");
+        PlayersReady = valueToChangeTo;
+    }
+    void OnGameActiveChange(bool valueToChangeTo)
+    {
+        GameActive = valueToChangeTo;
+    }
+    void OnTimerChange(float valueToChangeTo)
+    {
+        Timer = valueToChangeTo;
+    }
+    void OnSpeedChange(float valueToChangeTo)
+    {
+        Speed = valueToChangeTo;
     }
 }
