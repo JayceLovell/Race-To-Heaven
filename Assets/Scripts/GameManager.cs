@@ -11,6 +11,10 @@ public class GameManager : NetworkBehaviour {
 
     public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 
+    [Header("Obsticles Prefabs")]
+    public GameObject TestObstible;
+    public GameObject SmallLevel;
+    public GameObject MediumLevel;
     public string LevelChoice
     {
         get
@@ -64,15 +68,27 @@ public class GameManager : NetworkBehaviour {
     void Update() {
 
     }
+    void PrepareNetWorkManager()
+    {
+        switch (_levelChoice)
+        {
+            case "Test":
+                _networkManager.spawnPrefabs.Add(TestObstible);
+                ClientScene.RegisterPrefab(TestObstible);
+                break;
+        }
+    }
     public void HostGame()
     {
         _networkManager.onlineScene = _levelChoice;
         _networkManager.StartHost();
+        PrepareNetWorkManager();
     }
     public void JoinGame()
     {
         _networkManager.onlineScene = _levelChoice;
         _networkManager.StartClient();
+        PrepareNetWorkManager();
     }
 
 }

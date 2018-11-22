@@ -11,6 +11,7 @@ public class Skill_Miner : MonoBehaviour {
     private Rigidbody2D _rigibody;
     private SkillBarScript _skillbar;
     private float _staminaCost;
+    private bool isUsingSkill;
 
 
 
@@ -19,7 +20,7 @@ public class Skill_Miner : MonoBehaviour {
         _rigibody = GetComponent<Rigidbody2D>();
         _skillbar = GetComponent<SkillBarScript>();
         currStamina = _skillbar.StaminaAmount;
-        _staminaCost = 15;
+        _staminaCost = 50;
     }
 
 
@@ -38,6 +39,7 @@ public class Skill_Miner : MonoBehaviour {
             _skillbar.StaminaAmount -= _staminaCost;
             currCD = cooldown;
             GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", true);
+            isUsingSkill = true;
             StartCoroutine(Timer(1));
         }
 
@@ -46,6 +48,21 @@ public class Skill_Miner : MonoBehaviour {
     IEnumerator Timer(int counter)
     {
         yield return new WaitForSeconds(counter);
+        isUsingSkill = false;
         GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", false);
+        GetComponent<PlayerController>().Animator.SetBool("IsStruck", false);
     }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Obsticle" && isUsingSkill)
+        {
+            Destroy(collision.gameObject);
+        }
+        else if(collision.gameObject.tag == "Obsticle")
+        {
+            GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
+            StartCoroutine(Timer(1));
+        }
+    }
+
 }

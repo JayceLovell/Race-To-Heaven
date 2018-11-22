@@ -4,38 +4,25 @@ using UnityEngine;
 
 public class MakeObsticlemove : MonoBehaviour {
 
-    private float _speed;
     private GameController _gameController;
-
-    public float Speed
-    {
-        get
-        {
-            return _speed;
-        }
-
-        set
-        {
-            _speed = value;
-        }
-    }
 
     // Use this for initialization
     void Start () {
         _gameController = GameObject.Find("GameController").GetComponent<GameController>();
-        _speed = 1f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (_gameController.GameActive)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(-1f, 0f) * _speed);
+            //GetComponent<Rigidbody2D>().AddForce(new Vector2(-1f, 0f) * _speed);
+            transform.Translate(Vector2.left * _gameController.Speed * Time.deltaTime);
         }
     }
+    //eliminate spawned objects on the left when they exit the collision box
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.name == "Off")
+        if (collision.gameObject.name == "Off")
         {
             Destroy(this.gameObject);
         }

@@ -57,16 +57,16 @@ GameObject:
   - component: {fileID: 212344395073068492}
   - component: {fileID: 114365636814867566}
   - component: {fileID: 60509885267203144}
-  - component: {fileID: 50658969475715312}
   - component: {fileID: 114608450657099664}
   - component: {fileID: 114446032534236056}
   - component: {fileID: 95600769671455852}
   - component: {fileID: 114993171511310572}
   - component: {fileID: 114418270484029074}
   - component: {fileID: 114292202247969130}
+  - component: {fileID: 50465836420424940}
   m_Layer: 0
   m_Name: Test
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,7 +85,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50658969475715312
+--- !u!50 &50465836420424940
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1

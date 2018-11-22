@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
@@ -32,7 +33,8 @@ public class PlayerController : NetworkBehaviour
 
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         if (!isLocalPlayer)
         {
             return;
@@ -63,6 +65,7 @@ public class PlayerController : NetworkBehaviour
         {
             return;
         }
+        Grounded = Physics2D.OverlapCircle(_groundCheck.position, GroundCheckRadius, WhatIsGround);
         if (Grounded)
         {
             Animator.SetBool("IsGrounded", true);
@@ -76,17 +79,19 @@ public class PlayerController : NetworkBehaviour
         {
             Animator.SetBool("IsRunning", true);
         }
+
+        _networkanimator.GetParameterAutoSend(3);
         _networkanimator.GetParameterAutoSend(2);
         _networkanimator.GetParameterAutoSend(1);
         _networkanimator.GetParameterAutoSend(0);
     }
     // Update is called once per frame
-    void FixedUpdate () {
+    void FixedUpdate()
+    {
         if (!isLocalPlayer)
         {
             return;
         }
-        Grounded = Physics2D.OverlapCircle(_groundCheck.position, GroundCheckRadius, WhatIsGround);
         if (Input.GetKeyDown("space"))
         {
             //and you are on the ground...
@@ -96,8 +101,6 @@ public class PlayerController : NetworkBehaviour
                 _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
                 StoppedJumping = false;
             }
-            //https://forum.unity.com/threads/mario-style-jumping.381906/
-            //use this link to implement mario style jumping
         }
         //if you keep holding down the jump button...
         if (Input.GetKeyDown("space") && !StoppedJumping)
@@ -120,6 +123,12 @@ public class PlayerController : NetworkBehaviour
         if (_gameController.GameActive)
         {
             Animator.SetBool("IsRunning", true);
+            var otherplayers = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var player in otherplayers)
+            {
+                Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+
+            }
         }
         else
         {
@@ -130,5 +139,19 @@ public class PlayerController : NetworkBehaviour
     void CmdSetPlayerName(string PlayerName)
     {
         PlayerNameText.text = PlayerName;
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "Off")
+        {
+            if (isClient)
+            {
+                _networkManager.StopClient();
+            }
+            else if (isServer)
+            {
+                _networkManager.StopHost();
+            }
+        }
     }
 }
