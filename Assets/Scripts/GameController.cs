@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
@@ -6,14 +7,15 @@ public class GameController : NetworkBehaviour {
 
     [SyncVar] private int _playersConnected;
     [SyncVar] private int _playersReady;
+    [SyncVar] private float _timer;
+    [SyncVar] private float _speed;
+    [SyncVar] private bool _gameActive;
 
     private GameObject _startButton;
     private Text _txtamountOfPlayers;
     private bool _displayPlayers;
-    private bool _gameActive;
-    private float _speed;
-    private float _timer;
     private LevelGenerationScript _levelGenerationScript;
+    private NetworkManager _networkManager;
 
     public bool GameActive
     {
@@ -44,14 +46,21 @@ public class GameController : NetworkBehaviour {
 
     // Use this for initialization
     void Start () {
+        Initilize();
         _displayPlayers = true;
         _startButton = GameObject.Find("btnStart");
         _txtamountOfPlayers = GameObject.Find("txtAmountOfPlayers").GetComponent<Text>();
         _speed = 3.5f;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+     void Initilize()
+    {
+        _levelGenerationScript = GetComponent<LevelGenerationScript>();
+        _networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+    }
+
+    // Update is called once per frame
+    void Update () {
         if (_displayPlayers)
         {
             if (isServer)
@@ -63,6 +72,7 @@ public class GameController : NetworkBehaviour {
         if(_gameActive)
         {
             IncreaseDiffculty();
+            _startButton.SetActive(false);
         }
     }
     public void StartGame()
@@ -70,19 +80,21 @@ public class GameController : NetworkBehaviour {
         _playersReady++;
         if(_playersReady == _playersConnected)
         {
-            _startButton.SetActive(false);
             _gameActive = true;
         }
     }
     void IncreaseDiffculty()
     {
-        _timer += Time.deltaTime;
-        if (_timer >= 20)
+        if (isServer)
         {
-            _timer = 0;
-            _speed++;
-            _levelGenerationScript.ObstacleMaxWidth++;
-            _levelGenerationScript.ObstacleMinWidth++;
+            _timer += Time.deltaTime;
+            if (_timer >= 10)
+            {
+                _timer = 0;
+                _speed++;
+                _levelGenerationScript.ObstacleMaxWidth++;
+                _levelGenerationScript.ObstacleMinWidth++;
+            }
         }
     }
 }

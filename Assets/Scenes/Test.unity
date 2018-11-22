@@ -603,8 +603,8 @@ MonoBehaviour:
   - {fileID: 1720846101615166, guid: 9b5815bdcbdc8d94cbfb39ca3039e331, type: 2}
   obstavleInitialSpawnLoc: {fileID: 4996382101219892, guid: 9b5815bdcbdc8d94cbfb39ca3039e331,
     type: 2}
-  obstacleMinWidth: 5
-  obstacleMaxWidth: 10
+  ObstacleMinWidth: 5
+  ObstacleMaxWidth: 10
   floorPrefab: {fileID: 1123993704995620, guid: feb70f8cf6327b24ab8864aa74da671e,
     type: 2}
   floor: {fileID: 634088508}

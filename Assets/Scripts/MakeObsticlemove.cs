@@ -22,10 +22,8 @@ public class MakeObsticlemove : MonoBehaviour {
     //eliminate spawned objects on the left when they exit the collision box
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.name);
         if (collision.gameObject.name == "Off")
         {
-            Debug.Log("Destroy");
             Destroy(this.gameObject);
         }
     }
