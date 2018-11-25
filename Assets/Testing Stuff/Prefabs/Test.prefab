@@ -55,12 +55,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4025952301174936}
   - component: {fileID: 212344395073068492}
-  - component: {fileID: 114365636814867566}
   - component: {fileID: 60509885267203144}
-  - component: {fileID: 114608450657099664}
   - component: {fileID: 114446032534236056}
   - component: {fileID: 95600769671455852}
-  - component: {fileID: 114993171511310572}
   - component: {fileID: 114418270484029074}
   - component: {fileID: 114292202247969130}
   - component: {fileID: 50465836420424940}
@@ -221,38 +218,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1
---- !u!114 &114365636814867566
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1751761618899206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 38
-    i1: 82
-    i2: 213
-    i3: 206
-    i4: 233
-    i5: 103
-    i6: 229
-    i7: 116
-    i8: 58
-    i9: 16
-    i10: 48
-    i11: 180
-    i12: 25
-    i13: 102
-    i14: 226
-    i15: 221
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
 --- !u!114 &114418270484029074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -275,7 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd4c825090e55154e8fd897d024e7fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerName: 
   PlayerNameText: {fileID: 114651948520815188}
   JumpForce: 9
   JumpTime: 10
@@ -303,27 +267,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &114608450657099664
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1751761618899206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TransformSyncMode: 2
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 3
-  m_RotationSyncCompression: 0
-  m_SyncSpin: 0
-  m_MovementTheshold: 0.001
-  m_VelocityThreshold: 0.0001
-  m_SnapThreshold: 5
-  m_InterpolateRotation: 1
-  m_InterpolateMovement: 1
 --- !u!114 &114651948520815188
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -357,25 +300,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Player
---- !u!114 &114993171511310572
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1751761618899206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Animator: {fileID: 95600769671455852}
-  m_ParameterSendBits: 0
-  param0: 
-  param1: 
-  param2: 
-  param3: 
-  param4: 
-  param5: 
 --- !u!212 &212344395073068492
 SpriteRenderer:
   m_ObjectHideFlags: 1

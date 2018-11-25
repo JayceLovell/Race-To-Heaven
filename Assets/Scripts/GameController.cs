@@ -3,28 +3,27 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class GameController : NetworkBehaviour {
+public class GameController : MonoBehaviour {
 
-    [SyncVar(hook = "OnPlayersConnectedChange")]
-    public int PlayersConnected;
-    [SyncVar(hook = "OnPlayersReadyChange")]
-    public int PlayersReady;
-    [SyncVar(hook = "OnGameActiveChange")]
+    //public int PlayersConnected;
+    //public int PlayersReady;
     public bool GameActive;
-    [SyncVar(hook = "OnTimerChange")]
     public float Timer;
-    [SyncVar(hook = "OnSpeedChange")] 
     public float Speed;
 
     private GameObject _startButton;
     private Text _txtamountOfPlayers;
     private bool _displayPlayers;
     private LevelGenerationScript _levelGenerationScript;
-    private NetworkManager _networkManager;
+
+    public GameObject PrefabTestplayer;
 
 
     // Use this for initialization
     void Start () {
+        //this code only here for non multiplayer
+        Instantiate(PrefabTestplayer, new Vector3(0,0),Quaternion.identity);
+        //resume
         Initilize();
         _displayPlayers = true;
         _startButton = GameObject.Find("btnStart");
@@ -35,20 +34,20 @@ public class GameController : NetworkBehaviour {
      void Initilize()
     {
         _levelGenerationScript = GetComponent<LevelGenerationScript>();
-        _networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+        //_networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
     }
 
     // Update is called once per frame
     void Update () {
         if (_displayPlayers)
         {
-            if (isServer)
+            /*if (isServer)
             {
                 PlayersConnected = NetworkServer.connections.Count;
             }
-            _txtamountOfPlayers.text = "Players Connected: " + PlayersConnected+"/4";
+            _txtamountOfPlayers.text = "Players Connected: " + PlayersConnected+"/4";*/
         }
-        if(GameActive)
+        if (GameActive)
         {
             IncreaseDiffculty();
         }
@@ -56,17 +55,21 @@ public class GameController : NetworkBehaviour {
 
     public void StartGame()
     {
-        PlayersReady++;
+        /*PlayersReady++;
         _startButton.SetActive(false);
         if (PlayersReady == PlayersConnected)
         {
             GameActive = true;
-        }
+        }*/
+        GameActive = true;
+        _startButton.SetActive(false);
+        _levelGenerationScript.ObstacleMaxWidth=8;
+        _levelGenerationScript.ObstacleMinWidth=10;
     }
     void IncreaseDiffculty()
     {
-        if (isServer)
-        {
+        //if (isServer)
+        //{
             Timer += Time.deltaTime;
             if (Timer >= 10)
             {
@@ -75,27 +78,6 @@ public class GameController : NetworkBehaviour {
                 _levelGenerationScript.ObstacleMaxWidth++;
                 _levelGenerationScript.ObstacleMinWidth++;
             }
-        }
-    }
-    void OnPlayersConnectedChange(int valueToChangeTo)
-    {
-        PlayersConnected = valueToChangeTo;
-    }
-    void OnPlayersReadyChange(int valueToChangeTo)
-    {
-        Debug.Log("Changing value");
-        PlayersReady = valueToChangeTo;
-    }
-    void OnGameActiveChange(bool valueToChangeTo)
-    {
-        GameActive = valueToChangeTo;
-    }
-    void OnTimerChange(float valueToChangeTo)
-    {
-        Timer = valueToChangeTo;
-    }
-    void OnSpeedChange(float valueToChangeTo)
-    {
-        Speed = valueToChangeTo;
+        //}
     }
 }

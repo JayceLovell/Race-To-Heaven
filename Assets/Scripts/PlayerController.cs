@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerController : NetworkBehaviour
+public class PlayerController : MonoBehaviour
 {
     // Public variables
-    [Header("Player Name")]
-    [SyncVar(hook = "OnPlayerNameChange")] public string PlayerName;
 
     public Text PlayerNameText;
 
@@ -25,24 +24,19 @@ public class PlayerController : NetworkBehaviour
     // Private variables
     private Rigidbody2D _rigidBody;
     private SpriteRenderer _sprite;
-    private NetworkManager _networkManager;
-    private NetworkAnimator _networkanimator;
     private GameManager _gameManager;
     private GameController _gameController;
     private Transform _groundCheck;
+    private string _playerName;
 
 
     // Use this for initialization
     void Start()
     {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
         Initialise();
 
-        PlayerName = _gameManager.PlayerName;
-        SetPlayerName(PlayerName);
+        _playerName = _gameManager.PlayerName;
+        SetPlayerName(_playerName);
         JumpTimeCounter = JumpTime;
         WhatIsGround = LayerMask.GetMask("Ground");
         GroundCheckRadius = 1;
@@ -53,8 +47,8 @@ public class PlayerController : NetworkBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
-        _networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
-        _networkanimator = GetComponent<NetworkAnimator>();
+        //_networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+        //_networkanimator = GetComponent<NetworkAnimator>();
         _gameController = GameObject.Find("GameController").GetComponent<GameController>();
         _groundCheck = this.gameObject.transform;
     }
@@ -74,19 +68,11 @@ public class PlayerController : NetworkBehaviour
         {
             Animator.SetBool("IsRunning", true);
         }
-        _networkanimator.GetParameterAutoSend(3);
-        _networkanimator.GetParameterAutoSend(2);
-        _networkanimator.GetParameterAutoSend(1);
-        _networkanimator.GetParameterAutoSend(0);
     }
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!isLocalPlayer)
-        {
-            return;
-        }
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKey("space"))
         {
             //and you are on the ground...
             if (Grounded)
@@ -97,7 +83,7 @@ public class PlayerController : NetworkBehaviour
             }
         }
         //if you keep holding down the jump button...
-        if (Input.GetKeyDown("space") && !StoppedJumping)
+        if (Input.GetKey("space") && !StoppedJumping)
         {
             //and your counter hasn't reached zero...
             if (JumpTimeCounter > 0)
@@ -108,7 +94,7 @@ public class PlayerController : NetworkBehaviour
             }
         }
         //if you stop holding down the jump button...
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKey("space"))
         {
             //stop jumping and set your counter to zero.  The timer will reset once we touch the ground again in the update function.
             JumpTimeCounter = 0;
@@ -137,23 +123,8 @@ public class PlayerController : NetworkBehaviour
     {
         if (collision.gameObject.name == "Off")
         {
-            if (isClient)
-            {
-                _networkManager.StopClient();
-            }
+            SceneManager.LoadScene("Main Menu");
         }
-    }
-    /*public override void OnStartLocalPlayer()
-    {
-        var otherplayers = GameObject.FindGameObjectsWithTag("Player");
-        foreach (var player in otherplayers)
-        {
-            Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-
-        }
-    }*/
-    void OnPlayerNameChange(string valueToChangeTo)
-    {
-        PlayerName = valueToChangeTo;
     }
 }
+    
