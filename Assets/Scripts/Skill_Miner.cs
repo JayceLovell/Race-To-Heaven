@@ -54,13 +54,15 @@ public class Skill_Miner : MonoBehaviour {
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Obsticle" && isUsingSkill)
+        if ((collision.gameObject.tag == "Obsticle1" || collision.gameObject.tag == "Obsticle2") && isUsingSkill)
         {
             Destroy(collision.gameObject);
         }
-        else if(collision.gameObject.tag == "Obsticle")
+        else if(collision.gameObject.tag == "Obsticle2")
         {
             GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
+            _rigibody.AddForce(new Vector2(-1,1), ForceMode2D.Impulse);
+            Destroy(collision.gameObject);
             StartCoroutine(Timer(1));
         }
     }

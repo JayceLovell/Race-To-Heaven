@@ -41,5 +41,14 @@ public class Skill_Cube : MonoBehaviour {
     {
         if (collision.gameObject.tag == "ground" && !jumpReady)
             jumpReady = true;
+
+
+            if (collision.gameObject.tag == "Obsticle2")
+            {
+                GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
+            rb.AddForce(new Vector2(-1, 1), ForceMode2D.Impulse);
+            Destroy(collision.gameObject);
+        }
+        
     }
 }

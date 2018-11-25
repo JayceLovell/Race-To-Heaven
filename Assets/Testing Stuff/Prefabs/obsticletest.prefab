@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 50028903876237102}
   m_Layer: 8
   m_Name: obsticletest
-  m_TagString: Obsticle
+  m_TagString: Obsticle1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e26c9845b0257549a32ca7639b931da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obsticleType: 0
 --- !u!212 &212897140800163662
 SpriteRenderer:
   m_ObjectHideFlags: 1

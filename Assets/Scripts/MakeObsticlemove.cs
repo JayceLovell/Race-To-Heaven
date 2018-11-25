@@ -4,11 +4,29 @@ using UnityEngine;
 
 public class MakeObsticlemove : MonoBehaviour {
 
+    public int obsticleType;
+    
     private GameController _gameController;
+    private bool goingUp = true;
+
 
     // Use this for initialization
     void Start () {
         _gameController = GameObject.Find("GameController").GetComponent<GameController>();
+
+        switch (obsticleType)
+        {
+            case 0:
+                transform.Translate(Vector2.down * 0.3f);
+                break;
+            case 1:
+                transform.Translate(Vector2.down *1);
+                break;
+            case 2:
+                transform.Translate(Vector2.up * Random.Range(0,2f));
+                StartCoroutine(movingPlatform(2));
+                break;
+        }
 	}
 	
 	// Update is called once per frame
@@ -17,6 +35,14 @@ public class MakeObsticlemove : MonoBehaviour {
         {
             //GetComponent<Rigidbody2D>().AddForce(new Vector2(-1f, 0f) * _speed);
             transform.Translate(Vector2.left * _gameController.Speed * Time.deltaTime);
+
+        }
+        if (obsticleType == 2)
+        {
+            if (goingUp)
+                transform.Translate(Vector2.up * Time.deltaTime);
+            else
+                transform.Translate(Vector2.down * Time.deltaTime);
         }
     }
     //eliminate spawned objects on the left when they exit the collision box
@@ -26,5 +52,11 @@ public class MakeObsticlemove : MonoBehaviour {
         {
             Destroy(this.gameObject);
         }
+    }
+    IEnumerator movingPlatform(int counter)
+    {
+        yield return new WaitForSeconds(counter);
+        goingUp = !goingUp;
+        StartCoroutine(movingPlatform(counter));
     }
 }

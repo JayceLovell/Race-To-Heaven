@@ -60,9 +60,9 @@ public class LevelGenerationScript : MonoBehaviour {
     private void FixedUpdate()
     {
 
-        if (obstacle.transform.position.x < cam.transform.position.x + 50)
+        if (obstacle.transform.position.x < cam.transform.position.x + 20)
         {
-            obstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length - 1)], obstacle.transform.position + new Vector3(Random.Range(ObstacleMinWidth, ObstacleMaxWidth), 0, 0), Quaternion.identity);
+            obstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)], obstavleInitialSpawnLoc.position + new Vector3(Random.Range(ObstacleMinWidth, ObstacleMaxWidth), 0, 0), Quaternion.identity);
             //NetworkServer.Spawn(obstacle);
         }
 
