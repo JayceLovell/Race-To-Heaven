@@ -5,7 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - GameManager
-  - Obsticle
+  - Obsticle2
+  - Obsticle3
+  - Obsticle1
   layers:
   - Default
   - TransparentFX
@@ -16,7 +18,7 @@ TagManager:
   - 
   - 
   - Ground
-  - 
+  - player
   - 
   - 
   - 

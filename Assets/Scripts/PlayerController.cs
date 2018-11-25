@@ -33,16 +33,6 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Initialise();
-
-        _playerName = _gameManager.PlayerName;
-        SetPlayerName(_playerName);
-        JumpTimeCounter = JumpTime;
-        WhatIsGround = LayerMask.GetMask("Ground");
-        GroundCheckRadius = 1;
-    }
-    void Initialise()
-    {
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _rigidBody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
@@ -51,7 +41,14 @@ public class PlayerController : MonoBehaviour
         //_networkanimator = GetComponent<NetworkAnimator>();
         _gameController = GameObject.Find("GameController").GetComponent<GameController>();
         _groundCheck = this.gameObject.transform;
+
+        _playerName = _gameManager.PlayerName;
+        SetPlayerName(_playerName);
+        JumpTimeCounter = JumpTime;
+        WhatIsGround = LayerMask.GetMask("Ground");
+        GroundCheckRadius = 1;
     }
+
     void Update()
     {
         Grounded = Physics2D.OverlapCircle(_groundCheck.position, GroundCheckRadius, WhatIsGround);
