@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class LevelGenerationScript : NetworkBehaviour {
+public class LevelGenerationScript : MonoBehaviour {
     public GameObject cam;
 
     [Header("obstacles")]
     public GameObject[] obstaclePrefabs;
     public Transform obstavleInitialSpawnLoc;
     GameObject obstacle;
-    [SyncVar]  public float _obstacleMinWidth;
-    [SyncVar]  public float _obstacleMaxWidth;
+    public float _obstacleMinWidth;
+    public float _obstacleMaxWidth;
 
 
     [Header("floors")]
@@ -52,25 +52,18 @@ public class LevelGenerationScript : NetworkBehaviour {
 
     void Start()
     {
-        if (!isServer)
-        {
-            return;
-        }
         _obstacleMaxWidth = 15;
         _obstacleMinWidth = 10;
         obstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length - 1)], obstavleInitialSpawnLoc.position, Quaternion.identity);
-        NetworkServer.Spawn(obstacle);
+        //NetworkServer.Spawn(obstacle);
     }
     private void FixedUpdate()
     {
-        if (!isServer)
-        {
-            return;
-        }
+
         if (obstacle.transform.position.x < cam.transform.position.x + 50)
         {
             obstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length - 1)], obstacle.transform.position + new Vector3(Random.Range(ObstacleMinWidth, ObstacleMaxWidth), 0, 0), Quaternion.identity);
-            NetworkServer.Spawn(obstacle);
+            //NetworkServer.Spawn(obstacle);
         }
 
 
