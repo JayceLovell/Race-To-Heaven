@@ -44,5 +44,19 @@ public class Skill_Placeholder : MonoBehaviour {
                 Destroy(portal);   
             }
         }
+
+       
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+
+
+        if (collision.gameObject.tag == "Obsticle2")
+        {
+            GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
+            rb.AddForce(new Vector2(-1, 0), ForceMode2D.Impulse);
+            Destroy(collision.gameObject);
+        }
+
     }
 }
