@@ -9,17 +9,17 @@ public class OptionsScript : MonoBehaviour {
 
     //private NetworkManager _networkManager;
 
-    public Button Character1, Character2, Character3, Character4, Character5;
+    public Button Chicken, MeatBoy, Miner, Placeholder, Angle;
     public GameObject[] CharacterPrefabs;
 
     // Use this for initialization
     void Start () {
         //_networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
-        Character1.onClick.AddListener(delegate { ChangePrefabToChoice("Test"); });
-        Character2.onClick.AddListener(delegate { ChangePrefabToChoice("Test"); });
-        Character3.onClick.AddListener(delegate { ChangePrefabToChoice("Test"); });
-        Character4.onClick.AddListener(delegate { ChangePrefabToChoice("Test"); });
-        Character5.onClick.AddListener(delegate { ChangePrefabToChoice("Test"); });
+        Chicken.onClick.AddListener(delegate { ChangePrefabToChoice("Chicken"); });
+        MeatBoy.onClick.AddListener(delegate { ChangePrefabToChoice("MeatBoy"); });
+        Miner.onClick.AddListener(delegate { ChangePrefabToChoice("Miner"); });
+        Placeholder.onClick.AddListener(delegate { ChangePrefabToChoice("Placeholder"); });
+        Angle.onClick.AddListener(delegate { ChangePrefabToChoice("Angle"); });
     }
 	
 	// Update is called once per frame
@@ -30,9 +30,29 @@ public class OptionsScript : MonoBehaviour {
     {
         SceneManager.LoadScene("MainMenu");
     }
-    void ChangePrefabToChoice(string CharacterName)
+    void ChangePrefabToChoice(string _characterChocie)
     {
-        //_networkManager.playerPrefab = CharacterPrefabs[0];
+        /*switch (_characterChocie)
+        {
+            case "Chicken":
+                _networkManager.playerPrefab = CharacterPrefabs[1];
+                break;
+            case "Miner":
+                _networkManager.playerPrefab = CharacterPrefabs[1];
+                break;
+            case "Placeholder":
+                _networkManager.playerPrefab = CharacterPrefabs[1];
+                break;
+            case "Angle":
+                _networkManager.playerPrefab = CharacterPrefabs[1];
+                break;
+            case "Meatboy":
+                _networkManager.playerPrefab = CharacterPrefabs[1];
+                break;
+            default:
+                _networkManager.playerPrefab = CharacterPrefabs[0];
+                break;
+        }*/
     }
 
 }

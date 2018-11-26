@@ -22,8 +22,8 @@ GameObject:
   - component: {fileID: 212656920141225194}
   - component: {fileID: 114956612927097958}
   - component: {fileID: 50686677987930786}
-  - component: {fileID: 61180556627832984}
   - component: {fileID: 251874088914361386}
+  - component: {fileID: 68548637137852730}
   m_Layer: 8
   m_Name: floatyObsticleTest
   m_TagString: Obsticle1
@@ -64,8 +64,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 6
---- !u!61 &61180556627832984
-BoxCollider2D:
+--- !u!68 &68548637137852730
+EdgeCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -77,18 +77,10 @@ BoxCollider2D:
   m_UsedByEffector: 1
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.5, y: 0}
+  - {x: 0.5, y: 0}
 --- !u!114 &114956612927097958
 MonoBehaviour:
   m_ObjectHideFlags: 1
