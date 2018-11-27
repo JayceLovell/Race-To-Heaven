@@ -63,9 +63,13 @@ public class MainMenuScript : MonoBehaviour {
     {
         Application.Quit();
     }
-    public void ClickOptions()
+    public void ClickSettings()
     {
         SceneManager.LoadScene("Options", LoadSceneMode.Additive);
+    }
+    public void ClickCharacterChange()
+    {
+        SceneManager.LoadScene("Character Selection", LoadSceneMode.Additive);
     }
     public void EnteredName()
     {

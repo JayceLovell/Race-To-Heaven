@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class OptionsScript : MonoBehaviour {
+public class CharacterSelectionScript : MonoBehaviour {
 
     //private NetworkManager _networkManager;
 
