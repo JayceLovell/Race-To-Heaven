@@ -77,13 +77,17 @@ public class GameManager : MonoBehaviour {
                 //_networkManager.spawnPrefabs.Add(TestObstible);
                 //ClientScene.RegisterPrefab(TestObstible);
                 break;
+            case "Aether":
+                break;
+            case "Limbo":
+                break;
         }
     }
     public void HostGame()
     {
         //_networkManager.onlineScene = _levelChoice;
         // _networkManager.StartHost();
-        SceneManager.LoadScene("Test");
+        SceneManager.LoadScene(_levelChoice);
         PrepareNetWorkManager();
     }
     public void JoinGame()

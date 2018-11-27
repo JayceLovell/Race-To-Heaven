@@ -84,10 +84,10 @@ public class MainMenuScript : MonoBehaviour {
                 _selectedlevel = "Test";
                 break;
             case 1:
-                _selectedlevel = "Small Level";
+                _selectedlevel = "Aether";
                 break;
             case 2:
-                _selectedlevel = "Medium Level";
+                _selectedlevel = "Limbo";
                 break;
             case 3:
                 _selectedlevel = "Test";
