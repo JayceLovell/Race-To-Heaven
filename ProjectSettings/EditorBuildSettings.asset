@@ -15,6 +15,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Test.unity
     guid: 27785dd54cb30c849958cdd43c085e96
   - enabled: 1
-    path: Assets/Scenes/Options.unity
+    path: Assets/Scenes/Character Selection.unity
     guid: afbb3dd43769e754a99427dadda913be
+  - enabled: 1
+    path: Assets/Scenes/Options.unity
+    guid: ff69a8834c17b184eb2244836e76e62b
+  - enabled: 1
+    path: Assets/Scenes/Aether.unity
+    guid: a45d21b48e09de14292d5be23bf92972
+  - enabled: 1
+    path: Assets/Scenes/Limbo.unity
+    guid: 333e6610b37e3b24f8585077edf81234
   m_configObjects: {}

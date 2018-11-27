@@ -12,6 +12,7 @@ public class MainMenuScript : MonoBehaviour {
     private Dropdown _dropdownLevelSelector;
     private Text _version;
     private string _selectedlevel;
+    public GameObject Settings;
 
     public string PlayerName
     {
@@ -44,7 +45,7 @@ public class MainMenuScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+        Settings.transform.Rotate(0,0,Time.deltaTime*5);
 	}
     
     public void HostGame()
@@ -65,7 +66,7 @@ public class MainMenuScript : MonoBehaviour {
     }
     public void ClickSettings()
     {
-        SceneManager.LoadScene("Options", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Options");
     }
     public void ClickCharacterChange()
     {
