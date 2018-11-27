@@ -20,7 +20,7 @@ public class MakeObsticlemove : MonoBehaviour {
                 transform.Translate(Vector2.down * 0.3f);
                 break;
             case 1:
-                transform.Translate(Vector2.down *1);
+                transform.Translate(Vector2.down * 0.85f);
                 break;
             case 2:
                 transform.Translate(Vector2.up * Random.Range(0,2f));
@@ -33,9 +33,7 @@ public class MakeObsticlemove : MonoBehaviour {
 	void Update () {
         if (_gameController.GameActive)
         {
-            //GetComponent<Rigidbody2D>().AddForce(new Vector2(-1f, 0f) * _speed);
             transform.Translate(Vector2.left * _gameController.Speed * Time.deltaTime);
-
         }
         if (obsticleType == 2)
         {
