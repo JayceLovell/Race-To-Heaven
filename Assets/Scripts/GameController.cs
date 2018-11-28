@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour {
         //resume
         Initilize();
         _displayPlayers = true;
-        Speed = 3.5f;
+        Speed = 4f;
         _fastfoward.SetActive(false);
     }
 
@@ -98,6 +98,8 @@ public class GameController : MonoBehaviour {
                 foreach(var player in Players)
                 {
                     player.GetComponent<Animator>().speed+=0.5f;
+                    player.GetComponent<Rigidbody2D>().gravityScale++;
+                player.GetComponent<PlayerController>().JumpForce++;
                 }
             }
         //}
