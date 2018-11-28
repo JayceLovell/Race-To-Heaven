@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public float GroundCheckRadius;
     [Header("Animator")]
     public Animator Animator;
+    public AudioSource GameOver;
 
     // Private variables
     private Rigidbody2D _rigidBody;
@@ -120,6 +121,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.name == "Off")
         {
+            GameOver.Play();
             SceneManager.LoadScene("Main Menu");
         }
     }

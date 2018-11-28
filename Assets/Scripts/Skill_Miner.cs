@@ -5,6 +5,7 @@ using UnityEngine;
 public class Skill_Miner : MonoBehaviour {
 
     public float cooldown; // must be more than 1, since our previous slash gameobject takes 1 sec to despawn
+    public AudioSource TakeDamage;
 
     float currStamina;
     float currCD = 0;
@@ -61,9 +62,10 @@ public class Skill_Miner : MonoBehaviour {
         else if(collision.gameObject.tag == "Obsticle2")
         {
             GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
+            StartCoroutine(Timer(1));
             _rigibody.AddForce(new Vector2(-1,1), ForceMode2D.Impulse);
             Destroy(collision.gameObject);
-            StartCoroutine(Timer(1));
+            TakeDamage.Play();
         }
     }
 

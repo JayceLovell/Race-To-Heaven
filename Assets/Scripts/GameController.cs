@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -10,11 +11,15 @@ public class GameController : MonoBehaviour {
     public bool GameActive;
     public float Timer;
     public float Speed;
+    public GameObject[] Players;
 
-    private GameObject _startButton;
+    private GameObject _readyButton;
     private Text _txtamountOfPlayers;
+    private Text _txtClock;
     private bool _displayPlayers;
     private LevelGenerationScript _levelGenerationScript;
+    private float _previousTime;
+    private GameObject _fastfoward;
 
     public GameObject PrefabTestplayer;
 
@@ -26,14 +31,17 @@ public class GameController : MonoBehaviour {
         //resume
         Initilize();
         _displayPlayers = true;
-        _startButton = GameObject.Find("btnStart");
-        _txtamountOfPlayers = GameObject.Find("txtAmountOfPlayers").GetComponent<Text>();
         Speed = 3.5f;
+        _fastfoward.SetActive(false);
     }
 
      void Initilize()
     {
         _levelGenerationScript = GetComponent<LevelGenerationScript>();
+        _readyButton = GameObject.Find("btnReady");
+        _txtamountOfPlayers = GameObject.Find("txtAmountOfPlayers").GetComponent<Text>();
+        _txtClock = GameObject.Find("TxtClock").GetComponent<Text>();
+        _fastfoward = GameObject.Find("FastFoward");
         //_networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
     }
 
@@ -49,8 +57,17 @@ public class GameController : MonoBehaviour {
         }
         if (GameActive)
         {
-            IncreaseDiffculty();
+            Timer += Time.deltaTime;
+            IncreaseDiffculty(Timer);
+            TxtClock(Timer);
         }
+    }
+
+    void TxtClock(float timer)
+    {
+        float minutes = Mathf.Floor(timer / 60);
+        float seconds = timer % 60;
+        _txtClock.text = "Time: " + minutes + ":" + Mathf.RoundToInt(seconds);
     }
 
     public void StartGame()
@@ -62,22 +79,33 @@ public class GameController : MonoBehaviour {
             GameActive = true;
         }*/
         GameActive = true;
-        _startButton.SetActive(false);
+        _readyButton.SetActive(false);
         _levelGenerationScript.ObstacleMaxWidth=8;
         _levelGenerationScript.ObstacleMinWidth=10;
     }
-    void IncreaseDiffculty()
+    void IncreaseDiffculty(float _timer)
     {
         //if (isServer)
         //{
-            Timer += Time.deltaTime;
-            if (Timer >= 10)
+            if (_timer >= (_previousTime+10))
             {
-                Timer = 0;
+            StartCoroutine(DisableFastfoward());
+                _previousTime = _timer;
                 Speed++;
                 _levelGenerationScript.ObstacleMaxWidth++;
                 _levelGenerationScript.ObstacleMinWidth++;
+                Players = GameObject.FindGameObjectsWithTag("Player");
+                foreach(var player in Players)
+                {
+                    player.GetComponent<Animator>().speed+=0.5f;
+                }
             }
         //}
+    }
+    IEnumerator DisableFastfoward()
+    {
+        _fastfoward.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        _fastfoward.SetActive(false);
     }
 }
