@@ -29,11 +29,6 @@ public class MakeObsticlemove : MonoBehaviour {
 	}
 	
 	void Update () {
-        if (_gameController == null)
-        {
-            _gameController = GameObject.Find("GameController").GetComponent<GameController>();
-        }
-
 
         if (_gameController.GameActive)
         {
