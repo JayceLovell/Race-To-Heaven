@@ -46,7 +46,7 @@ public class Skill_Miner : MonoBehaviour {
 
     }
 
-    IEnumerator Timer(int counter)
+    IEnumerator Timer(float counter)
     {
         yield return new WaitForSeconds(counter);
         isUsingSkill = false;
@@ -62,7 +62,7 @@ public class Skill_Miner : MonoBehaviour {
         else if(collision.gameObject.tag == "Obsticle2")
         {
             GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
-            StartCoroutine(Timer(1));
+            StartCoroutine(Timer(0.1f));
             _rigibody.AddForce(new Vector2(-1,1), ForceMode2D.Impulse);
             Destroy(collision.gameObject);
             TakeDamage.Play();

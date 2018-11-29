@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     public Text PlayerNameText;
 
     [Header("Jump Settings")]
-    public float JumpForce;
     public float JumpTime;
     public float JumpTimeCounter;
     public bool Grounded;
@@ -29,6 +28,20 @@ public class PlayerController : MonoBehaviour
     private GameController _gameController;
     private Transform _groundCheck;
     private string _playerName;
+    private float _jumpForce;
+
+    public float JumpForce
+    {
+        get
+        {
+            return _jumpForce;
+        }
+
+        set
+        {
+            _jumpForce = value;
+        }
+    }
 
 
     // Use this for initialization
@@ -48,6 +61,7 @@ public class PlayerController : MonoBehaviour
         JumpTimeCounter = JumpTime;
         WhatIsGround = LayerMask.GetMask("Ground");
         GroundCheckRadius = 1;
+        JumpForce = 9;
     }
 
     void Update()

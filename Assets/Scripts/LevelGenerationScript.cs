@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class LevelGenerationScript : MonoBehaviour {
-    public GameObject cam;
+    public GameObject Camera;
 
     [Header("obstacles")]
     public GameObject[] obstaclePrefabs;
@@ -52,6 +52,7 @@ public class LevelGenerationScript : MonoBehaviour {
 
     void Start()
     {
+        Camera = GameObject.Find("Main Camera");
         _obstacleMaxWidth = 15;
         _obstacleMinWidth = 10;
         obstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length - 1)], obstavleInitialSpawnLoc.position, Quaternion.identity);
@@ -60,7 +61,7 @@ public class LevelGenerationScript : MonoBehaviour {
     private void FixedUpdate()
     {
 
-        if (obstacle.transform.position.x < cam.transform.position.x + 20)
+        if (obstacle.transform.position.x < Camera.transform.position.x + 20)
         {
             obstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)], obstavleInitialSpawnLoc.position + new Vector3(Random.Range(ObstacleMinWidth, ObstacleMaxWidth), 0, 0), Quaternion.identity);
             //NetworkServer.Spawn(obstacle);
