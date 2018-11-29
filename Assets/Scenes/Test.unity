@@ -252,60 +252,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &634088508 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1123993704995620, guid: feb70f8cf6327b24ab8864aa74da671e,
-    type: 2}
-  m_PrefabInternal: {fileID: 739895309}
---- !u!1 &635018683
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 1185220798979452, guid: be034c46525d08c4da0e516cb3eaa498,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 635018684}
-  - component: {fileID: 635018685}
-  m_Layer: 0
-  m_Name: SpawnSet 2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &635018684
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 4784727080224974, guid: be034c46525d08c4da0e516cb3eaa498,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 635018683}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: -2.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1177253006}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &635018685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 635018683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b5cae9c1fc66ad4aa5363a055d2a963, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 1371428055922392, guid: e650da21b8c3ef04a907385f2411334b, type: 2}
-  spawnHeightAdjustment:
-  - 0.5
-  obstacleMinWidth: 10
-  obstacleMaxWidth: 30
-  speedMultipliler: 0.1
 --- !u!1001 &739895309
 Prefab:
   m_ObjectHideFlags: 0
@@ -365,11 +311,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114511906878721822, guid: be034c46525d08c4da0e516cb3eaa498,
-        type: 2}
-      propertyPath: obstaclePrefabs2.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4105533353895298, guid: be034c46525d08c4da0e516cb3eaa498, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -402,72 +343,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114511906878721822, guid: be034c46525d08c4da0e516cb3eaa498,
-        type: 2}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 408637635}
-    - target: {fileID: 114511906878721822, guid: be034c46525d08c4da0e516cb3eaa498,
-        type: 2}
-      propertyPath: floor
-      value: 
-      objectReference: {fileID: 634088508}
-    - target: {fileID: 114511906878721822, guid: be034c46525d08c4da0e516cb3eaa498,
-        type: 2}
-      propertyPath: obstaclePrefabs2.Array.data[0]
-      value: 
-      objectReference: {fileID: 1371428055922392, guid: e650da21b8c3ef04a907385f2411334b,
-        type: 2}
-    - target: {fileID: 114511906878721822, guid: be034c46525d08c4da0e516cb3eaa498,
-        type: 2}
-      propertyPath: obstaclePrefabs.Array.data[2]
-      value: 
-      objectReference: {fileID: 1489260566650028, guid: 2014900704b214240b8d256c1ba1b0a5,
-        type: 2}
-    - target: {fileID: 1185220798979452, guid: be034c46525d08c4da0e516cb3eaa498, type: 2}
-      propertyPath: m_Name
-      value: SpawnSet 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4784727080224974, guid: be034c46525d08c4da0e516cb3eaa498, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 10
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114511906878721822, guid: be034c46525d08c4da0e516cb3eaa498, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be034c46525d08c4da0e516cb3eaa498, type: 2}
   m_IsPrefabAsset: 0
---- !u!4 &1177253006 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4105533353895298, guid: be034c46525d08c4da0e516cb3eaa498,
-    type: 2}
-  m_PrefabInternal: {fileID: 1177253005}
---- !u!1 &1177253007 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1185220798979452, guid: be034c46525d08c4da0e516cb3eaa498,
-    type: 2}
-  m_PrefabInternal: {fileID: 1177253005}
---- !u!114 &1177253008
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1177253007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b5cae9c1fc66ad4aa5363a055d2a963, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 1720846101615166, guid: 9b5815bdcbdc8d94cbfb39ca3039e331, type: 2}
-  - {fileID: 1329460458024806, guid: 5fe92936a10833a449f4bf6ffbc4bd9d, type: 2}
-  - {fileID: 1489260566650028, guid: 2014900704b214240b8d256c1ba1b0a5, type: 2}
-  spawnHeightAdjustment:
-  - -0.3
-  - -0.85
-  - 5
-  obstacleMinWidth: 8
-  obstacleMaxWidth: 10
-  speedMultipliler: 0.1
 --- !u!1001 &1260168853
 Prefab:
   m_ObjectHideFlags: 0
@@ -626,6 +504,11 @@ Prefab:
         type: 2}
       propertyPath: m_AnchoredPosition.y
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231622948627326, guid: ff6ac3db0c315b74ab1f5d7c862ae4c5,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReadyButtonClicked
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff6ac3db0c315b74ab1f5d7c862ae4c5, type: 2}

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class PlayerController : NetworkBehaviour
 {
     // Public variables
-
     public Text PlayerNameText;
     public GameObject gameMangerPrefab;
 
@@ -55,13 +54,11 @@ public class PlayerController : NetworkBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
-        //_networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
-        //_networkanimator = GetComponent<NetworkAnimator>();
         _gameController = GameObject.Find("GameController").GetComponent<GameController>();
         _groundCheck = this.gameObject.transform;
 
         _playerName = _gameManager.PlayerName;
-        SetPlayerName(_playerName);
+        CmdSetPlayerName(_playerName);
         JumpTimeCounter = JumpTime;
         WhatIsGround = LayerMask.GetMask("Ground");
         GroundCheckRadius = 1;
@@ -92,7 +89,7 @@ public class PlayerController : NetworkBehaviour
             }
     }
         // Update is called once per frame
-        void FixedUpdate()
+    void FixedUpdate()
         {
         if (!isLocalPlayer)
         {
@@ -128,30 +125,36 @@ public class PlayerController : NetworkBehaviour
                 JumpTimeCounter = 0;
                 StoppedJumping = true;
             }
-            if (_gameController.GameActive)
+            /*if (_gameController.GameActive)
             {
                 Animator.SetBool("IsRunning", true);
                 var otherplayers = GameObject.FindGameObjectsWithTag("Player");
                 foreach (var player in otherplayers)
                 {
                     Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-
                 }
-            }
+            }*/
             else
             {
                 Animator.SetBool("IsRunning", false);
             }
         }
-        void SetPlayerName(string PlayerName)
-        {
-            PlayerNameText.text = PlayerName;
-        }
-        void OnCollisionEnter2D(Collision2D collision)
+    [Command]
+    void CmdSetPlayerName(string PlayerName)
+    {
+        RpcSetPlayerName(PlayerName);          
+    }
+    [ClientRpc]
+    void RpcSetPlayerName(string name)
+    {
+        PlayerNameText.text = name;
+    }
+    void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.name == "Off")
             {
                 GameOver.Play();
+                NetworkIdentity.Destroy(this.gameObject);
                 //SceneManager.LoadScene("Main Menu");
             }
         }

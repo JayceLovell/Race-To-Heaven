@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class GameController : MonoBehaviour {
+public class GameController : NetworkBehaviour {
 
-    //public int PlayersConnected;
-    //public int PlayersReady;
-    public bool GameActive;
+    [SyncVar(hook = "OnPlayersConnectedChange")] public int PlayersConnected;
+    [SyncVar] public int PlayersReady;
+    [SyncVar(hook = "RpcGameActive")] public bool GameActive;
     public float Timer;
     public float Speed;
     public GameObject[] Players;
@@ -25,9 +25,6 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        //this code only here for non multiplayer
-        Instantiate(PrefabTestplayer, new Vector3(0,0),Quaternion.identity);
-        //resume
         Initilize();
         _displayPlayers = true;
         Speed = 4f;
@@ -36,54 +33,65 @@ public class GameController : MonoBehaviour {
 
      void Initilize()
     {
-
         _readyButton = GameObject.Find("btnReady");
         _txtamountOfPlayers = GameObject.Find("txtAmountOfPlayers").GetComponent<Text>();
         _txtClock = GameObject.Find("TxtClock").GetComponent<Text>();
         _fastfoward = GameObject.Find("FastFoward");
-        //_networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
     }
 
     // Update is called once per frame
     void Update () {
-        if (_displayPlayers)
+        if (isServer)
         {
-            /*if (isServer)
+            PlayersConnected = NetworkServer.connections.Count;
+
+            if (GameActive)
             {
-                PlayersConnected = NetworkServer.connections.Count;
+                Timer += Time.deltaTime;
+                IncreaseDiffculty(Timer);
+                TxtClock(Timer);
             }
-            _txtamountOfPlayers.text = "Players Connected: " + PlayersConnected+"/4";*/
-        }
-        if (GameActive)
-        {
-            Timer += Time.deltaTime;
-            IncreaseDiffculty(Timer);
-            TxtClock(Timer);
         }
     }
-
+    public void OnPlayersConnectedChange(int players)
+    {
+        _txtamountOfPlayers.text = "Players Connected: " + players + "/4";
+    }
     void TxtClock(float timer)
     {
         float minutes = Mathf.Floor(timer / 60);
         float seconds = timer % 60;
         _txtClock.text = "Time: " + minutes + ":" + Mathf.RoundToInt(seconds);
     }
-
-    public void StartGame()
+    public void ReadyButtonClicked()
     {
-        /*PlayersReady++;
-        _startButton.SetActive(false);
+        if (!isLocalPlayer)
+        {
+            // exit from update if this is not the local player
+            return;
+        }
+        Debug.Log("Button Clicked");
+        CmdReady();
+    }
+    [Command]
+     void CmdReady()
+    {
+        Debug.Log("Command called");
+        PlayersReady++;
+        _readyButton.SetActive(false);
         if (PlayersReady == PlayersConnected)
         {
+            Debug.Log("detect value change");
             GameActive = true;
-        }*/
-        GameActive = true;
-        _readyButton.SetActive(false);
+        }
+    }
+    [ClientRpc]
+    void RpcGameActive(bool GameActive)
+    {
+        Debug.Log("game set Active");
     }
     void IncreaseDiffculty(float _timer)
     {
-        //if (isServer)
-        //{
             if (_timer >= (_previousTime+10))
             {
             StartCoroutine(DisableFastfoward());
@@ -94,10 +102,9 @@ public class GameController : MonoBehaviour {
                 {
                     player.GetComponent<Animator>().speed+=0.5f;
                     player.GetComponent<Rigidbody2D>().gravityScale+=0.5f;
-                player.GetComponent<PlayerController>().JumpForce++;
+                    player.GetComponent<PlayerController>().JumpForce++;
                 }
             }
-        //}
     }
     IEnumerator DisableFastfoward()
     {

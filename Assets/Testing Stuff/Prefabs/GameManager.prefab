@@ -51,7 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7facdb96f99fcd9489f17fc7152d2c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestObstible: {fileID: 1720846101615166, guid: 9b5815bdcbdc8d94cbfb39ca3039e331,
-    type: 2}
-  SmallLevel: {fileID: 0}
-  MediumLevel: {fileID: 0}
+  TestObsticles:
+  - {fileID: 1329460458024806, guid: 5fe92936a10833a449f4bf6ffbc4bd9d, type: 2}
+  - {fileID: 1371428055922392, guid: e650da21b8c3ef04a907385f2411334b, type: 2}
+  - {fileID: 1720846101615166, guid: 9b5815bdcbdc8d94cbfb39ca3039e331, type: 2}
+  - {fileID: 1489260566650028, guid: 2014900704b214240b8d256c1ba1b0a5, type: 2}
+  AetherObsticles: []
+  LimboObstricles: []

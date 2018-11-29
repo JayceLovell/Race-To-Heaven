@@ -588,16 +588,17 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 0}
+  m_PlayerPrefab: {fileID: 1751761618899206, guid: 2652d5cee967e5743a1030b41966e2dd,
+    type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
   m_OfflineScene: Main Menu
   m_OnlineScene: 
   m_SpawnPrefabs:
-  - {fileID: 1329460458024806, guid: 5fe92936a10833a449f4bf6ffbc4bd9d, type: 2}
-  - {fileID: 1371428055922392, guid: e650da21b8c3ef04a907385f2411334b, type: 2}
-  - {fileID: 1720846101615166, guid: 9b5815bdcbdc8d94cbfb39ca3039e331, type: 2}
-  - {fileID: 1489260566650028, guid: 2014900704b214240b8d256c1ba1b0a5, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -1551,6 +1552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Settings: {fileID: 146866757}
+  MainMenuMusic: {fileID: 0}
 --- !u!4 &1287813786
 Transform:
   m_ObjectHideFlags: 0

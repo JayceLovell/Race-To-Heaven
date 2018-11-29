@@ -18,9 +18,28 @@ GameObject:
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4784727080224974}
+  - component: {fileID: 4490784286334158}
+  - component: {fileID: 114517509634730992}
+  - component: {fileID: 114336114223054034}
   m_Layer: 0
-  m_Name: SpawnLoc
+  m_Name: SpawnSet 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1913500581121058
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4784727080224974}
+  - component: {fileID: 114285064714586216}
+  - component: {fileID: 114734250059800164}
+  m_Layer: 0
+  m_Name: SpawnSet 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,8 +54,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4105533353895298}
   - component: {fileID: 114543352924571038}
-  - component: {fileID: 114511906878721822}
   - component: {fileID: 50004005747459290}
+  - component: {fileID: 114167850489744716}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -55,17 +74,31 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4784727080224974}
+  - {fileID: 4490784286334158}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4490784286334158
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1185220798979452}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 10, y: -2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4105533353895298}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4784727080224974
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1185220798979452}
+  m_GameObject: {fileID: 1913500581121058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25, y: -2.5, z: 0}
+  m_LocalPosition: {x: 10, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4105533353895298}
@@ -91,7 +124,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!114 &114511906878721822
+--- !u!114 &114167850489744716
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,21 +132,102 @@ MonoBehaviour:
   m_GameObject: {fileID: 1979324168206796}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 190
+    i1: 3
+    i2: 76
+    i3: 70
+    i4: 82
+    i5: 93
+    i6: 8
+    i7: 196
+    i8: 218
+    i9: 14
+    i10: 81
+    i11: 108
+    i12: 179
+    i13: 234
+    i14: 164
+    i15: 152
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114285064714586216
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1913500581121058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2b5cae9c1fc66ad4aa5363a055d2a963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  obstaclePrefabs:
+  prefabs:
   - {fileID: 1720846101615166, guid: 9b5815bdcbdc8d94cbfb39ca3039e331, type: 2}
   - {fileID: 1329460458024806, guid: 5fe92936a10833a449f4bf6ffbc4bd9d, type: 2}
+  - {fileID: 1489260566650028, guid: 2014900704b214240b8d256c1ba1b0a5, type: 2}
+  spawnHeightAdjustment:
+  - -0.3
+  - -0.85
+  - 5
+  obstacleMinWidth: 8
+  obstacleMaxWidth: 10
+  speedMultipliler: 0.1
+--- !u!114 &114336114223054034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1185220798979452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 190
+    i1: 3
+    i2: 76
+    i3: 70
+    i4: 82
+    i5: 93
+    i6: 8
+    i7: 196
+    i8: 218
+    i9: 14
+    i10: 81
+    i11: 108
+    i12: 179
+    i13: 234
+    i14: 164
+    i15: 152
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114517509634730992
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1185220798979452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5cae9c1fc66ad4aa5363a055d2a963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
   - {fileID: 1371428055922392, guid: e650da21b8c3ef04a907385f2411334b, type: 2}
-  obstavleInitialSpawnLoc: {fileID: 4784727080224974}
-  _obstacleMinWidth: 0
-  _obstacleMaxWidth: 0
-  floorPrefab: {fileID: 1123993704995620, guid: feb70f8cf6327b24ab8864aa74da671e,
-    type: 2}
-  floor: {fileID: 0}
-  floorWidth: 18
+  spawnHeightAdjustment:
+  - 0.5
+  obstacleMinWidth: 10
+  obstacleMaxWidth: 30
+  speedMultipliler: 0.1
 --- !u!114 &114543352924571038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,9 +239,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e194a8b528295141b511c918a6fef8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayersConnected: 0
+  PlayersReady: 0
   GameActive: 0
   Timer: 0
   Speed: 0
   Players: []
   PrefabTestplayer: {fileID: 1751761618899206, guid: 2652d5cee967e5743a1030b41966e2dd,
     type: 2}
+--- !u!114 &114734250059800164
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1913500581121058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 190
+    i1: 3
+    i2: 76
+    i3: 70
+    i4: 82
+    i5: 93
+    i6: 8
+    i7: 196
+    i8: 218
+    i9: 14
+    i10: 81
+    i11: 108
+    i12: 179
+    i13: 234
+    i14: 164
+    i15: 152
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0

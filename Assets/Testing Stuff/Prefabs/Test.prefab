@@ -65,6 +65,7 @@ GameObject:
   - component: {fileID: 82545102073921910}
   - component: {fileID: 114711996051374142}
   - component: {fileID: 114470325683871802}
+  - component: {fileID: 114670519723305944}
   m_Layer: 9
   m_Name: Test
   m_TagString: Player
@@ -79,7 +80,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1751761618899206}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.07459, y: 0.12301609, z: 0}
+  m_LocalPosition: {x: 20.713596, y: 0.2235446, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224115755277342958}
@@ -517,7 +518,26 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player
+  m_Text: Ninja
+--- !u!114 &114670519723305944
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1751761618899206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95600769671455852}
+  m_ParameterSendBits: 31
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!114 &114711996051374142
 MonoBehaviour:
   m_ObjectHideFlags: 1

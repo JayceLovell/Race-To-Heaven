@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class LevelGenerationScript : MonoBehaviour {
+public class LevelGenerationScript : NetworkBehaviour {
 
     [Header("objects")]
     public GameObject[] prefabs;
@@ -19,7 +19,10 @@ public class LevelGenerationScript : MonoBehaviour {
     {
         prefabSelection = Random.Range(0, prefabs.Length);
         spawnedObject = Instantiate(prefabs[prefabSelection], transform.position + new Vector3(Random.Range(obstacleMinWidth, obstacleMaxWidth), spawnHeightAdjustment[prefabSelection], 0), Quaternion.identity);
-        //NetworkServer.Spawn(obstacle);
+        if (isServer)
+        {
+            NetworkServer.Spawn(spawnedObject);
+        }
     }
     private void FixedUpdate()
     {
@@ -33,7 +36,10 @@ public class LevelGenerationScript : MonoBehaviour {
             prefabSelection = Random.Range(0, prefabs.Length);
 
             spawnedObject = Instantiate(prefabs[prefabSelection], transform.position + new Vector3(Random.Range(obstacleMinWidth, obstacleMaxWidth), spawnHeightAdjustment[prefabSelection], 0), Quaternion.identity);
-            //NetworkServer.Spawn(obstacle);
+            if (isServer)
+            {
+                NetworkServer.Spawn(spawnedObject);
+            }
         }
 
     }
