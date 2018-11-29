@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     // Public variables
 
     public Text PlayerNameText;
+    public GameObject gameMangerPrefab;
 
     [Header("Jump Settings")]
     public float JumpTime;
@@ -47,7 +48,10 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        if (GameObject.Find("GameManager") != null)
+            _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        else
+            _gameManager = Instantiate(gameMangerPrefab, transform).GetComponent<GameManager>();
         _rigidBody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
@@ -64,80 +68,81 @@ public class PlayerController : MonoBehaviour
         JumpForce = 9;
     }
 
-    void Update()
-    {
-        Grounded = Physics2D.OverlapCircle(_groundCheck.position, GroundCheckRadius, WhatIsGround);
-        if (Grounded)
+        void Update()
         {
-            Animator.SetBool("IsGrounded", true);
-            JumpTimeCounter = JumpTime;
-        }
-        else
-        {
-            Animator.SetBool("IsGrounded", false);
-        }
-        if (_gameController.GameActive)
-        {
-            Animator.SetBool("IsRunning", true);
-        }
-    }
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (Input.GetKey("space"))
-        {
-            //and you are on the ground...
+            Grounded = Physics2D.OverlapCircle(_groundCheck.position, GroundCheckRadius, WhatIsGround);
             if (Grounded)
             {
-                //jump!
-                _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
-                StoppedJumping = false;
+                Animator.SetBool("IsGrounded", true);
+                JumpTimeCounter = JumpTime;
+            }
+            else
+            {
+                Animator.SetBool("IsGrounded", false);
+            }
+            if (_gameController.GameActive)
+            {
+                Animator.SetBool("IsRunning", true);
             }
         }
-        //if you keep holding down the jump button...
-        if (Input.GetKey("space") && !StoppedJumping)
+        // Update is called once per frame
+        void FixedUpdate()
         {
-            //and your counter hasn't reached zero...
-            if (JumpTimeCounter > 0)
+            if (Input.GetKey("space"))
             {
-                //keep jumping!
-                _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
-                JumpTimeCounter -= Time.deltaTime;
+                //and you are on the ground...
+                if (Grounded)
+                {
+                    //jump!
+                    _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
+                    StoppedJumping = false;
+                }
             }
-        }
-        //if you stop holding down the jump button...
-        if (Input.GetKey("space"))
-        {
-            //stop jumping and set your counter to zero.  The timer will reset once we touch the ground again in the update function.
-            JumpTimeCounter = 0;
-            StoppedJumping = true;
-        }
-        if (_gameController.GameActive)
-        {
-            Animator.SetBool("IsRunning", true);
-            var otherplayers = GameObject.FindGameObjectsWithTag("Player");
-            foreach (var player in otherplayers)
+            //if you keep holding down the jump button...
+            if (Input.GetKey("space") && !StoppedJumping)
             {
-                Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+                //and your counter hasn't reached zero...
+                if (JumpTimeCounter > 0)
+                {
+                    //keep jumping!
+                    _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
+                    JumpTimeCounter -= Time.deltaTime;
+                }
+            }
+            //if you stop holding down the jump button...
+            if (Input.GetKey("space"))
+            {
+                //stop jumping and set your counter to zero.  The timer will reset once we touch the ground again in the update function.
+                JumpTimeCounter = 0;
+                StoppedJumping = true;
+            }
+            if (_gameController.GameActive)
+            {
+                Animator.SetBool("IsRunning", true);
+                var otherplayers = GameObject.FindGameObjectsWithTag("Player");
+                foreach (var player in otherplayers)
+                {
+                    Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
 
+                }
+            }
+            else
+            {
+                Animator.SetBool("IsRunning", false);
             }
         }
-        else
+        void SetPlayerName(string PlayerName)
         {
-            Animator.SetBool("IsRunning", false);
+            PlayerNameText.text = PlayerName;
+        }
+        void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.name == "Off")
+            {
+                GameOver.Play();
+                SceneManager.LoadScene("Main Menu");
+            }
         }
     }
-    void SetPlayerName(string PlayerName)
-    {
-        PlayerNameText.text = PlayerName;
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.name == "Off")
-        {
-            GameOver.Play();
-            SceneManager.LoadScene("Main Menu");
-        }
-    }
-}
+
     
