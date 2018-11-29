@@ -17,7 +17,6 @@ public class GameController : MonoBehaviour {
     private Text _txtamountOfPlayers;
     private Text _txtClock;
     private bool _displayPlayers;
-    private LevelGenerationScript _levelGenerationScript;
     private float _previousTime;
     private GameObject _fastfoward;
 
@@ -37,7 +36,7 @@ public class GameController : MonoBehaviour {
 
      void Initilize()
     {
-        _levelGenerationScript = GetComponent<LevelGenerationScript>();
+
         _readyButton = GameObject.Find("btnReady");
         _txtamountOfPlayers = GameObject.Find("txtAmountOfPlayers").GetComponent<Text>();
         _txtClock = GameObject.Find("TxtClock").GetComponent<Text>();
@@ -80,8 +79,6 @@ public class GameController : MonoBehaviour {
         }*/
         GameActive = true;
         _readyButton.SetActive(false);
-        _levelGenerationScript.ObstacleMaxWidth=8;
-        _levelGenerationScript.ObstacleMinWidth=10;
     }
     void IncreaseDiffculty(float _timer)
     {
@@ -92,8 +89,6 @@ public class GameController : MonoBehaviour {
             StartCoroutine(DisableFastfoward());
                 _previousTime = _timer;
                 Speed++;
-                _levelGenerationScript.ObstacleMaxWidth++;
-                _levelGenerationScript.ObstacleMinWidth++;
                 Players = GameObject.FindGameObjectsWithTag("Player");
                 foreach(var player in Players)
                 {

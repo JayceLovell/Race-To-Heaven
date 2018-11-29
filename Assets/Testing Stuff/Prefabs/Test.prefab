@@ -434,7 +434,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerNameText: {fileID: 114651948520815188}
-  JumpForce: 9
+  gameMangerPrefab: {fileID: 1752932883271752, guid: bad9379adf97d4843826b63a409dbc4d,
+    type: 2}
   JumpTime: 10
   JumpTimeCounter: 10
   Grounded: 1

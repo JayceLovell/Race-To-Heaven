@@ -4,78 +4,37 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class LevelGenerationScript : MonoBehaviour {
-    public GameObject Camera;
 
-    [Header("obstacles")]
-    public GameObject[] obstaclePrefabs;
-    public Transform obstavleInitialSpawnLoc;
-    GameObject obstacle;
-    public float _obstacleMinWidth;
-    public float _obstacleMaxWidth;
+    [Header("objects")]
+    public GameObject[] prefabs;
+    public float[] spawnHeightAdjustment;
+    GameObject spawnedObject;
+    public float obstacleMinWidth;
+    public float obstacleMaxWidth;
+    public float speedMultipliler;
+    int prefabSelection;
 
-
-    [Header("floors")]
-    public GameObject floorPrefab;
-    public GameObject floor;
-    public float floorWidth;
-
-    public float ObstacleMinWidth
-    {
-        get
-        {
-            return _obstacleMinWidth;
-        }
-
-        set
-        {
-            _obstacleMinWidth = value;
-        }
-    }
-
-    public float ObstacleMaxWidth
-    {
-        get
-        {
-            return _obstacleMaxWidth;
-        }
-
-        set
-        {
-            _obstacleMaxWidth = value;
-        }
-    }
-
-    /*[Header("backgrounds")]
-    public GameObject backgroundPrefab;
-    public GameObject background;
-    public float backgroundWidth;*/
 
     void Start()
     {
-        Camera = GameObject.Find("Main Camera");
-        _obstacleMaxWidth = 15;
-        _obstacleMinWidth = 10;
-        obstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length - 1)], obstavleInitialSpawnLoc.position, Quaternion.identity);
+        prefabSelection = Random.Range(0, prefabs.Length);
+        spawnedObject = Instantiate(prefabs[prefabSelection], transform.position + new Vector3(Random.Range(obstacleMinWidth, obstacleMaxWidth), spawnHeightAdjustment[prefabSelection], 0), Quaternion.identity);
         //NetworkServer.Spawn(obstacle);
     }
     private void FixedUpdate()
     {
 
-        if (obstacle.transform.position.x < Camera.transform.position.x + 20)
+        obstacleMinWidth += Time.deltaTime * speedMultipliler;
+        obstacleMaxWidth += Time.deltaTime * speedMultipliler * (obstacleMaxWidth/ obstacleMinWidth);
+
+
+        if (spawnedObject.transform.position.x < transform.position.x)
         {
-            obstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)], obstavleInitialSpawnLoc.position + new Vector3(Random.Range(ObstacleMinWidth, ObstacleMaxWidth), 0, 0), Quaternion.identity);
+            prefabSelection = Random.Range(0, prefabs.Length);
+
+            spawnedObject = Instantiate(prefabs[prefabSelection], transform.position + new Vector3(Random.Range(obstacleMinWidth, obstacleMaxWidth), spawnHeightAdjustment[prefabSelection], 0), Quaternion.identity);
             //NetworkServer.Spawn(obstacle);
         }
 
-
-        /*if (floor.transform.position.x < cam.transform.position.x + 50)
-        {
-            floor = Instantiate(floorPrefab, floor.transform.position + new Vector3(floorWidth, 0, 0), Quaternion.identity);
-            NetworkServer.Spawn(floor);
-        }*/
-
-
-        //if (background.transform.position.x < cam.transform.position.x + 50)
-        //    background = Instantiate(backgroundPrefab, background.transform.position + new Vector3(backgroundWidth, 0, 0), Quaternion.identity);
     }
 }

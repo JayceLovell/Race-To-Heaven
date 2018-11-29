@@ -5,42 +5,41 @@ using UnityEngine;
 public class MakeObsticlemove : MonoBehaviour {
 
     public int obsticleType;
+    //type 0 no special
+    //type 1 moves up and down
     
-    private GameController _gameController;
-    private bool goingUp = true;
+    GameController _gameController;
+    bool goingUp = true;
+    float verticalChangeTimer;
 
 
     // Use this for initialization
     void Start () {
         _gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        verticalChangeTimer = _gameController.Speed;
 
         switch (obsticleType)
         {
             case 0:
-                transform.Translate(Vector2.down * 0.3f);
                 break;
             case 1:
-                transform.Translate(Vector2.down * 0.85f);
-                break;
-            case 2:
-                transform.Translate(Vector2.up * Random.Range(0,2f));
-                StartCoroutine(movingPlatform(2));
+                StartCoroutine(movingPlatform());
                 break;
         }
 	}
 	
-	// Update is called once per frame
 	void Update () {
+
         if (_gameController.GameActive)
         {
             transform.Translate(Vector2.left * _gameController.Speed * Time.deltaTime);
         }
-        if (obsticleType == 2)
+        if (obsticleType == 1)
         {
             if (goingUp)
-                transform.Translate(Vector2.up * Time.deltaTime);
+                transform.Translate(Vector2.up * verticalChangeTimer * Time.deltaTime/2);
             else
-                transform.Translate(Vector2.down * Time.deltaTime);
+                transform.Translate(Vector2.down * verticalChangeTimer * Time.deltaTime/2);
         }
     }
     //eliminate spawned objects on the left when they exit the collision box
@@ -51,10 +50,10 @@ public class MakeObsticlemove : MonoBehaviour {
             Destroy(this.gameObject);
         }
     }
-    IEnumerator movingPlatform(int counter)
+    IEnumerator movingPlatform()
     {
-        yield return new WaitForSeconds(counter);
+        yield return new WaitForSeconds(4 / verticalChangeTimer);
         goingUp = !goingUp;
-        StartCoroutine(movingPlatform(counter));
+        StartCoroutine(movingPlatform());
     }
 }
