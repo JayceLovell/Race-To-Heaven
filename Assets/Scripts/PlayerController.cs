@@ -4,7 +4,7 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     // Public variables
 
@@ -68,9 +68,15 @@ public class PlayerController : MonoBehaviour
         JumpForce = 9;
     }
 
-        void Update()
+    void Update()
+    {
+        if (!isLocalPlayer)
         {
-            Grounded = Physics2D.OverlapCircle(_groundCheck.position, GroundCheckRadius, WhatIsGround);
+            // exit from update if this is not the local player
+            return;
+        }
+
+        Grounded = Physics2D.OverlapCircle(_groundCheck.position, GroundCheckRadius, WhatIsGround);
             if (Grounded)
             {
                 Animator.SetBool("IsGrounded", true);
@@ -84,11 +90,17 @@ public class PlayerController : MonoBehaviour
             {
                 Animator.SetBool("IsRunning", true);
             }
-        }
+    }
         // Update is called once per frame
         void FixedUpdate()
         {
-            if (Input.GetKey("space"))
+        if (!isLocalPlayer)
+        {
+            // exit from update if this is not the local player
+            return;
+        }
+
+        if (Input.GetKey("space"))
             {
                 //and you are on the ground...
                 if (Grounded)
@@ -140,7 +152,7 @@ public class PlayerController : MonoBehaviour
             if (collision.gameObject.name == "Off")
             {
                 GameOver.Play();
-                SceneManager.LoadScene("Main Menu");
+                //SceneManager.LoadScene("Main Menu");
             }
         }
     }
