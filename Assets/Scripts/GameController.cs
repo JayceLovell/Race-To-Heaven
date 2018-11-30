@@ -65,11 +65,11 @@ public class GameController : NetworkBehaviour {
     }
     public void ReadyButtonClicked()
     {
-        if (!isLocalPlayer)
+        /*if (!isLocalPlayer)
         {
             // exit from update if this is not the local player
             return;
-        }
+        }*/
         Debug.Log("Button Clicked");
         CmdReady();
     }
