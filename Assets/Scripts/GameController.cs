@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class GameController : NetworkBehaviour {
 
-    [SyncVar(hook = "OnPlayersConnectedChange")] public int PlayersConnected;
-    [SyncVar] public int PlayersReady;
+    [SyncVar] public int PlayersConnected;
+    [SyncVar(hook = "PlayersReadyIncrement")] public int PlayersReady;
     [SyncVar] public bool GameActive;
     public float Timer;
     public float Speed;
@@ -51,16 +51,22 @@ public class GameController : NetworkBehaviour {
                 IncreaseDiffculty(Timer);
                 TxtClock(Timer);
             }
-            if (PlayersReady == PlayersConnected)
-            {
-                Debug.Log("detect value change");
-                GameActive = true;
-            }
         }
+        if (PlayersReady == PlayersConnected)
+        {
+            GameActive = true;
+            //RpcSetGameActive();
+        }
+        _txtamountOfPlayers.text = "Players Connected: " + PlayersConnected + "/4";
     }
-    public void OnPlayersConnectedChange(int players)
+    /*[ClientRpc]
+    void RpcSetGameActive()
     {
-        _txtamountOfPlayers.text = "Players Connected: " + players + "/4";
+        GameActive = true;
+    }*/
+    void PlayersReadyIncrement(int PlayersReadySoFar)
+    {
+        PlayersReady = PlayersReadySoFar;
     }
     void TxtClock(float timer)
     {

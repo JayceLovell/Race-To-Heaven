@@ -449,6 +449,7 @@ MonoBehaviour:
   GroundCheckRadius: 1
   Animator: {fileID: 0}
   GameOver: {fileID: 82503057571828976}
+  _readyButton: {fileID: 0}
 --- !u!114 &114470325683871802
 MonoBehaviour:
   m_ObjectHideFlags: 1
