@@ -29,6 +29,7 @@ public class PlayerController : NetworkBehaviour
     private Transform _groundCheck;
     private string _playerName;
     private float _jumpForce;
+    public GameObject _readyButton;
 
     public float JumpForce
     {
@@ -47,22 +48,33 @@ public class PlayerController : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-        if (GameObject.Find("GameManager") != null)
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+        Initilize();
+
+        _playerName = _gameManager.PlayerName;
+        CmdSetPlayerName(_playerName);
+        JumpTimeCounter = JumpTime;
+        GroundCheckRadius = 1;
+        JumpForce = 9;
+    }
+    void Initilize()
+    {
+        /*if (GameObject.Find("GameManager") != null)
             _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         else
-            _gameManager = Instantiate(gameMangerPrefab, transform).GetComponent<GameManager>();
+            _gameManager = Instantiate(gameMangerPrefab, transform).GetComponent<GameManager>();*/
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _rigidBody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
         _sprite = GetComponent<SpriteRenderer>();
         _gameController = GameObject.Find("GameController").GetComponent<GameController>();
         _groundCheck = this.gameObject.transform;
-
-        _playerName = _gameManager.PlayerName;
-        CmdSetPlayerName(_playerName);
-        JumpTimeCounter = JumpTime;
         WhatIsGround = LayerMask.GetMask("Ground");
-        GroundCheckRadius = 1;
-        JumpForce = 9;
+        _readyButton = GameObject.Find("btnReady");
+        _readyButton.GetComponent<Button>().onClick.AddListener(delegate { CmdPlayerReady(); });
     }
 
     void Update()
@@ -158,6 +170,20 @@ public class PlayerController : NetworkBehaviour
                 //SceneManager.LoadScene("Main Menu");
             }
         }
+    [Command]
+    void CmdPlayerReady()
+    {
+        if (!isLocalPlayer)
+        {
+            Debug.Log("wrong place");
+            // exit from update if this is not the local player
+            return;
+        }
+        Debug.Log("Button Clicked");
+        Debug.Log("Command called");
+        _gameController.PlayersReady++;
+        _readyButton.SetActive(false);
     }
+}
 
     

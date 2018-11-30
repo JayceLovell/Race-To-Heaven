@@ -8,7 +8,7 @@ public class GameController : NetworkBehaviour {
 
     [SyncVar(hook = "OnPlayersConnectedChange")] public int PlayersConnected;
     [SyncVar] public int PlayersReady;
-    [SyncVar(hook = "RpcGameActive")] public bool GameActive;
+    [SyncVar] public bool GameActive;
     public float Timer;
     public float Speed;
     public GameObject[] Players;
@@ -51,6 +51,11 @@ public class GameController : NetworkBehaviour {
                 IncreaseDiffculty(Timer);
                 TxtClock(Timer);
             }
+            if (PlayersReady == PlayersConnected)
+            {
+                Debug.Log("detect value change");
+                GameActive = true;
+            }
         }
     }
     public void OnPlayersConnectedChange(int players)
@@ -62,33 +67,6 @@ public class GameController : NetworkBehaviour {
         float minutes = Mathf.Floor(timer / 60);
         float seconds = timer % 60;
         _txtClock.text = "Time: " + minutes + ":" + Mathf.RoundToInt(seconds);
-    }
-    public void ReadyButtonClicked()
-    {
-        /*if (!isLocalPlayer)
-        {
-            // exit from update if this is not the local player
-            return;
-        }*/
-        Debug.Log("Button Clicked");
-        CmdReady();
-    }
-    [Command]
-     void CmdReady()
-    {
-        Debug.Log("Command called");
-        PlayersReady++;
-        _readyButton.SetActive(false);
-        if (PlayersReady == PlayersConnected)
-        {
-            Debug.Log("detect value change");
-            GameActive = true;
-        }
-    }
-    [ClientRpc]
-    void RpcGameActive(bool GameActive)
-    {
-        Debug.Log("game set Active");
     }
     void IncreaseDiffculty(float _timer)
     {
