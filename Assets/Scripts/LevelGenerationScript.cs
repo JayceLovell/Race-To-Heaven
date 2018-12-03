@@ -17,28 +17,30 @@ public class LevelGenerationScript : NetworkBehaviour {
 
     void Start()
     {
-        prefabSelection = Random.Range(0, prefabs.Length);
-        spawnedObject = Instantiate(prefabs[prefabSelection], transform.position + new Vector3(Random.Range(obstacleMinWidth, obstacleMaxWidth), spawnHeightAdjustment[prefabSelection], 0), Quaternion.identity);
         if (isServer)
         {
-            NetworkServer.Spawn(spawnedObject);
+            prefabSelection = Random.Range(0, prefabs.Length);
+            spawnedObject = Instantiate(prefabs[prefabSelection], transform.position + new Vector3(Random.Range(obstacleMinWidth, obstacleMaxWidth), spawnHeightAdjustment[prefabSelection], 0), Quaternion.identity);
+            NetworkServer.Spawn(spawnedObject);          
         }
     }
     private void FixedUpdate()
     {
-
-        obstacleMinWidth += Time.deltaTime * speedMultipliler;
-        obstacleMaxWidth += Time.deltaTime * speedMultipliler * (obstacleMaxWidth/ obstacleMinWidth);
-
-
-        if (spawnedObject.transform.position.x < transform.position.x)
+        if (isServer)
         {
-            prefabSelection = Random.Range(0, prefabs.Length);
+            obstacleMinWidth += Time.deltaTime * speedMultipliler;
+            obstacleMaxWidth += Time.deltaTime * speedMultipliler * (obstacleMaxWidth / obstacleMinWidth);
 
-            spawnedObject = Instantiate(prefabs[prefabSelection], transform.position + new Vector3(Random.Range(obstacleMinWidth, obstacleMaxWidth), spawnHeightAdjustment[prefabSelection], 0), Quaternion.identity);
-            if (isServer)
+
+            if (spawnedObject.transform.position.x < transform.position.x)
             {
-                NetworkServer.Spawn(spawnedObject);
+                prefabSelection = Random.Range(0, prefabs.Length);
+
+                spawnedObject = Instantiate(prefabs[prefabSelection], transform.position + new Vector3(Random.Range(obstacleMinWidth, obstacleMaxWidth), spawnHeightAdjustment[prefabSelection], 0), Quaternion.identity);
+                if (isServer)
+                {
+                    NetworkServer.Spawn(spawnedObject);
+                }
             }
         }
 
