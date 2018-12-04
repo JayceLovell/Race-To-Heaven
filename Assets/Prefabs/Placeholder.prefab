@@ -442,7 +442,6 @@ MonoBehaviour:
   GroundCheckRadius: 1
   Animator: {fileID: 0}
   GameOver: {fileID: 82892294527818002}
-  _readyButton: {fileID: 0}
 --- !u!114 &114418164114615022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -454,10 +453,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53a17e3325d7ffe4a960f3c0a7eff65e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaCost: 0
-  staminaRegen: 0
-  cooldown: 0
-  portalPrefab: {fileID: 0}
+  staminaCost: 50
+  portalPrefab: {fileID: 1000331915475318, guid: 2c0006b9207a4db458e426028e8879fb,
+    type: 2}
 --- !u!114 &114437236120071878
 MonoBehaviour:
   m_ObjectHideFlags: 1
