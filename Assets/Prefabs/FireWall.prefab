@@ -25,9 +25,10 @@ GameObject:
   - component: {fileID: 95652561824128922}
   - component: {fileID: 60990930119185356}
   - component: {fileID: 50609782156509730}
+  - component: {fileID: 114152318262911956}
   m_Layer: 0
   m_Name: FireWall
-  m_TagString: Untagged
+  m_TagString: Obsticle2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,6 +170,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114152318262911956
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1769309459883568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e26c9845b0257549a32ca7639b931da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obsticleType: 0
 --- !u!114 &114201907153450540
 MonoBehaviour:
   m_ObjectHideFlags: 1

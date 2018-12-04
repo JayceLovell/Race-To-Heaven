@@ -25,9 +25,10 @@ GameObject:
   - component: {fileID: 50392652840769472}
   - component: {fileID: 114155005748649694}
   - component: {fileID: 114731342344113246}
+  - component: {fileID: 114064457032302012}
   m_Layer: 8
   m_Name: Fire
-  m_TagString: Untagged
+  m_TagString: Obsticle2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,6 +151,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114064457032302012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1966065604538744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e26c9845b0257549a32ca7639b931da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obsticleType: 0
 --- !u!114 &114155005748649694
 MonoBehaviour:
   m_ObjectHideFlags: 1
