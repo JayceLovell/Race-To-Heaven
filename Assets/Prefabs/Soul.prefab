@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 95526720589728648}
   - component: {fileID: 114853705658165234}
   - component: {fileID: 114150324375475148}
+  - component: {fileID: 114515124522323268}
   m_Layer: 0
   m_Name: Soul
   m_TagString: Obsticle2
@@ -173,6 +174,25 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114515124522323268
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1187844438442084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95526720589728648}
+  m_ParameterSendBits: 0
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!114 &114853705658165234
 MonoBehaviour:
   m_ObjectHideFlags: 1

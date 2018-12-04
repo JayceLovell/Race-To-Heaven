@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114155005748649694}
   - component: {fileID: 114731342344113246}
   - component: {fileID: 114064457032302012}
+  - component: {fileID: 114109418597413306}
   m_Layer: 8
   m_Name: Fire
   m_TagString: Obsticle2
@@ -163,6 +164,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obsticleType: 0
+--- !u!114 &114109418597413306
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1966065604538744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95354729638640244}
+  m_ParameterSendBits: 0
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!114 &114155005748649694
 MonoBehaviour:
   m_ObjectHideFlags: 1
