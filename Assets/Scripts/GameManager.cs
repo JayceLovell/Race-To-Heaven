@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
 
     private string _levelChoice;
     private string _playerName;
-    private NetworkManager _networkManager;
+    public NetworkManager _networkManager;
 
     public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 
@@ -72,6 +72,10 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if (_networkManager == null)
+        {
+            Debug.Log("null");
+        }
 
     }
     void PrepareNetWorkManager()

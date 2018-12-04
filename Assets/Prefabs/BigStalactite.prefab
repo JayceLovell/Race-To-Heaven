@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114039887747241650}
   m_Layer: 0
   m_Name: BigStalactite
-  m_TagString: Untagged
+  m_TagString: Obsticle1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

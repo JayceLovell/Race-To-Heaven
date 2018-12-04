@@ -470,8 +470,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4461269010295206, guid: bad9379adf97d4843826b63a409dbc4d, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114539753005651580, guid: bad9379adf97d4843826b63a409dbc4d,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114539753005651580, guid: bad9379adf97d4843826b63a409dbc4d,
+        type: 2}
+      propertyPath: _networkManager
+      value: 
+      objectReference: {fileID: 555791499}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bad9379adf97d4843826b63a409dbc4d, type: 2}
   m_IsPrefabAsset: 0
@@ -1560,7 +1570,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1287813787
 AudioSource:

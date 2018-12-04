@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114295323181804444}
   m_Layer: 0
   m_Name: ShotRock
-  m_TagString: Untagged
+  m_TagString: Obsticle1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

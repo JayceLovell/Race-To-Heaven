@@ -7,7 +7,8 @@ public class MakeObsticlemove : MonoBehaviour {
     public int obsticleType;
     //type 0 no special
     //type 1 moves up and down
-    
+    //type 2 moves left
+
     GameController _gameController;
     bool goingUp = true;
     float verticalChangeTimer;
@@ -33,6 +34,11 @@ public class MakeObsticlemove : MonoBehaviour {
         if (_gameController.GameActive)
         {
             transform.Translate(Vector2.left * _gameController.Speed * Time.deltaTime);
+            if (obsticleType == 2)
+            {
+
+                transform.Translate(Vector2.left * _gameController.Speed * Time.deltaTime/2);
+            }
         }
         if (obsticleType == 1)
         {
@@ -41,6 +47,7 @@ public class MakeObsticlemove : MonoBehaviour {
             else
                 transform.Translate(Vector2.down * verticalChangeTimer * Time.deltaTime/2);
         }
+       
     }
     //eliminate spawned objects on the left when they exit the collision box
     private void OnCollisionEnter2D(Collision2D collision)

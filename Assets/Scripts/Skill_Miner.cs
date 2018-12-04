@@ -11,7 +11,7 @@ public class Skill_Miner : MonoBehaviour {
     float currCD = 0;
     private Rigidbody2D _rigibody;
     private SkillBarScript _skillbar;
-    private float _staminaCost;
+    public float _staminaCost;
     private bool isUsingSkill;
 
 
@@ -21,7 +21,6 @@ public class Skill_Miner : MonoBehaviour {
         _rigibody = GetComponent<Rigidbody2D>();
         _skillbar = GetComponent<SkillBarScript>();
         currStamina = _skillbar.StaminaAmount;
-        _staminaCost = 50;
     }
 
 

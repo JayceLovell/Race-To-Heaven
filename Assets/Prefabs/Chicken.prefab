@@ -404,8 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8278922544c24d49a2f80d7eb4fe669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaCost: 0
-  staminaRegen: 0
+  staminaCost: 30
 --- !u!114 &114309290087038068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -532,7 +531,6 @@ MonoBehaviour:
   GroundCheckRadius: 1
   Animator: {fileID: 0}
   GameOver: {fileID: 82680508943619350}
-  _readyButton: {fileID: 0}
 --- !u!114 &114721245803589232
 MonoBehaviour:
   m_ObjectHideFlags: 1

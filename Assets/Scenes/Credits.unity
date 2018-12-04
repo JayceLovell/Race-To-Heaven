@@ -302,9 +302,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Jayce Lovell (UnderInfluence)
+  m_Text: 'Jayce Lovell
 
-    Micheal Sun'
+    Yueyang Sun'
 --- !u!222 &182670505
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -862,7 +862,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '*InsertName*'
+  m_Text: Vincent Wright
 --- !u!222 &1202910084
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1014,7 +1014,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '*InsertName*'
+  m_Text: Vicent Wright
 --- !u!222 &1282147692
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1239,7 +1239,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '*InsertName*'
+  m_Text: 'Jayce Lovell
+
+    Yueyang Sun
+
+    Vincent Wright'
 --- !u!222 &1741710851
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1743,7 +1747,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '*InsertName*'
+  m_Text: 'Vincent Wright
+
+'
 --- !u!222 &2120625281
 CanvasRenderer:
   m_ObjectHideFlags: 0
