@@ -17,24 +17,22 @@ public class LevelGenerationScript : MonoBehaviour {
 
     void Start()
     {
-        prefabSelection = Random.Range(0, prefabs.Length);
-        spawnedObject = Instantiate(prefabs[prefabSelection], transform.position + new Vector3(Random.Range(obstacleMinWidth, obstacleMaxWidth), spawnHeightAdjustment[prefabSelection], 0), Quaternion.identity);
-        //NetworkServer.Spawn(obstacle);
+            prefabSelection = Random.Range(0, prefabs.Length);
+            spawnedObject = Instantiate(prefabs[prefabSelection], transform.position + new Vector3(Random.Range(obstacleMinWidth, obstacleMaxWidth), spawnHeightAdjustment[prefabSelection], 0), Quaternion.identity);
+            NetworkServer.Spawn(spawnedObject);          
     }
     private void FixedUpdate()
     {
+            obstacleMinWidth += Time.deltaTime * speedMultipliler;
+            obstacleMaxWidth += Time.deltaTime * speedMultipliler * (obstacleMaxWidth / obstacleMinWidth);
 
-        obstacleMinWidth += Time.deltaTime * speedMultipliler;
-        obstacleMaxWidth += Time.deltaTime * speedMultipliler * (obstacleMaxWidth/ obstacleMinWidth);
 
+            if (spawnedObject.transform.position.x < transform.position.x)
+            {
+                prefabSelection = Random.Range(0, prefabs.Length);
 
-        if (spawnedObject.transform.position.x < transform.position.x)
-        {
-            prefabSelection = Random.Range(0, prefabs.Length);
-
-            spawnedObject = Instantiate(prefabs[prefabSelection], transform.position + new Vector3(Random.Range(obstacleMinWidth, obstacleMaxWidth), spawnHeightAdjustment[prefabSelection], 0), Quaternion.identity);
-            //NetworkServer.Spawn(obstacle);
-        }
-
+                spawnedObject = Instantiate(prefabs[prefabSelection], transform.position + new Vector3(Random.Range(obstacleMinWidth, obstacleMaxWidth), spawnHeightAdjustment[prefabSelection], 0), Quaternion.identity);
+                    NetworkServer.Spawn(spawnedObject);
+            }
     }
 }

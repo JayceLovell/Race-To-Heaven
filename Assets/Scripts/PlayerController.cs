@@ -4,10 +4,9 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     // Public variables
-
     public Text PlayerNameText;
     public GameObject gameMangerPrefab;
 
@@ -48,29 +47,42 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if (GameObject.Find("GameManager") != null)
-            _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        else
-            _gameManager = Instantiate(gameMangerPrefab, transform).GetComponent<GameManager>();
-        _rigidBody = GetComponent<Rigidbody2D>();
-        Animator = GetComponent<Animator>();
-        _sprite = GetComponent<SpriteRenderer>();
-        //_networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
-        //_networkanimator = GetComponent<NetworkAnimator>();
-        _gameController = GameObject.Find("GameController").GetComponent<GameController>();
-        _groundCheck = this.gameObject.transform;
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+        Initilize();
 
         _playerName = _gameManager.PlayerName;
-        SetPlayerName(_playerName);
+        CmdSetPlayerName(_playerName);
         JumpTimeCounter = JumpTime;
-        WhatIsGround = LayerMask.GetMask("Ground");
         GroundCheckRadius = 1;
         JumpForce = 9;
     }
+    void Initilize()
+    {
+        /*if (GameObject.Find("GameManager") != null)
+            _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        else
+            _gameManager = Instantiate(gameMangerPrefab, transform).GetComponent<GameManager>();*/
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _rigidBody = GetComponent<Rigidbody2D>();
+        Animator = GetComponent<Animator>();
+        _sprite = GetComponent<SpriteRenderer>();
+        _gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        _groundCheck = this.gameObject.transform;
+        WhatIsGround = LayerMask.GetMask("Ground");
+    }
 
-        void Update()
+    void Update()
+    {
+        if (!isLocalPlayer)
         {
-            Grounded = Physics2D.OverlapCircle(_groundCheck.position, GroundCheckRadius, WhatIsGround);
+            // exit from update if this is not the local player
+            return;
+        }
+
+        Grounded = Physics2D.OverlapCircle(_groundCheck.position, GroundCheckRadius, WhatIsGround);
             if (Grounded)
             {
                 Animator.SetBool("IsGrounded", true);
@@ -84,11 +96,17 @@ public class PlayerController : MonoBehaviour
             {
                 Animator.SetBool("IsRunning", true);
             }
-        }
+    }
         // Update is called once per frame
-        void FixedUpdate()
+    void FixedUpdate()
         {
-            if (Input.GetKey("space"))
+        if (!isLocalPlayer)
+        {
+            // exit from update if this is not the local player
+            return;
+        }
+
+        if (Input.GetKey("space"))
             {
                 //and you are on the ground...
                 if (Grounded)
@@ -116,33 +134,34 @@ public class PlayerController : MonoBehaviour
                 JumpTimeCounter = 0;
                 StoppedJumping = true;
             }
-            if (_gameController.GameActive)
+            /*if (_gameController.GameActive)
             {
                 Animator.SetBool("IsRunning", true);
                 var otherplayers = GameObject.FindGameObjectsWithTag("Player");
                 foreach (var player in otherplayers)
                 {
                     Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-
                 }
-            }
+            }*/
             else
             {
                 Animator.SetBool("IsRunning", false);
             }
         }
-        void SetPlayerName(string PlayerName)
+    [Command]
+    void CmdSetPlayerName(string PlayerName)
+    {
+        PlayerNameText.text = PlayerName;        
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "Off")
         {
-            PlayerNameText.text = PlayerName;
-        }
-        void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (collision.gameObject.name == "Off")
-            {
-                GameOver.Play();
-                SceneManager.LoadScene("Main Menu");
-            }
+            GameOver.Play();
+            NetworkIdentity.Destroy(this.gameObject);
+            //SceneManager.LoadScene("Main Menu");
         }
     }
+}
 
     

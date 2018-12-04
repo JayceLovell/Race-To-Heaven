@@ -23,6 +23,8 @@ GameObject:
   - component: {fileID: 61175045228327372}
   - component: {fileID: 114032399531143250}
   - component: {fileID: 50523568861487682}
+  - component: {fileID: 114113296536613176}
+  - component: {fileID: 114576240405615498}
   m_Layer: 0
   m_Name: damagingObsticleTest
   m_TagString: Obsticle2
@@ -100,6 +102,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obsticleType: 0
+--- !u!114 &114113296536613176
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1329460458024806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 95
+    i1: 233
+    i2: 41
+    i3: 54
+    i4: 161
+    i5: 8
+    i6: 51
+    i7: 164
+    i8: 73
+    i9: 244
+    i10: 191
+    i11: 111
+    i12: 251
+    i13: 196
+    i14: 189
+    i15: 157
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114576240405615498
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1329460458024806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!212 &212423844191027798
 SpriteRenderer:
   m_ObjectHideFlags: 1

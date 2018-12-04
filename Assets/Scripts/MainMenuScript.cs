@@ -13,6 +13,7 @@ public class MainMenuScript : MonoBehaviour {
     private Text _version;
     private string _selectedlevel;
     public GameObject Settings;
+    public AudioSource MainMenuMusic;
 
     public string PlayerName
     {
@@ -33,6 +34,7 @@ public class MainMenuScript : MonoBehaviour {
         Initialize();
         _version.text = "Version :" + Application.version;
         _selectedlevel = "Test";
+        MainMenuMusic.volume = _gameManager.GameSettings.MusicVolume;
 	}
 
     void Initialize()
@@ -41,6 +43,7 @@ public class MainMenuScript : MonoBehaviour {
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _dropdownLevelSelector = GameObject.Find("DropdownLevelSelector").GetComponent<Dropdown>();
         _version = GameObject.Find("txtVersion").GetComponent<Text>();
+        MainMenuMusic = GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -68,9 +71,13 @@ public class MainMenuScript : MonoBehaviour {
     {
         SceneManager.LoadScene("Options");
     }
+    public void ClickCredits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
     public void ClickCharacterChange()
     {
-        SceneManager.LoadScene("Character Selection", LoadSceneMode.Additive);
+        SceneManager.LoadScene("Character Selection",LoadSceneMode.Additive);
     }
     public void EnteredName()
     {

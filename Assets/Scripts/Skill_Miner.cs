@@ -61,7 +61,7 @@ public class Skill_Miner : MonoBehaviour {
         }
         else if(collision.gameObject.tag == "Obsticle2")
         {
-            GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
+            this.gameObject.GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
             StartCoroutine(Timer(0.1f));
             _rigibody.AddForce(new Vector2(-1,1), ForceMode2D.Impulse);
             Destroy(collision.gameObject);

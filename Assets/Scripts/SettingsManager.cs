@@ -16,9 +16,11 @@ public class SettingsManager : MonoBehaviour {
     public AudioSource audiosource;
     public Resolution[] Resolutions;
     public GameSettings GameSettings;
+    private GameManager _gameManager;
 
     void Start()
     {
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         GameSettings = new GameSettings();
 
         FullScreenToggle.onValueChanged.AddListener(delegate { OnFullscreenToggle(); });
@@ -65,6 +67,7 @@ public class SettingsManager : MonoBehaviour {
     {
         string jsonData = JsonUtility.ToJson(GameSettings, true);
         File.WriteAllText(Application.persistentDataPath + "/gamesettings.json",jsonData);
+        _gameManager.ChangedSettings();
     }
     public void LoadSettings()
     {
