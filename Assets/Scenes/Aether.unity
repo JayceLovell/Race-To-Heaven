@@ -502,6 +502,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114517509634730992, guid: be034c46525d08c4da0e516cb3eaa498,
+        type: 2}
+      propertyPath: prefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114517509634730992, guid: be034c46525d08c4da0e516cb3eaa498,
+        type: 2}
+      propertyPath: spawnHeightAdjustment.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4105533353895298, guid: be034c46525d08c4da0e516cb3eaa498, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -533,6 +543,65 @@ Prefab:
     - target: {fileID: 4105533353895298, guid: be034c46525d08c4da0e516cb3eaa498, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114517509634730992, guid: be034c46525d08c4da0e516cb3eaa498,
+        type: 2}
+      propertyPath: prefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1061702554097630, guid: 8d639c41c003e0c4287f1ac67a576bbf,
+        type: 2}
+    - target: {fileID: 114517509634730992, guid: be034c46525d08c4da0e516cb3eaa498,
+        type: 2}
+      propertyPath: prefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 1142229704509928, guid: b6da664669ed03f409ae839739bf0049,
+        type: 2}
+    - target: {fileID: 114517509634730992, guid: be034c46525d08c4da0e516cb3eaa498,
+        type: 2}
+      propertyPath: spawnHeightAdjustment.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114517509634730992, guid: be034c46525d08c4da0e516cb3eaa498,
+        type: 2}
+      propertyPath: spawnHeightAdjustment.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114285064714586216, guid: be034c46525d08c4da0e516cb3eaa498,
+        type: 2}
+      propertyPath: prefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 1966065604538744, guid: 748eca545d3e0d44f82bd8b1d3e939db,
+        type: 2}
+    - target: {fileID: 114285064714586216, guid: be034c46525d08c4da0e516cb3eaa498,
+        type: 2}
+      propertyPath: prefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 1501844319735718, guid: 710dd5aa7aac7784891532bba097b8cd,
+        type: 2}
+    - target: {fileID: 114285064714586216, guid: be034c46525d08c4da0e516cb3eaa498,
+        type: 2}
+      propertyPath: prefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 1769309459883568, guid: ce63369b7a9786249a2201add6173f2a,
+        type: 2}
+    - target: {fileID: 4490784286334158, guid: be034c46525d08c4da0e516cb3eaa498, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114285064714586216, guid: be034c46525d08c4da0e516cb3eaa498,
+        type: 2}
+      propertyPath: spawnHeightAdjustment.Array.data[0]
+      value: -0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114285064714586216, guid: be034c46525d08c4da0e516cb3eaa498,
+        type: 2}
+      propertyPath: spawnHeightAdjustment.Array.data[2]
+      value: -0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114285064714586216, guid: be034c46525d08c4da0e516cb3eaa498,
+        type: 2}
+      propertyPath: spawnHeightAdjustment.Array.data[1]
+      value: 3.69
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be034c46525d08c4da0e516cb3eaa498, type: 2}
