@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 114846873450148856}
   m_Layer: 8
   m_Name: FatRock
-  m_TagString: Untagged
+  m_TagString: Obsticle1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
