@@ -39,7 +39,7 @@ public class CharacterSelectionScript : MonoBehaviour {
                 Debug.Log("Choose Chicken");
                 break;
             case "Miner":
-                _networkManager.playerPrefab = CharacterPrefabs[1];
+                _networkManager.playerPrefab = CharacterPrefabs[2];
                 Debug.Log("Choose Miner");
                 break;
             case "Placeholder":
