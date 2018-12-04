@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
     [Header("Obsticles Prefabs")]
     public GameObject[] TestObsticles;
     public GameObject[] AetherObsticles;
-    public GameObject[] LimboObstricles;
+    public GameObject[] LimboObsticles;
     public GameSettings GameSettings;
     public string LevelChoice
     {
@@ -86,8 +86,18 @@ public class GameManager : MonoBehaviour {
                 }
                 break;
             case "Aether":
+                foreach (var prefab in AetherObsticles)
+                {
+                    _networkManager.spawnPrefabs.Add(prefab);
+                    ClientScene.RegisterPrefab(prefab);
+                }
                 break;
             case "Limbo":
+                foreach (var prefab in LimboObsticles)
+                {
+                    _networkManager.spawnPrefabs.Add(prefab);
+                    ClientScene.RegisterPrefab(prefab);
+                }
                 break;
         }
     }
