@@ -12,7 +12,6 @@ public class Skill_Cube : MonoBehaviour {
     float maxStamina = 100;
     float currStamina;
     bool jumpReady = true;
-    GameObject portal = null;
     Rigidbody2D rb;
     // Use this for initialization
     void Start()

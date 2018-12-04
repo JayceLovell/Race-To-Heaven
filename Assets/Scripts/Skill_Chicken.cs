@@ -4,25 +4,33 @@ using UnityEngine;
 
 public class Skill_Chicken : MonoBehaviour {
     public float staminaCost;
-    public float staminaRegen;
-
-    float maxStamina = 100;
+    public float currCD = 0;
     float currStamina;
+    private SkillBarScript _skillbar;
     Rigidbody2D rb;
 
     void Start () {
-        currStamina = maxStamina;
+        _skillbar = GetComponent<SkillBarScript>();
+        currStamina = _skillbar.StaminaAmount;
         rb = GetComponent<Rigidbody2D>();
+        currCD = 0;
     }
 	
 	void Update () {
-        if (currStamina < maxStamina) currStamina += staminaRegen;
-        else if (currStamina > maxStamina) currStamina = maxStamina;
+        currStamina = _skillbar.StaminaAmount;
+        if (currCD > 0)
+            currCD -= Time.deltaTime;
+        else if (currCD < 0)
+            currCD = 0;
 
-        if (currStamina > staminaCost && rb.velocity.y < -0.5f && Input.GetButton("Skill"))
+        if (currStamina > staminaCost && rb.velocity.y < -0.5f && Input.GetButton("Skill")&&currCD<=0)
         {
-            currStamina -= staminaCost * Time.deltaTime;
+            _skillbar.StaminaAmount -=  staminaCost * Time.deltaTime;
             rb.velocity = new Vector2(rb.velocity.x,-0.5f);
+        }
+        if (currStamina <= staminaCost)
+        {
+            currCD = 1;
         }
 	}
     void OnCollisionEnter2D(Collision2D collision)

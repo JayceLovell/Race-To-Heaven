@@ -61,10 +61,6 @@ public class PlayerController : NetworkBehaviour
     }
     void Initilize()
     {
-        /*if (GameObject.Find("GameManager") != null)
-            _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        else
-            _gameManager = Instantiate(gameMangerPrefab, transform).GetComponent<GameManager>();*/
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _rigidBody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
