@@ -1,7 +1,9 @@
 fileFormatVersion: 2
 guid: 7b9549230c3cbd5479e69599a7679fef
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: placeholderAscend_0
+    21300002: placeholderAscend_1
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -137,7 +139,47 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: placeholderAscend_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7
+        width: 128
+        height: 121
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 1, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73292aaf7ab3cb44cbd32b734d73f5b0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: placeholderAscend_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 7
+        width: 128
+        height: 121
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34e90977bda90f14aa8882060432d53d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

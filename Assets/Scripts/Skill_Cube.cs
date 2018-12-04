@@ -29,7 +29,7 @@ public class Skill_Cube : MonoBehaviour {
 
 
 
-        if (currStamina > staminaCost && Input.GetButtonDown("skill") && jumpReady)
+        if (currStamina > staminaCost && Input.GetButtonDown("Skill") && jumpReady)
         {
             rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             jumpReady = false;

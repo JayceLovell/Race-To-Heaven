@@ -12,6 +12,7 @@ public class GameController : NetworkBehaviour {
     public float Timer;
     public float Speed;
     public GameObject[] Players;
+    public GameObject ReadyButton;
 
     private GameObject _readyButton;
     private Text _txtamountOfPlayers;
@@ -20,7 +21,7 @@ public class GameController : NetworkBehaviour {
     private float _previousTime;
     private GameObject _fastfoward;
 
-    public GameObject PrefabTestplayer;
+    //public GameObject PrefabTestplayer;
 
 
     // Use this for initialization
@@ -55,15 +56,9 @@ public class GameController : NetworkBehaviour {
         if (PlayersReady == PlayersConnected)
         {
             GameActive = true;
-            //RpcSetGameActive();
         }
         _txtamountOfPlayers.text = "Players Connected: " + PlayersConnected + "/4";
     }
-    /*[ClientRpc]
-    void RpcSetGameActive()
-    {
-        GameActive = true;
-    }*/
     void PlayersReadyIncrement(int PlayersReadySoFar)
     {
         PlayersReady = PlayersReadySoFar;
@@ -89,6 +84,11 @@ public class GameController : NetworkBehaviour {
                     player.GetComponent<PlayerController>().JumpForce++;
                 }
             }
+    }
+    public void PlayerReady()
+    {
+        PlayersReady++;
+        ReadyButton.SetActive(false);
     }
     IEnumerator DisableFastfoward()
     {

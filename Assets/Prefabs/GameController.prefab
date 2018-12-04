@@ -245,8 +245,7 @@ MonoBehaviour:
   Timer: 0
   Speed: 0
   Players: []
-  PrefabTestplayer: {fileID: 1751761618899206, guid: 2652d5cee967e5743a1030b41966e2dd,
-    type: 2}
+  ReadyButton: {fileID: 0}
 --- !u!114 &114734250059800164
 MonoBehaviour:
   m_ObjectHideFlags: 1

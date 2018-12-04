@@ -71,9 +71,13 @@ public class MainMenuScript : MonoBehaviour {
     {
         SceneManager.LoadScene("Options");
     }
+    public void ClickCredits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
     public void ClickCharacterChange()
     {
-        SceneManager.LoadScene("Character Selection");
+        SceneManager.LoadScene("Character Selection",LoadSceneMode.Additive);
     }
     public void EnteredName()
     {

@@ -29,7 +29,6 @@ public class PlayerController : NetworkBehaviour
     private Transform _groundCheck;
     private string _playerName;
     private float _jumpForce;
-    public GameObject _readyButton;
 
     public float JumpForce
     {
@@ -73,8 +72,6 @@ public class PlayerController : NetworkBehaviour
         _gameController = GameObject.Find("GameController").GetComponent<GameController>();
         _groundCheck = this.gameObject.transform;
         WhatIsGround = LayerMask.GetMask("Ground");
-        _readyButton = GameObject.Find("btnReady");
-        _readyButton.GetComponent<Button>().onClick.AddListener(delegate { PlayerReady(); });
     }
 
     void Update()
@@ -154,35 +151,16 @@ public class PlayerController : NetworkBehaviour
     [Command]
     void CmdSetPlayerName(string PlayerName)
     {
-        PlayerNameText.text = PlayerName;
-        //RpcSetPlayerName(PlayerName);          
+        PlayerNameText.text = PlayerName;        
     }
-    /*[ClientRpc]
-    void RpcSetPlayerName(string name)
-    {
-        PlayerNameText.text = name;
-    }*/
     void OnCollisionEnter2D(Collision2D collision)
-        {
-            if (collision.gameObject.name == "Off")
-            {
-                GameOver.Play();
-                NetworkIdentity.Destroy(this.gameObject);
-                //SceneManager.LoadScene("Main Menu");
-            }
-        }
-    //[Command]
-    void PlayerReady()
     {
-        Debug.Log("Button Clicked");
-       /* if (!isLocalPlayer)
+        if (collision.gameObject.name == "Off")
         {
-            // exit from update if this is not the local player
-            return;
-        }*/
-        Debug.Log("Command called");
-        _gameController.PlayersReady++;
-        _readyButton.SetActive(false);
+            GameOver.Play();
+            NetworkIdentity.Destroy(this.gameObject);
+            //SceneManager.LoadScene("Main Menu");
+        }
     }
 }
 
