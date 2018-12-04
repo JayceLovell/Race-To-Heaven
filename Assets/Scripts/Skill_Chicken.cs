@@ -19,7 +19,7 @@ public class Skill_Chicken : MonoBehaviour {
         if (currStamina < maxStamina) currStamina += staminaRegen;
         else if (currStamina > maxStamina) currStamina = maxStamina;
 
-        if (currStamina > staminaCost && rb.velocity.y < -0.5f && Input.GetButton("skill"))
+        if (currStamina > staminaCost && rb.velocity.y < -0.5f && Input.GetButton("Skill"))
         {
             currStamina -= staminaCost * Time.deltaTime;
             rb.velocity = new Vector2(rb.velocity.x,-0.5f);
