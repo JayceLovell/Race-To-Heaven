@@ -433,10 +433,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e0aa6120e7682b4391a99b1073d24f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaCost: 0
-  staminaRegen: 0
-  jumpForce: 0
-  portalPrefab: {fileID: 0}
+  staminaCost: 40
+  jumpForce: 13
 --- !u!114 &114399668163837122
 MonoBehaviour:
   m_ObjectHideFlags: 1
