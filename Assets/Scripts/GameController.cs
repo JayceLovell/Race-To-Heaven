@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GameController : NetworkBehaviour {
 
     [SyncVar] public int PlayersConnected;
-    [SyncVar(hook = "PlayersReadyIncrement")] public int PlayersReady;
+    [SyncVar] public int PlayersReady;
     [SyncVar] public bool GameActive;
     public float Timer;
     public float Speed;
@@ -38,6 +38,7 @@ public class GameController : NetworkBehaviour {
         _txtamountOfPlayers = GameObject.Find("txtAmountOfPlayers").GetComponent<Text>();
         _txtClock = GameObject.Find("TxtClock").GetComponent<Text>();
         _fastfoward = GameObject.Find("FastFoward");
+        ReadyButton = GameObject.Find("btnReady");
     }
 
     // Update is called once per frame
@@ -58,10 +59,6 @@ public class GameController : NetworkBehaviour {
             GameActive = true;
         }
         _txtamountOfPlayers.text = "Players Connected: " + PlayersConnected + "/4";
-    }
-    void PlayersReadyIncrement(int PlayersReadySoFar)
-    {
-        PlayersReady = PlayersReadySoFar;
     }
     void TxtClock(float timer)
     {

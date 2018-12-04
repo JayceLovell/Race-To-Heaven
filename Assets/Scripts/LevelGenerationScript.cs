@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class LevelGenerationScript : NetworkBehaviour {
+public class LevelGenerationScript : MonoBehaviour {
 
     [Header("objects")]
     public GameObject[] prefabs;
@@ -17,17 +17,12 @@ public class LevelGenerationScript : NetworkBehaviour {
 
     void Start()
     {
-        if (isServer)
-        {
             prefabSelection = Random.Range(0, prefabs.Length);
             spawnedObject = Instantiate(prefabs[prefabSelection], transform.position + new Vector3(Random.Range(obstacleMinWidth, obstacleMaxWidth), spawnHeightAdjustment[prefabSelection], 0), Quaternion.identity);
             NetworkServer.Spawn(spawnedObject);          
-        }
     }
     private void FixedUpdate()
     {
-        if (isServer)
-        {
             obstacleMinWidth += Time.deltaTime * speedMultipliler;
             obstacleMaxWidth += Time.deltaTime * speedMultipliler * (obstacleMaxWidth / obstacleMinWidth);
 
@@ -37,12 +32,7 @@ public class LevelGenerationScript : NetworkBehaviour {
                 prefabSelection = Random.Range(0, prefabs.Length);
 
                 spawnedObject = Instantiate(prefabs[prefabSelection], transform.position + new Vector3(Random.Range(obstacleMinWidth, obstacleMaxWidth), spawnHeightAdjustment[prefabSelection], 0), Quaternion.identity);
-                if (isServer)
-                {
                     NetworkServer.Spawn(spawnedObject);
-                }
             }
-        }
-
     }
 }
