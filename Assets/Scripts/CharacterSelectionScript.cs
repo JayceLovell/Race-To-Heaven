@@ -28,7 +28,8 @@ public class CharacterSelectionScript : MonoBehaviour {
 	}
     public void Back()
     {
-        SceneManager.LoadScene("Main Menu");
+        //SceneManager.LoadScene("Main Menu");
+        SceneManager.UnloadScene("Character Selection");
     }
     void ChangePrefabToChoice(string _characterChocie)
     {
