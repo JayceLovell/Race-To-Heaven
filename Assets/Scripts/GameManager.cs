@@ -61,9 +61,20 @@ public class GameManager : MonoBehaviour {
 
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
-
-        //Loads game Settings
-        GameSettings = JsonUtility.FromJson<GameSettings>(File.ReadAllText(Application.persistentDataPath + "/gamesettings.json"));
+        if(System.IO.File.Exists(Application.persistentDataPath + "/gamesettings.json"))
+        {
+            //Loads game Settings
+            GameSettings = JsonUtility.FromJson<GameSettings>(File.ReadAllText(Application.persistentDataPath + "/gamesettings.json"));
+        }
+        else
+        {
+            //Create File
+            Debug.Log("Creating file");
+            GameSettings = new GameSettings();
+            GameSettings.MusicVolume = 50f;
+            string jsonData = JsonUtility.ToJson(GameSettings, true);
+            File.WriteAllText(Application.persistentDataPath + "/gamesettings.json", jsonData);
+        }
     }
     // Use this for initialization
     void Start() {
