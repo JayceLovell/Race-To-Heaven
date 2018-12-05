@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4490784286334158}
   - component: {fileID: 114517509634730992}
-  - component: {fileID: 114336114223054034}
   m_Layer: 0
   m_Name: SpawnSet 2
   m_TagString: Untagged
@@ -37,7 +36,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4784727080224974}
   - component: {fileID: 114285064714586216}
-  - component: {fileID: 114734250059800164}
   m_Layer: 0
   m_Name: SpawnSet 1
   m_TagString: Untagged
@@ -168,48 +166,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 1720846101615166, guid: 9b5815bdcbdc8d94cbfb39ca3039e331, type: 2}
-  - {fileID: 1329460458024806, guid: 5fe92936a10833a449f4bf6ffbc4bd9d, type: 2}
-  - {fileID: 1489260566650028, guid: 2014900704b214240b8d256c1ba1b0a5, type: 2}
+  - {fileID: 1966065604538744, guid: 748eca545d3e0d44f82bd8b1d3e939db, type: 2}
+  - {fileID: 1501844319735718, guid: 710dd5aa7aac7784891532bba097b8cd, type: 2}
+  - {fileID: 1769309459883568, guid: ce63369b7a9786249a2201add6173f2a, type: 2}
   spawnHeightAdjustment:
-  - -0.3
-  - -0.85
-  - 5
+  - -0.16
+  - 3.69
+  - -0.16
   obstacleMinWidth: 8
   obstacleMaxWidth: 10
   speedMultipliler: 0.1
---- !u!114 &114336114223054034
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1185220798979452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 190
-    i1: 3
-    i2: 76
-    i3: 70
-    i4: 82
-    i5: 93
-    i6: 8
-    i7: 196
-    i8: 218
-    i9: 14
-    i10: 81
-    i11: 108
-    i12: 179
-    i13: 234
-    i14: 164
-    i15: 152
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!114 &114517509634730992
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -222,9 +188,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabs:
-  - {fileID: 1371428055922392, guid: e650da21b8c3ef04a907385f2411334b, type: 2}
+  - {fileID: 1061702554097630, guid: 8d639c41c003e0c4287f1ac67a576bbf, type: 2}
+  - {fileID: 1142229704509928, guid: b6da664669ed03f409ae839739bf0049, type: 2}
   spawnHeightAdjustment:
-  - 0.5
+  - 0
+  - 2
   obstacleMinWidth: 10
   obstacleMaxWidth: 30
   speedMultipliler: 0.1
@@ -246,35 +214,3 @@ MonoBehaviour:
   Speed: 0
   Players: []
   ReadyButton: {fileID: 0}
---- !u!114 &114734250059800164
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1913500581121058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 190
-    i1: 3
-    i2: 76
-    i3: 70
-    i4: 82
-    i5: 93
-    i6: 8
-    i7: 196
-    i8: 218
-    i9: 14
-    i10: 81
-    i11: 108
-    i12: 179
-    i13: 234
-    i14: 164
-    i15: 152
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0

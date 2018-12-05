@@ -49,7 +49,7 @@ public class SkillBarScript : MonoBehaviour {
         {
             if (!_isfull)
             {
-                _staminaAmount += 0.10f;
+                _staminaAmount += 0.010f;
             }
             _skillbar.value = _staminaAmount;
             if (_skillbar.value == _skillbar.maxValue)
