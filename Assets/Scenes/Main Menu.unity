@@ -474,11 +474,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114539753005651580, guid: bad9379adf97d4843826b63a409dbc4d,
         type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114539753005651580, guid: bad9379adf97d4843826b63a409dbc4d,
-        type: 2}
       propertyPath: _networkManager
       value: 
       objectReference: {fileID: 555791499}

@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7facdb96f99fcd9489f17fc7152d2c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _networkManager: {fileID: 0}
   TestObsticles:
   - {fileID: 1329460458024806, guid: 5fe92936a10833a449f4bf6ffbc4bd9d, type: 2}
   - {fileID: 1371428055922392, guid: e650da21b8c3ef04a907385f2411334b, type: 2}
@@ -60,11 +61,12 @@ MonoBehaviour:
   - {fileID: 1966065604538744, guid: 748eca545d3e0d44f82bd8b1d3e939db, type: 2}
   - {fileID: 1501844319735718, guid: 710dd5aa7aac7784891532bba097b8cd, type: 2}
   - {fileID: 1769309459883568, guid: ce63369b7a9786249a2201add6173f2a, type: 2}
-  LimboObstricles:
+  - {fileID: 1142229704509928, guid: b6da664669ed03f409ae839739bf0049, type: 2}
+  - {fileID: 1061702554097630, guid: 8d639c41c003e0c4287f1ac67a576bbf, type: 2}
+  LimboObsticles:
   - {fileID: 1277479105555726, guid: 2c1cdbf18f5049a4187d9fb3bbc19594, type: 2}
   - {fileID: 1606014982832154, guid: 6ae6052a952d5de439f24551dc056f5d, type: 2}
   - {fileID: 1979299918894538, guid: 5d35ac10875feaf409327dffc9e120da, type: 2}
   - {fileID: 1868398084375990, guid: b2d685517c12afd44883d2ab3303b5f7, type: 2}
-  - {fileID: 1771141486350670, guid: fba488fca625fda43b02e5d6289b7f44, type: 2}
   - {fileID: 1187844438442084, guid: fa1fc8cd55e910a478e975c1e1d63efc, type: 2}
   - {fileID: 1136925145000648, guid: 49416b6be6e8644438313128a2d92102, type: 2}
