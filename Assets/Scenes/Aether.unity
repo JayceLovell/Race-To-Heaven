@@ -2743,7 +2743,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5cae9c1fc66ad4aa5363a055d2a963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabs: []
+  prefabs:
+  - {fileID: 1061702554097630, guid: 8d639c41c003e0c4287f1ac67a576bbf, type: 2}
+  - {fileID: 1142229704509928, guid: b6da664669ed03f409ae839739bf0049, type: 2}
   spawnHeightAdjustment:
   - 0
   - 2
@@ -5158,7 +5160,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b5cae9c1fc66ad4aa5363a055d2a963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabs: []
+  prefabs:
+  - {fileID: 1966065604538744, guid: 748eca545d3e0d44f82bd8b1d3e939db, type: 2}
+  - {fileID: 1501844319735718, guid: 710dd5aa7aac7784891532bba097b8cd, type: 2}
+  - {fileID: 1769309459883568, guid: ce63369b7a9786249a2201add6173f2a, type: 2}
   spawnHeightAdjustment:
   - -0.16
   - 3.69
