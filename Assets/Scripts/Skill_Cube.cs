@@ -26,6 +26,8 @@ public class Skill_Cube : MonoBehaviour {
         {
             _skillbar.StaminaAmount -= staminaCost;
             rb.velocity=(new Vector3(0, jumpForce,0));
+            GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", true);
+            StartCoroutine(Timer(0.1f));
         }
 
     }
@@ -38,7 +40,14 @@ public class Skill_Cube : MonoBehaviour {
             GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
             rb.AddForce(new Vector2(-1, 1), ForceMode2D.Impulse);
             Destroy(collision.gameObject);
+            StartCoroutine(Timer(0.1f));
         }
         
+    }
+    IEnumerator Timer(float counter)
+    {
+        yield return new WaitForSeconds(counter);
+        GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", false);
+        GetComponent<PlayerController>().Animator.SetBool("IsStruck", false);
     }
 }
