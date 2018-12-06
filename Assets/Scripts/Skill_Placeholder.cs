@@ -25,15 +25,18 @@ public class Skill_Placeholder : MonoBehaviour {
 
         if (currStamina > staminaCost && Input.GetButtonDown("Skill") && portal == null)
         {
-                _skillbar.StaminaAmount -= staminaCost;
-                portal = Instantiate(portalPrefab, this.transform.position, Quaternion.identity);
+            GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", true);
+            StartCoroutine(Timer(0.5f));
+            _skillbar.StaminaAmount -= staminaCost;
+            portal = Instantiate(portalPrefab, this.transform.position, Quaternion.identity);
         }
         else if ( Input.GetButtonDown("Skill") && portal != null)
         {
+            GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", true);
             this.transform.position = portal.transform.position;
             Destroy(portal);
+            StartCoroutine(Timer(0.5f));
         }
-       
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -44,7 +47,14 @@ public class Skill_Placeholder : MonoBehaviour {
             GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
             rb.AddForce(new Vector2(-1, 1), ForceMode2D.Impulse);
             Destroy(collision.gameObject);
+            StartCoroutine(Timer(0.1f));
         }
 
+    }
+    IEnumerator Timer(float counter)
+    {
+        yield return new WaitForSeconds(counter);
+        GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", false);
+        GetComponent<PlayerController>().Animator.SetBool("IsStruck", false);
     }
 }
