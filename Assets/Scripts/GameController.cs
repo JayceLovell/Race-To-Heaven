@@ -9,6 +9,7 @@ public class GameController : NetworkBehaviour {
     [SyncVar] public int PlayersConnected;
     [SyncVar] public int PlayersReady;
     [SyncVar] public bool GameActive;
+    [SyncVar] public int PlayersAlive;
     public float Timer;
     public float Speed;
     public GameObject[] Players;
@@ -18,8 +19,6 @@ public class GameController : NetworkBehaviour {
     private Text _txtClock;
     private float _previousTime;
     private GameObject _fastfoward;
-
-    //public GameObject PrefabTestplayer;
 
 
     // Use this for initialization
@@ -44,20 +43,35 @@ public class GameController : NetworkBehaviour {
         if (isServer)
         {
             PlayersConnected = NetworkServer.connections.Count;
-        }
 
-        if (GameActive)
-        {
-            Timer += Time.deltaTime;
-            IncreaseDiffculty(Timer);
-            TxtClock(Timer);
+            if (GameActive)
+            {
+                Timer += Time.deltaTime;
+                IncreaseDiffculty(Timer);
+                TxtClock(Timer);
+            }
         }
         if ((PlayersReady == PlayersConnected) && !GameActive )
         {
-            Debug.Log("Calling Command RPC");
-            RpcStartGame();
+            //Debug.Log("Calling Command RPC");
+            GameActive = true;
+            PlayersAlive = PlayersConnected;
+            //RpcStartGame();
         }
-        _txtamountOfPlayers.text = "Players Connected: " + PlayersConnected + "/4";
+        if (!GameActive)
+        {
+            _txtamountOfPlayers.text = "Players Connected: " + PlayersConnected + "/4";
+        }
+        else
+        {
+            _txtamountOfPlayers.text = "Players Live: " + PlayersAlive + "/" + PlayersConnected;
+        }
+        if (PlayersAlive == 1 && GameActive)
+        {
+            GameActive = false;
+            //Write code to find winner player
+
+        }
     }
     void TxtClock(float timer)
     {
@@ -81,16 +95,14 @@ public class GameController : NetworkBehaviour {
                 }
             }
     }
+    
     public void PlayerReady()
     {
         PlayersReady++;
         ReadyButton.SetActive(false);
+        Debug.Log("Done");
     }
-    [ClientRpc]
-    void RpcStartGame()
-    {
-            GameActive = true;
-    }
+
     IEnumerator DisableFastfoward()
     {
         _fastfoward.SetActive(true);

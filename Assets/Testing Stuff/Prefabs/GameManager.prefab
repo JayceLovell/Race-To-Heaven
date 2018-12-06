@@ -57,6 +57,8 @@ MonoBehaviour:
   - {fileID: 1371428055922392, guid: e650da21b8c3ef04a907385f2411334b, type: 2}
   - {fileID: 1720846101615166, guid: 9b5815bdcbdc8d94cbfb39ca3039e331, type: 2}
   - {fileID: 1489260566650028, guid: 2014900704b214240b8d256c1ba1b0a5, type: 2}
+  - {fileID: 1142229704509928, guid: b6da664669ed03f409ae839739bf0049, type: 2}
+  - {fileID: 1061702554097630, guid: 8d639c41c003e0c4287f1ac67a576bbf, type: 2}
   AetherObsticles:
   - {fileID: 1966065604538744, guid: 748eca545d3e0d44f82bd8b1d3e939db, type: 2}
   - {fileID: 1501844319735718, guid: 710dd5aa7aac7784891532bba097b8cd, type: 2}

@@ -83,13 +83,9 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (_networkManager == null)
-        {
-            Debug.Log("null");
-        }
 
     }
-    void PrepareNetWorkManager()
+    private void _prepareNetWorkManager()
     {
         switch (_levelChoice)
         {
@@ -119,14 +115,14 @@ public class GameManager : MonoBehaviour {
     public void HostGame()
     {
         _networkManager.onlineScene = _levelChoice;
-        PrepareNetWorkManager();
+        _prepareNetWorkManager();
         _networkManager.StartHost();
     }
     public void JoinGame()
     {
-            _networkManager.onlineScene = _levelChoice;
-            PrepareNetWorkManager();
-            _networkManager.StartClient();        
+        _prepareNetWorkManager();
+        _networkManager.onlineScene = _levelChoice;            
+        _networkManager.StartClient();        
     }
     public void ChangedSettings()
     {

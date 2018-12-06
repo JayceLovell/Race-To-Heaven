@@ -141,7 +141,18 @@ public class PlayerController : NetworkBehaviour
             {
                 Animator.SetBool("IsRunning", false);
             }
+        if ((Input.GetButton("Submit")||Input.GetKey(KeyCode.Space)) && !_gameController.GameActive)
+        {
+            Debug.Log("Calling CMD");
+            CmdPlayerReady();
         }
+    }
+    [Command]
+    void CmdPlayerReady()
+    {
+        Debug.Log("Calling command in controller");
+        _gameController.PlayerReady();
+    }
     void SetPlayerName(string PlayerName)
     {
         PlayerNameText.text = PlayerName;        
@@ -151,6 +162,7 @@ public class PlayerController : NetworkBehaviour
         if (collision.gameObject.name == "Off")
         {
             GameOver.Play();
+            _gameController.PlayersAlive--;
             NetworkIdentity.Destroy(this.gameObject);
             //SceneManager.LoadScene("Main Menu");
         }
