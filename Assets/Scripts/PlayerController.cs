@@ -140,7 +140,7 @@ public class PlayerController : NetworkBehaviour
     [Command]
     void CmdPlayerReady()
     {
-        _gameController.PlayerReady();
+        _gameController.PlayersReady++;
     }
     void SetPlayerName(string PlayerName)
     {

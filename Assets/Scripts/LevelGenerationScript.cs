@@ -14,9 +14,12 @@ public class LevelGenerationScript : NetworkBehaviour {
     public float speedMultipliler;
     int prefabSelection;
 
+    private GameController _gameController;
+
 
     void Start()
     {
+        _gameController = GameObject.Find("GameController").GetComponent<GameController>();
         if (isServer)
         {
             prefabSelection = Random.Range(0, prefabs.Length);
@@ -28,7 +31,7 @@ public class LevelGenerationScript : NetworkBehaviour {
     }
     private void FixedUpdate()
     {
-        if (isServer)
+        if (isServer && _gameController.GameActive)
         {
             obstacleMinWidth += Time.deltaTime * speedMultipliler;
             obstacleMaxWidth += Time.deltaTime * speedMultipliler * (obstacleMaxWidth / obstacleMinWidth);
