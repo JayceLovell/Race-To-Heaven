@@ -14,10 +14,8 @@ public class GameController : NetworkBehaviour {
     public GameObject[] Players;
     public GameObject ReadyButton;
 
-    private GameObject _readyButton;
     private Text _txtamountOfPlayers;
     private Text _txtClock;
-    private bool _displayPlayers;
     private float _previousTime;
     private GameObject _fastfoward;
 
@@ -27,14 +25,12 @@ public class GameController : NetworkBehaviour {
     // Use this for initialization
     void Start () {
         Initilize();
-        _displayPlayers = true;
         Speed = 4f;
         _fastfoward.SetActive(false);
     }
 
      void Initilize()
     {
-        _readyButton = GameObject.Find("btnReady");
         _txtamountOfPlayers = GameObject.Find("txtAmountOfPlayers").GetComponent<Text>();
         _txtClock = GameObject.Find("TxtClock").GetComponent<Text>();
         _fastfoward = GameObject.Find("FastFoward");
@@ -43,20 +39,23 @@ public class GameController : NetworkBehaviour {
 
     // Update is called once per frame
     void Update () {
+        //Players connected link
+        //https://answers.unity.com/questions/1259697/how-to-display-connections-count-on-client.html
         if (isServer)
         {
             PlayersConnected = NetworkServer.connections.Count;
-
-            if (GameActive)
-            {
-                Timer += Time.deltaTime;
-                IncreaseDiffculty(Timer);
-                TxtClock(Timer);
-            }
         }
-        if (PlayersReady == PlayersConnected)
+
+        if (GameActive)
         {
-            GameActive = true;
+            Timer += Time.deltaTime;
+            IncreaseDiffculty(Timer);
+            TxtClock(Timer);
+        }
+        if ((PlayersReady == PlayersConnected) && !GameActive )
+        {
+            Debug.Log("Calling Command RPC");
+            RpcStartGame();
         }
         _txtamountOfPlayers.text = "Players Connected: " + PlayersConnected + "/4";
     }
@@ -86,6 +85,11 @@ public class GameController : NetworkBehaviour {
     {
         PlayersReady++;
         ReadyButton.SetActive(false);
+    }
+    [ClientRpc]
+    void RpcStartGame()
+    {
+            GameActive = true;
     }
     IEnumerator DisableFastfoward()
     {

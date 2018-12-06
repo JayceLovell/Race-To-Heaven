@@ -22,13 +22,15 @@ GameObject:
   - component: {fileID: 212366567664740636}
   - component: {fileID: 61864254337627028}
   - component: {fileID: 50918592214109122}
+  - component: {fileID: 114423298821761292}
+  - component: {fileID: 114975977135031742}
   m_Layer: 0
   m_Name: Off
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4736996571053348
 Transform:
   m_ObjectHideFlags: 1
@@ -36,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1707238007901294}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.45, y: 1.49, z: 0}
+  m_LocalPosition: {x: -11.82, y: 1.49, z: 0}
   m_LocalScale: {x: 1, y: 15.634299, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -87,6 +89,59 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &114423298821761292
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1707238007901294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 238
+    i1: 229
+    i2: 103
+    i3: 151
+    i4: 158
+    i5: 106
+    i6: 122
+    i7: 164
+    i8: 123
+    i9: 240
+    i10: 76
+    i11: 40
+    i12: 191
+    i13: 246
+    i14: 251
+    i15: 50
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
+--- !u!114 &114975977135031742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1707238007901294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 2
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 3
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!212 &212366567664740636
 SpriteRenderer:
   m_ObjectHideFlags: 1

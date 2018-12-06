@@ -23,7 +23,6 @@ public class PlayerController : NetworkBehaviour
 
     // Private variables
     private Rigidbody2D _rigidBody;
-    private SpriteRenderer _sprite;
     private GameManager _gameManager;
     private GameController _gameController;
     private Transform _groundCheck;
@@ -54,7 +53,7 @@ public class PlayerController : NetworkBehaviour
         Initilize();
 
         _playerName = _gameManager.PlayerName;
-        CmdSetPlayerName(_playerName);
+        SetPlayerName(_playerName);
         JumpTimeCounter = JumpTime;
         GroundCheckRadius = 1;
         JumpForce = 9;
@@ -64,7 +63,6 @@ public class PlayerController : NetworkBehaviour
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _rigidBody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
-        _sprite = GetComponent<SpriteRenderer>();
         _gameController = GameObject.Find("GameController").GetComponent<GameController>();
         _groundCheck = this.gameObject.transform;
         WhatIsGround = LayerMask.GetMask("Ground");
@@ -144,8 +142,7 @@ public class PlayerController : NetworkBehaviour
                 Animator.SetBool("IsRunning", false);
             }
         }
-    [Command]
-    void CmdSetPlayerName(string PlayerName)
+    void SetPlayerName(string PlayerName)
     {
         PlayerNameText.text = PlayerName;        
     }
