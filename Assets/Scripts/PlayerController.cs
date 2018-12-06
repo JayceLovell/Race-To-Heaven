@@ -77,19 +77,23 @@ public class PlayerController : NetworkBehaviour
         }
 
         Grounded = Physics2D.OverlapCircle(_groundCheck.position, GroundCheckRadius, WhatIsGround);
-            if (Grounded)
-            {
+        if (Grounded)
+        {
                 Animator.SetBool("IsGrounded", true);
                 JumpTimeCounter = JumpTime;
-            }
-            else
-            {
+        }
+        else
+        {
                 Animator.SetBool("IsGrounded", false);
-            }
-            if (_gameController.GameActive)
-            {
+        }
+        if (_gameController.GameActive)
+        {
                 Animator.SetBool("IsRunning", true);
-            }
+        }
+        else
+        {
+            Animator.SetBool("IsRunning", false);
+        }
     }
         // Update is called once per frame
     void FixedUpdate()
@@ -128,43 +132,36 @@ public class PlayerController : NetworkBehaviour
                 JumpTimeCounter = 0;
                 StoppedJumping = true;
             }
-            /*if (_gameController.GameActive)
-            {
-                Animator.SetBool("IsRunning", true);
-                var otherplayers = GameObject.FindGameObjectsWithTag("Player");
-                foreach (var player in otherplayers)
-                {
-                    Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-                }
-            }*/
-            else
-            {
-                Animator.SetBool("IsRunning", false);
-            }
         if ((Input.GetButton("Submit")||Input.GetKey(KeyCode.Space)) && !_gameController.GameActive)
         {
-            Debug.Log("Calling CMD");
             CmdPlayerReady();
         }
     }
     [Command]
     void CmdPlayerReady()
     {
-        Debug.Log("Calling command in controller");
         _gameController.PlayerReady();
     }
     void SetPlayerName(string PlayerName)
     {
         PlayerNameText.text = PlayerName;        
     }
+    public void Winner()
+    {
+        Animator.SetBool("Winner", true);
+    }
+    [Command]
+    void CmdPlayerDead()
+    {
+        GameOver.Play();
+        _gameController.PlayerDead();
+        NetworkIdentity.Destroy(this.gameObject);
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "Off")
         {
-            GameOver.Play();
-            _gameController.PlayersAlive--;
-            NetworkIdentity.Destroy(this.gameObject);
-            //SceneManager.LoadScene("Main Menu");
+            CmdPlayerDead();            
         }
     }
 }

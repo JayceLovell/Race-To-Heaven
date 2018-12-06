@@ -13,12 +13,12 @@ public class GameController : NetworkBehaviour {
     public float Timer;
     public float Speed;
     public GameObject[] Players;
-    public GameObject ReadyButton;
 
     private Text _txtamountOfPlayers;
     private Text _txtClock;
     private float _previousTime;
     private GameObject _fastfoward;
+    private bool _playingWinner;
 
 
     // Use this for initialization
@@ -33,7 +33,6 @@ public class GameController : NetworkBehaviour {
         _txtamountOfPlayers = GameObject.Find("txtAmountOfPlayers").GetComponent<Text>();
         _txtClock = GameObject.Find("TxtClock").GetComponent<Text>();
         _fastfoward = GameObject.Find("FastFoward");
-        ReadyButton = GameObject.Find("btnReady");
     }
 
     // Update is called once per frame
@@ -66,11 +65,23 @@ public class GameController : NetworkBehaviour {
         {
             _txtamountOfPlayers.text = "Players Live: " + PlayersAlive + "/" + PlayersConnected;
         }
-        if (PlayersAlive == 1 && GameActive)
+        if (PlayersAlive == 1 && GameActive && !_playingWinner)
         {
-            GameActive = false;
             //Write code to find winner player
-
+            GameActive = false;
+            var obsticles2 = GameObject.FindGameObjectsWithTag("Obsticle2");
+            var obsticles1 = GameObject.FindGameObjectsWithTag("Obsticle1");
+            foreach(var obsticle in obsticles1)
+            {
+                NetworkServer.Destroy(obsticle);
+            }
+            foreach (var obsticle in obsticles2)
+            {
+                NetworkServer.Destroy(obsticle);
+            }
+            var PlayerLeft = GameObject.FindGameObjectWithTag("Player");
+            PlayerLeft.GetComponent<PlayerController>().Winner();
+            _playingWinner = true;
         }
     }
     void TxtClock(float timer)
@@ -99,8 +110,11 @@ public class GameController : NetworkBehaviour {
     public void PlayerReady()
     {
         PlayersReady++;
-        ReadyButton.SetActive(false);
         Debug.Log("Done");
+    }
+    public void PlayerDead()
+    {
+        PlayersAlive--;
     }
 
     IEnumerator DisableFastfoward()

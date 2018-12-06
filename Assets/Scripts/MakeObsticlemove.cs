@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class MakeObsticlemove : MonoBehaviour {
+public class MakeObsticlemove : NetworkBehaviour {
 
     public int obsticleType;
     //type 0 no special
@@ -54,7 +55,7 @@ public class MakeObsticlemove : MonoBehaviour {
     {
         if (collision.gameObject.name == "Off")
         {
-            Destroy(this.gameObject);
+            NetworkIdentity.Destroy(this.gameObject);
         }
     }
     IEnumerator movingPlatform()
