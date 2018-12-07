@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class CharacterSelectionScript : MonoBehaviour {
 
-    private NetworkManager _networkManager;
+    //private NetworkManager _networkManager;
     private GameManager _gameManager;
 
     public Button Chicken, MeatBoy, Miner, Placeholder, Angle;
@@ -15,7 +15,7 @@ public class CharacterSelectionScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        _networkManager = GameObject.Find("NetworkManager").GetComponent<MyNetworkManager>();
+        //_networkManager = GameObject.Find("NetworkManager").GetComponent<MyNetworkManager>();
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Chicken.onClick.AddListener(delegate { ChangePrefabToChoice("Chicken"); });
         MeatBoy.onClick.AddListener(delegate { ChangePrefabToChoice("MeatBoy"); });

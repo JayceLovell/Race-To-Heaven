@@ -12,8 +12,11 @@ public class MainMenuScript : MonoBehaviour {
     private Dropdown _dropdownLevelSelector;
     private Text _version;
     private string _selectedlevel;
+
     public GameObject Settings;
     public AudioSource MainMenuMusic;
+    public Button HostButton;
+    public Button JoinButton;
 
     public string PlayerName
     {
@@ -49,6 +52,16 @@ public class MainMenuScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Settings.transform.Rotate(0,0,Time.deltaTime*5);
+        if(!(_gameManager.PlayerCharacterChoice==null) && !(_inputPlayerNameField.text == ""))
+        {
+            HostButton.interactable = true;
+            JoinButton.interactable = true;
+        }
+        else
+        {
+            HostButton.interactable = false;
+            JoinButton.interactable = false;
+        }
 	}
     
     public void HostGame()
