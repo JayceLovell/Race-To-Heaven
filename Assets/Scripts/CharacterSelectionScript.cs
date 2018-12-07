@@ -8,13 +8,15 @@ using UnityEngine.UI;
 public class CharacterSelectionScript : MonoBehaviour {
 
     private NetworkManager _networkManager;
+    private GameManager _gameManager;
 
     public Button Chicken, MeatBoy, Miner, Placeholder, Angle;
     public GameObject[] CharacterPrefabs;
 
     // Use this for initialization
     void Start () {
-        _networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+        _networkManager = GameObject.Find("NetworkManager").GetComponent<MyNetworkManager>();
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Chicken.onClick.AddListener(delegate { ChangePrefabToChoice("Chicken"); });
         MeatBoy.onClick.AddListener(delegate { ChangePrefabToChoice("MeatBoy"); });
         Miner.onClick.AddListener(delegate { ChangePrefabToChoice("Miner"); });
@@ -36,19 +38,23 @@ public class CharacterSelectionScript : MonoBehaviour {
         switch (_characterChocie)
         {
             case "Chicken":
-                _networkManager.playerPrefab = CharacterPrefabs[1];
+                _gameManager.PlayerCharacterChoice = CharacterPrefabs[1];
+                //_networkManager.playerPrefab = CharacterPrefabs[1];
                 Debug.Log("Choose Chicken");
                 break;
             case "Miner":
-                _networkManager.playerPrefab = CharacterPrefabs[2];
+                _gameManager.PlayerCharacterChoice = CharacterPrefabs[2];
+                //_networkManager.playerPrefab = CharacterPrefabs[2];
                 Debug.Log("Choose Miner");
                 break;
             case "Placeholder":
-                _networkManager.playerPrefab = CharacterPrefabs[4];
+                //_networkManager.playerPrefab = CharacterPrefabs[4];
+                _gameManager.PlayerCharacterChoice = CharacterPrefabs[4];
                 Debug.Log("Choose Placeholder");
                 break;
             case "MeatBoy":
-                _networkManager.playerPrefab = CharacterPrefabs[3];
+                _gameManager.PlayerCharacterChoice = CharacterPrefabs[3];
+                // _networkManager.playerPrefab = CharacterPrefabs[3];
                 Debug.Log("Choose MeatBoy");
                 break;
             //case "Angle":
@@ -56,7 +62,8 @@ public class CharacterSelectionScript : MonoBehaviour {
             //Debug.Log("Choose Angle");
             //break;
             default:
-                _networkManager.playerPrefab = CharacterPrefabs[0];
+                _gameManager.PlayerCharacterChoice = CharacterPrefabs[0];
+                //_networkManager.playerPrefab = CharacterPrefabs[0];
                 Debug.Log("Choose Test");
                 break;
         }

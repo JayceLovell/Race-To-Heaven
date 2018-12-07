@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour {
 
     private string _levelChoice;
     private string _playerName;
-    public NetworkManager _networkManager;
+    private NetworkManager _networkManager;
+    private GameObject _PlayerCharacterChoice;
 
     public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 
@@ -41,6 +42,19 @@ public class GameManager : MonoBehaviour {
         set
         {
             _playerName = value;
+        }
+    }
+
+    public GameObject PlayerCharacterChoice
+    {
+        get
+        {
+            return _PlayerCharacterChoice;
+        }
+
+        set
+        {
+            _PlayerCharacterChoice = value;
         }
     }
 
@@ -78,7 +92,7 @@ public class GameManager : MonoBehaviour {
     }
     // Use this for initialization
     void Start() {
-        _networkManager = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
+        _networkManager = GameObject.Find("NetworkManager").GetComponent<MyNetworkManager>();
     }
 
     // Update is called once per frame
