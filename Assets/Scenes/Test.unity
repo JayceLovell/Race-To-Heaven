@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 222494657}
   m_Layer: 0
   m_Name: SpawnSet 1
-  m_TagString: Untagged
+  m_TagString: spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284,7 +284,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 222494654}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: -2.5, z: 0}
+  m_LocalPosition: {x: 50, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -515,7 +515,7 @@ GameObject:
   - component: {fileID: 469818313}
   m_Layer: 0
   m_Name: SpawnSet 2
-  m_TagString: Untagged
+  m_TagString: spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -528,7 +528,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 469818310}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: -2.5, z: 0}
+  m_LocalPosition: {x: 50, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1327,7 +1327,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4736996571053348, guid: eee567979e6a7aa47bf04c28bff6fb32, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -11.82
+      value: -9.97
       objectReference: {fileID: 0}
     - target: {fileID: 4736996571053348, guid: eee567979e6a7aa47bf04c28bff6fb32, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1525,6 +1525,7 @@ MonoBehaviour:
   Timer: 0
   Speed: 0
   Players: []
+  objects: []
 --- !u!4 &1487062673
 Transform:
   m_ObjectHideFlags: 0

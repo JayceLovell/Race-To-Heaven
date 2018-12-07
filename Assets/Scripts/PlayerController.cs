@@ -152,6 +152,11 @@ public class PlayerController : NetworkBehaviour
     public void Winner()
     {
         Animator.SetBool("Winner", true);
+        Animator.speed = 5;
+        this.gameObject.transform.position = Vector3.zero;
+        _rigidBody.gravityScale = 0;
+        _rigidBody.velocity = new Vector3(0, 0.5f, 0);
+        //Add code to raise in air
     }
     [Command]
     void CmdPlayerDead()

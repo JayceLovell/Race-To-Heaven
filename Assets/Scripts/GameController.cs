@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -19,6 +20,7 @@ public class GameController : NetworkBehaviour {
     private float _previousTime;
     private GameObject _fastfoward;
     private bool _playingWinner;
+    public List<GameObject> objects;
 
 
 
@@ -50,7 +52,7 @@ public class GameController : NetworkBehaviour {
                 IncreaseDiffculty(Timer);
                 TxtClock(Timer);
             }
-            if ((PlayersReady >= PlayersConnected) && !GameActive)
+            if ((PlayersReady >= PlayersConnected) && !GameActive && !_playingWinner)
             {
                 GameActive = true;
                 PlayersAlive = PlayersConnected;
@@ -59,22 +61,22 @@ public class GameController : NetworkBehaviour {
             {
                 //Write code to find winner player
                 GameActive = false;
-                var obsticles2 = GameObject.FindGameObjectsWithTag("Obsticle2");
-                var obsticles1 = GameObject.FindGameObjectsWithTag("Obsticle1");
-                foreach (var obsticle in obsticles1)
+                objects.Add(GameObject.Find("SpawnSet 1"));
+                objects.Add(GameObject.Find("SpawnSet 2"));
+                //objects.AddRange(GameObject.FindGameObjectsWithTag("spawner"));
+                objects.AddRange(GameObject.FindGameObjectsWithTag("Obsticle3"));
+                objects.AddRange(GameObject.FindGameObjectsWithTag("Obsticle2"));
+                objects.AddRange(GameObject.FindGameObjectsWithTag("Obsticle1"));
+                foreach (var Object in objects)
                 {
-                    NetworkServer.Destroy(obsticle);
-                }
-                foreach (var obsticle in obsticles2)
-                {
-                    NetworkServer.Destroy(obsticle);
+                    NetworkServer.Destroy(Object);
                 }
                 var PlayerLeft = GameObject.FindGameObjectWithTag("Player");
                 PlayerLeft.GetComponent<PlayerController>().Winner();
                 _playingWinner = true;
             }
         }
-        if (!GameActive)
+        if (!GameActive && !_playingWinner)
         {
             _txtamountOfPlayers.text = "Players Connected: " + PlayersConnected + "/4";
             Players = GameObject.FindGameObjectsWithTag("Player");
@@ -120,15 +122,9 @@ public class GameController : NetworkBehaviour {
                 }
             }
     }
-    /*
-    public void PlayerReady()
-    {
-        PlayersReady++;
-        Debug.Log("Done");
-    }*/
     public void PlayerDead()
     {
-        PlayersAlive--;
+        PlayersAlive = PlayersAlive-1;
     }
 
     IEnumerator DisableFastfoward()
