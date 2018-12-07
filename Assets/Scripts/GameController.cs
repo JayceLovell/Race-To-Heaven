@@ -50,39 +50,53 @@ public class GameController : NetworkBehaviour {
                 IncreaseDiffculty(Timer);
                 TxtClock(Timer);
             }
-        }
-        if ((PlayersReady == PlayersConnected) && !GameActive )
-        {
-            //Debug.Log("Calling Command RPC");
-            GameActive = true;
-            PlayersAlive = PlayersConnected;
-            //RpcStartGame();
+            if ((PlayersReady == PlayersConnected) && !GameActive)
+            {
+                GameActive = true;
+                PlayersAlive = PlayersConnected;
+            }
+            if (PlayersAlive == 1 && GameActive && !_playingWinner)
+            {
+                //Write code to find winner player
+                GameActive = false;
+                var obsticles2 = GameObject.FindGameObjectsWithTag("Obsticle2");
+                var obsticles1 = GameObject.FindGameObjectsWithTag("Obsticle1");
+                foreach (var obsticle in obsticles1)
+                {
+                    NetworkServer.Destroy(obsticle);
+                }
+                foreach (var obsticle in obsticles2)
+                {
+                    NetworkServer.Destroy(obsticle);
+                }
+                var PlayerLeft = GameObject.FindGameObjectWithTag("Player");
+                PlayerLeft.GetComponent<PlayerController>().Winner();
+                _playingWinner = true;
+            }
         }
         if (!GameActive)
         {
             _txtamountOfPlayers.text = "Players Connected: " + PlayersConnected + "/4";
+            Players = GameObject.FindGameObjectsWithTag("Player");
         }
         else
         {
             _txtamountOfPlayers.text = "Players Live: " + PlayersAlive + "/" + PlayersConnected;
         }
-        if (PlayersAlive == 1 && GameActive && !_playingWinner)
+    }
+    public void CheckIfPlayersReady()
+    {
+        if (PlayersConnected >= 2 && !GameActive)
         {
-            //Write code to find winner player
-            GameActive = false;
-            var obsticles2 = GameObject.FindGameObjectsWithTag("Obsticle2");
-            var obsticles1 = GameObject.FindGameObjectsWithTag("Obsticle1");
-            foreach(var obsticle in obsticles1)
+            Players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var player in Players)
             {
-                NetworkServer.Destroy(obsticle);
+                if (player.GetComponent<PlayerController>().PlayerReady)
+                {
+                    Debug.Log("Increaseing by 1");
+                    PlayersReady++;
+                }
             }
-            foreach (var obsticle in obsticles2)
-            {
-                NetworkServer.Destroy(obsticle);
-            }
-            var PlayerLeft = GameObject.FindGameObjectWithTag("Player");
-            PlayerLeft.GetComponent<PlayerController>().Winner();
-            _playingWinner = true;
         }
     }
     void TxtClock(float timer)
@@ -107,12 +121,12 @@ public class GameController : NetworkBehaviour {
                 }
             }
     }
-    
+    /*
     public void PlayerReady()
     {
         PlayersReady++;
         Debug.Log("Done");
-    }
+    }*/
     public void PlayerDead()
     {
         PlayersAlive--;

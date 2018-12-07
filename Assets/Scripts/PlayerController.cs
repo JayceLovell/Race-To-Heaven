@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerController : NetworkBehaviour
 {
+    [SyncVar] public bool PlayerReady;
     // Public variables
     public Text PlayerNameText;
     public GameObject gameMangerPrefab;
@@ -132,15 +133,17 @@ public class PlayerController : NetworkBehaviour
                 JumpTimeCounter = 0;
                 StoppedJumping = true;
             }
-        if ((Input.GetButton("Submit")||Input.GetKey(KeyCode.Space)) && !_gameController.GameActive)
+        if ((Input.GetButtonDown("Submit")||Input.GetKeyDown(KeyCode.Space)) && !_gameController.GameActive && !PlayerReady)
         {
-            CmdPlayerReady();
+            CmdThisPlayerReady();
         }
     }
     [Command]
-    void CmdPlayerReady()
+    private void CmdThisPlayerReady()
     {
-        _gameController.PlayersReady++;
+        _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        PlayerReady = true;
+        _gameController.CheckIfPlayersReady();
     }
     void SetPlayerName(string PlayerName)
     {
