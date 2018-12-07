@@ -50,7 +50,7 @@ public class GameController : NetworkBehaviour {
                 IncreaseDiffculty(Timer);
                 TxtClock(Timer);
             }
-            if ((PlayersReady == PlayersConnected) && !GameActive)
+            if ((PlayersReady >= PlayersConnected) && !GameActive)
             {
                 GameActive = true;
                 PlayersAlive = PlayersConnected;
@@ -93,7 +93,6 @@ public class GameController : NetworkBehaviour {
             {
                 if (player.GetComponent<PlayerController>().PlayerReady)
                 {
-                    Debug.Log("Increaseing by 1");
                     PlayersReady++;
                 }
             }

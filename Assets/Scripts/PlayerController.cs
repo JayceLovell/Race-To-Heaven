@@ -156,6 +156,7 @@ public class PlayerController : NetworkBehaviour
     [Command]
     void CmdPlayerDead()
     {
+        _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         GameOver.Play();
         _gameController.PlayerDead();
         NetworkIdentity.Destroy(this.gameObject);
