@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour {
     {
         _prepareNetWorkManager();
         _networkManager.onlineScene = _levelChoice;
-        _networkManager.StartClient();        
+        _networkManager.StartClient();
     }
     public void ChangedSettings()
     {
