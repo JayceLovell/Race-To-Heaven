@@ -139,6 +139,14 @@ public class GameController : NetworkBehaviour {
         Debug.Log("Now to Count 10 sec");
         yield return new WaitForSeconds(10f);
         Debug.Log("Finish Count");
-        NetworkServer.Shutdown();
+        if (isServer)
+        {
+            Debug.Log("Stopping Server");
+            MyNetworkManager.singleton.StopServer();
+        }
+        else if(isClient){
+            Debug.Log("Stopping Client");
+            MyNetworkManager.singleton.StopClient();
+        }
     }
 }
