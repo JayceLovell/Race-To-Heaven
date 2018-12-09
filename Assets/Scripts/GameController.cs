@@ -74,6 +74,7 @@ public class GameController : NetworkBehaviour {
                 var PlayerLeft = GameObject.FindGameObjectWithTag("Player");
                 PlayerLeft.GetComponent<PlayerController>().Winner();
                 _playingWinner = true;
+                StartCoroutine(CountDownToEndGame());
             }
         }
         if (!GameActive && !_playingWinner)
@@ -132,5 +133,12 @@ public class GameController : NetworkBehaviour {
         _fastfoward.SetActive(true);
         yield return new WaitForSeconds(2f);
         _fastfoward.SetActive(false);
+    }
+    IEnumerator CountDownToEndGame()
+    {
+        Debug.Log("Now to Count 10 sec");
+        yield return new WaitForSeconds(10f);
+        Debug.Log("Finish Count");
+        NetworkServer.Shutdown();
     }
 }

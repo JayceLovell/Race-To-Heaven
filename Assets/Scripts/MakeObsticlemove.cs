@@ -25,7 +25,7 @@ public class MakeObsticlemove : NetworkBehaviour {
             case 0:
                 break;
             case 1:
-                StartCoroutine(movingPlatform());
+                StartCoroutine(MovingPlatform());
                 break;
         }
 	}
@@ -58,10 +58,10 @@ public class MakeObsticlemove : NetworkBehaviour {
             NetworkIdentity.Destroy(this.gameObject);
         }
     }
-    IEnumerator movingPlatform()
+    IEnumerator MovingPlatform()
     {
         yield return new WaitForSeconds(4 / verticalChangeTimer);
         goingUp = !goingUp;
-        StartCoroutine(movingPlatform());
+        StartCoroutine(MovingPlatform());
     }
 }
