@@ -180,9 +180,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Undead Miner
-
-'
+  m_Text: The Miner
 --- !u!222 &241433723
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -675,7 +673,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -26.300003}
+  m_AnchoredPosition: {x: 0, y: -26.299988}
   m_SizeDelta: {x: 424, y: 105.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &799553503
@@ -1192,7 +1190,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Undead Chicken
+  m_Text: Nougat the Headless Chicken
 --- !u!222 &1553044821
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1689,9 +1687,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Undead Meat
-
-'
+  m_Text: Flesh Cube
 --- !u!222 &1876815727
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1889,7 +1885,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Undead Placeholder
+  m_Text: 'Placeholder
 
 '
 --- !u!222 &1998080265
