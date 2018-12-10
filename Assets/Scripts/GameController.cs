@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -9,40 +10,44 @@ public class GameController : NetworkBehaviour {
     [SyncVar] public int PlayersConnected;
     [SyncVar] public int PlayersReady;
     [SyncVar] public bool GameActive;
+    [SyncVar] public int PlayersAlive;
     public float Timer;
-    public float Speed;
+    [SyncVar]public float Speed;
     public GameObject[] Players;
-    public GameObject ReadyButton;
 
-    private GameObject _readyButton;
     private Text _txtamountOfPlayers;
     private Text _txtClock;
-    private bool _displayPlayers;
     private float _previousTime;
     private GameObject _fastfoward;
+    private bool _playingWinner;
+    public List<GameObject> objects;
 
-    //public GameObject PrefabTestplayer;
+    AudioSource aSource;
+    public AudioClip[] aClips;
+
 
 
     // Use this for initialization
     void Start () {
         Initilize();
-        _displayPlayers = true;
         Speed = 4f;
         _fastfoward.SetActive(false);
     }
 
      void Initilize()
     {
-        _readyButton = GameObject.Find("btnReady");
+        aSource = GetComponent<AudioSource>();
+        aSource.clip = aClips[0];
+        aSource.Play();
         _txtamountOfPlayers = GameObject.Find("txtAmountOfPlayers").GetComponent<Text>();
         _txtClock = GameObject.Find("TxtClock").GetComponent<Text>();
         _fastfoward = GameObject.Find("FastFoward");
-        ReadyButton = GameObject.Find("btnReady");
     }
 
     // Update is called once per frame
     void Update () {
+        //Players connected link
+        //https://answers.unity.com/questions/1259697/how-to-display-connections-count-on-client.html
         if (isServer)
         {
             PlayersConnected = NetworkServer.connections.Count;
@@ -53,12 +58,61 @@ public class GameController : NetworkBehaviour {
                 IncreaseDiffculty(Timer);
                 TxtClock(Timer);
             }
+            if ((PlayersReady >= PlayersConnected) && !GameActive && !_playingWinner)
+            {
+                GameActive = true;
+                PlayersAlive = PlayersConnected;
+            }
+            if (PlayersAlive == 1 && GameActive && !_playingWinner)
+            {
+                //Write code to find winner player
+                GameActive = false;
+                objects.Add(GameObject.Find("SpawnSet 1"));
+                objects.Add(GameObject.Find("SpawnSet 2"));
+                //objects.AddRange(GameObject.FindGameObjectsWithTag("spawner"));
+                objects.AddRange(GameObject.FindGameObjectsWithTag("Obsticle3"));
+                objects.AddRange(GameObject.FindGameObjectsWithTag("Obsticle2"));
+                objects.AddRange(GameObject.FindGameObjectsWithTag("Obsticle1"));
+                foreach (var Object in objects)
+                {
+                    NetworkServer.Destroy(Object);
+                }
+                var PlayerLeft = GameObject.FindGameObjectWithTag("Player");
+                PlayerLeft.GetComponent<PlayerController>().Winner();
+                _playingWinner = true;
+                StartCoroutine(CountDownToEndGame());
+                if (aSource.clip != aClips[1])
+                {
+                    aSource.Stop();
+                    aSource.clip = aClips[1];
+                    aSource.Play();
+                }
+                
+            }
         }
-        if (PlayersReady == PlayersConnected)
+        if (!GameActive && !_playingWinner)
         {
-            GameActive = true;
+            _txtamountOfPlayers.text = "Players Connected: " + PlayersConnected + "/4";
+            Players = GameObject.FindGameObjectsWithTag("Player");
         }
-        _txtamountOfPlayers.text = "Players Connected: " + PlayersConnected + "/4";
+        else
+        {
+            _txtamountOfPlayers.text = "Players Live: " + PlayersAlive + "/" + PlayersConnected;
+        }
+    }
+    public void CheckIfPlayersReady()
+    {
+        if (PlayersConnected >= 2 && !GameActive)
+        {
+            Players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (var player in Players)
+            {
+                if (player.GetComponent<PlayerController>().PlayerReady)
+                {
+                    PlayersReady++;
+                }
+            }
+        }
     }
     void TxtClock(float timer)
     {
@@ -82,15 +136,31 @@ public class GameController : NetworkBehaviour {
                 }
             }
     }
-    public void PlayerReady()
+    public void PlayerDead()
     {
-        PlayersReady++;
-        ReadyButton.SetActive(false);
+        PlayersAlive = PlayersAlive-1;
     }
+
     IEnumerator DisableFastfoward()
     {
         _fastfoward.SetActive(true);
         yield return new WaitForSeconds(2f);
         _fastfoward.SetActive(false);
+    }
+    IEnumerator CountDownToEndGame()
+    {
+
+        Debug.Log("Now to Count 10 sec");
+        yield return new WaitForSeconds(10f);
+        Debug.Log("Finish Count");
+        if (isServer)
+        {
+            Debug.Log("Stopping Server");
+            MyNetworkManager.singleton.StopServer();
+        }
+        else if(isClient){
+            Debug.Log("Stopping Client");
+            MyNetworkManager.singleton.StopClient();
+        }
     }
 }

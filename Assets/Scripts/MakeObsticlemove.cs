@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class MakeObsticlemove : MonoBehaviour {
+public class MakeObsticlemove : NetworkBehaviour {
 
     public int obsticleType;
     //type 0 no special
@@ -24,7 +25,7 @@ public class MakeObsticlemove : MonoBehaviour {
             case 0:
                 break;
             case 1:
-                StartCoroutine(movingPlatform());
+                StartCoroutine(MovingPlatform());
                 break;
         }
 	}
@@ -54,13 +55,13 @@ public class MakeObsticlemove : MonoBehaviour {
     {
         if (collision.gameObject.name == "Off")
         {
-            Destroy(this.gameObject);
+            NetworkIdentity.Destroy(this.gameObject);
         }
     }
-    IEnumerator movingPlatform()
+    IEnumerator MovingPlatform()
     {
         yield return new WaitForSeconds(4 / verticalChangeTimer);
         goingUp = !goingUp;
-        StartCoroutine(movingPlatform());
+        StartCoroutine(MovingPlatform());
     }
 }

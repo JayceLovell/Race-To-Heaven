@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerController : NetworkBehaviour
 {
+    [SyncVar] public bool PlayerReady;
     // Public variables
     public Text PlayerNameText;
     public GameObject gameMangerPrefab;
@@ -23,7 +24,6 @@ public class PlayerController : NetworkBehaviour
 
     // Private variables
     private Rigidbody2D _rigidBody;
-    private SpriteRenderer _sprite;
     private GameManager _gameManager;
     private GameController _gameController;
     private Transform _groundCheck;
@@ -54,7 +54,7 @@ public class PlayerController : NetworkBehaviour
         Initilize();
 
         _playerName = _gameManager.PlayerName;
-        CmdSetPlayerName(_playerName);
+        SetPlayerName(_playerName);
         JumpTimeCounter = JumpTime;
         GroundCheckRadius = 1;
         JumpForce = 9;
@@ -64,7 +64,6 @@ public class PlayerController : NetworkBehaviour
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _rigidBody = GetComponent<Rigidbody2D>();
         Animator = GetComponent<Animator>();
-        _sprite = GetComponent<SpriteRenderer>();
         _gameController = GameObject.Find("GameController").GetComponent<GameController>();
         _groundCheck = this.gameObject.transform;
         WhatIsGround = LayerMask.GetMask("Ground");
@@ -79,19 +78,23 @@ public class PlayerController : NetworkBehaviour
         }
 
         Grounded = Physics2D.OverlapCircle(_groundCheck.position, GroundCheckRadius, WhatIsGround);
-            if (Grounded)
-            {
+        if (Grounded)
+        {
                 Animator.SetBool("IsGrounded", true);
                 JumpTimeCounter = JumpTime;
-            }
-            else
-            {
+        }
+        else
+        {
                 Animator.SetBool("IsGrounded", false);
-            }
-            if (_gameController.GameActive)
-            {
+        }
+        if (_gameController.GameActive)
+        {
                 Animator.SetBool("IsRunning", true);
-            }
+        }
+        else
+        {
+            Animator.SetBool("IsRunning", false);
+        }
     }
         // Update is called once per frame
     void FixedUpdate()
@@ -130,32 +133,44 @@ public class PlayerController : NetworkBehaviour
                 JumpTimeCounter = 0;
                 StoppedJumping = true;
             }
-            /*if (_gameController.GameActive)
-            {
-                Animator.SetBool("IsRunning", true);
-                var otherplayers = GameObject.FindGameObjectsWithTag("Player");
-                foreach (var player in otherplayers)
-                {
-                    Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-                }
-            }*/
-            else
-            {
-                Animator.SetBool("IsRunning", false);
-            }
+        if ((Input.GetButtonDown("Submit")||Input.GetKeyDown(KeyCode.Space)) && !_gameController.GameActive && !PlayerReady)
+        {
+            CmdThisPlayerReady();
         }
+    }
     [Command]
-    void CmdSetPlayerName(string PlayerName)
+    private void CmdThisPlayerReady()
+    {
+        _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        PlayerReady = true;
+        _gameController.CheckIfPlayersReady();
+    }
+    void SetPlayerName(string PlayerName)
     {
         PlayerNameText.text = PlayerName;        
+    }
+    public void Winner()
+    {
+        Animator.SetBool("Winner", true);
+        Animator.speed = 5;
+        this.gameObject.transform.position = Vector3.zero;
+        _rigidBody.gravityScale = 0;
+        _rigidBody.velocity = new Vector3(0, 0.5f, 0);
+        //Add code to raise in air
+    }
+    [Command]
+    void CmdPlayerDead()
+    {
+        _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        GameOver.Play();
+        _gameController.PlayerDead();
+        NetworkIdentity.Destroy(this.gameObject);
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "Off")
         {
-            GameOver.Play();
-            NetworkIdentity.Destroy(this.gameObject);
-            //SceneManager.LoadScene("Main Menu");
+            CmdPlayerDead();            
         }
     }
 }
