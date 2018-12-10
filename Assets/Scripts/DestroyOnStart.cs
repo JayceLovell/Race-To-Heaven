@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class DestroyOnStart : MonoBehaviour {
-
+    public GameController gc;
 	void Start () {
 
 	}
