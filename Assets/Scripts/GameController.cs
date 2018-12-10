@@ -12,7 +12,7 @@ public class GameController : NetworkBehaviour {
     [SyncVar] public bool GameActive;
     [SyncVar] public int PlayersAlive;
     public float Timer;
-    public float Speed;
+    [SyncVar]public float Speed;
     public GameObject[] Players;
 
     private Text _txtamountOfPlayers;
@@ -21,6 +21,9 @@ public class GameController : NetworkBehaviour {
     private GameObject _fastfoward;
     private bool _playingWinner;
     public List<GameObject> objects;
+
+    AudioSource aSource;
+    public AudioClip[] aClips;
 
 
 
@@ -33,6 +36,9 @@ public class GameController : NetworkBehaviour {
 
      void Initilize()
     {
+        aSource = GetComponent<AudioSource>();
+        aSource.clip = aClips[0];
+        aSource.Play();
         _txtamountOfPlayers = GameObject.Find("txtAmountOfPlayers").GetComponent<Text>();
         _txtClock = GameObject.Find("TxtClock").GetComponent<Text>();
         _fastfoward = GameObject.Find("FastFoward");
@@ -75,6 +81,13 @@ public class GameController : NetworkBehaviour {
                 PlayerLeft.GetComponent<PlayerController>().Winner();
                 _playingWinner = true;
                 StartCoroutine(CountDownToEndGame());
+                if (aSource.clip != aClips[1])
+                {
+                    aSource.Stop();
+                    aSource.clip = aClips[1];
+                    aSource.Play();
+                }
+                
             }
         }
         if (!GameActive && !_playingWinner)
@@ -136,6 +149,7 @@ public class GameController : NetworkBehaviour {
     }
     IEnumerator CountDownToEndGame()
     {
+
         Debug.Log("Now to Count 10 sec");
         yield return new WaitForSeconds(10f);
         Debug.Log("Finish Count");
