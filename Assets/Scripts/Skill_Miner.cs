@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class Skill_Miner : MonoBehaviour {
 
@@ -56,14 +57,14 @@ public class Skill_Miner : MonoBehaviour {
     {
         if ((collision.gameObject.tag == "Obsticle1" || collision.gameObject.tag == "Obsticle2") && isUsingSkill)
         {
-            Destroy(collision.gameObject);
+            NetworkIdentity.Destroy(collision.gameObject);
         }
         else if(collision.gameObject.tag == "Obsticle2")
         {
             this.gameObject.GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
             StartCoroutine(Timer(0.1f));
             _rigibody.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
-            Destroy(collision.gameObject);
+            NetworkIdentity.Destroy(collision.gameObject);
             TakeDamage.Play();
         }
     }

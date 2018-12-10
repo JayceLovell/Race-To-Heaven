@@ -29,7 +29,7 @@ public class PlayerController : NetworkBehaviour
     private Transform _groundCheck;
     private string _playerName;
     private float _jumpForce;
-    private GameObject _startGameText;
+    private GameObject _startGame;
 
     public float JumpForce
     {
@@ -68,7 +68,7 @@ public class PlayerController : NetworkBehaviour
         _gameController = GameObject.Find("GameController").GetComponent<GameController>();
         _groundCheck = this.gameObject.transform;
         WhatIsGround = LayerMask.GetMask("Ground");
-        _startGameText = GameObject.Find("StartGame");
+        _startGame = GameObject.Find("StartGame");
     }
 
     void Update()
@@ -137,6 +137,7 @@ public class PlayerController : NetworkBehaviour
             }
         if ((Input.GetButtonDown("Submit")||Input.GetKeyDown(KeyCode.Space)) && !_gameController.GameActive && !PlayerReady)
         {
+            _startGame.SetActive(false);
             CmdThisPlayerReady();
         }
     }
@@ -146,7 +147,6 @@ public class PlayerController : NetworkBehaviour
         _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         PlayerReady = true;
         _gameController.CheckIfPlayersReady();
-        _startGameText.SetActive(false);
     }
     void SetPlayerName(string PlayerName)
     {

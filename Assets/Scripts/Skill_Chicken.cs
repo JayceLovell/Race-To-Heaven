@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class Skill_Chicken : MonoBehaviour {
     public float staminaCost;
@@ -50,7 +51,7 @@ public class Skill_Chicken : MonoBehaviour {
         {
             GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
             rb.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
-            Destroy(collision.gameObject);
+            NetworkIdentity.Destroy(collision.gameObject);
             StartCoroutine(Timer(0.1f));
             TakeDamage.Play();
         }

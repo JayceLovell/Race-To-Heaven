@@ -21,6 +21,7 @@ public class GameController : NetworkBehaviour {
     private GameObject _fastfoward;
     private bool _playingWinner;
     public List<GameObject> objects;
+    private NetworkManager _networkManager;
 
     AudioSource aSource;
     public AudioClip[] aClips;
@@ -42,6 +43,7 @@ public class GameController : NetworkBehaviour {
         _txtamountOfPlayers = GameObject.Find("txtAmountOfPlayers").GetComponent<Text>();
         _txtClock = GameObject.Find("TxtClock").GetComponent<Text>();
         _fastfoward = GameObject.Find("FastFoward");
+        _networkManager = GameObject.Find("NetworkManager").GetComponent<MyNetworkManager>();
     }
 
     // Update is called once per frame
@@ -62,6 +64,7 @@ public class GameController : NetworkBehaviour {
             {
                 GameActive = true;
                 PlayersAlive = PlayersConnected;
+                _networkManager.maxConnections = PlayersConnected;
             }
             if (PlayersAlive == 1 && GameActive && !_playingWinner)
             {
