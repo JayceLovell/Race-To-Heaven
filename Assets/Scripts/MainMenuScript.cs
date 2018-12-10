@@ -7,7 +7,9 @@ using UnityEngine.SceneManagement;
 public class MainMenuScript : MonoBehaviour {
 
     private string _playerName;
+    private string _hostAddress;
     private InputField _inputPlayerNameField;
+    private InputField _inputAddressField;
     private GameManager _gameManager;
     private Dropdown _dropdownLevelSelector;
     private Text _version;
@@ -31,6 +33,19 @@ public class MainMenuScript : MonoBehaviour {
         }
     }
 
+    public string HostAddress
+    {
+        get
+        {
+            return _hostAddress;
+        }
+
+        set
+        {
+            _hostAddress = value;
+        }
+    }
+
 
     // Use this for initialization
     void Start () {
@@ -43,6 +58,7 @@ public class MainMenuScript : MonoBehaviour {
     void Initialize()
     {
         _inputPlayerNameField = GameObject.Find("InputPlayerName").GetComponent<InputField>();
+        _inputAddressField = GameObject.Find("InputHostAddress").GetComponent<InputField>();
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _dropdownLevelSelector = GameObject.Find("DropdownLevelSelector").GetComponent<Dropdown>();
         _version = GameObject.Find("txtVersion").GetComponent<Text>();
@@ -95,6 +111,10 @@ public class MainMenuScript : MonoBehaviour {
     public void EnteredName()
     {
         PlayerName=_inputPlayerNameField.text;
+    }
+    public void EnterHostAddress()
+    {
+        HostAddress = _inputAddressField.text;
     }
     public void LevelSelected()
     {
