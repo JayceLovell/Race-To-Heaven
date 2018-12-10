@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
     private string _playerName;
     private NetworkManager _networkManager;
     private int _PlayerCharacterChoice;
+    private bool _selectedCharacter;
 
     public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 
@@ -55,6 +56,19 @@ public class GameManager : MonoBehaviour {
         set
         {
             _PlayerCharacterChoice = value;
+        }
+    }
+
+    public bool SelectedCharacter
+    {
+        get
+        {
+            return _selectedCharacter;
+        }
+
+        set
+        {
+            _selectedCharacter = value;
         }
     }
 

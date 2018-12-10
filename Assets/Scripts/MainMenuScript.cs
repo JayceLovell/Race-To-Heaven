@@ -52,7 +52,7 @@ public class MainMenuScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Settings.transform.Rotate(0,0,Time.deltaTime*5);
-        if(!(_gameManager.PlayerCharacterChoice==null) && !(_inputPlayerNameField.text == ""))
+        if(_gameManager.SelectedCharacter && !(_inputPlayerNameField.text == ""))
         {
             HostButton.interactable = true;
             JoinButton.interactable = true;

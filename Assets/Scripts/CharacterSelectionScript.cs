@@ -38,7 +38,7 @@ public class CharacterSelectionScript : MonoBehaviour {
         switch (_characterChocie)
         {
             case "Chicken":
-                _gameManager.PlayerCharacterChoice = 1;
+                _gameManager.PlayerCharacterChoice = 0;
                 //_networkManager.playerPrefab = CharacterPrefabs[1];
                 Debug.Log("Choose Chicken");
                 break;
@@ -49,11 +49,11 @@ public class CharacterSelectionScript : MonoBehaviour {
                 break;
             case "Placeholder":
                 //_networkManager.playerPrefab = CharacterPrefabs[4];
-                _gameManager.PlayerCharacterChoice = 4;
+                _gameManager.PlayerCharacterChoice = 3;
                 Debug.Log("Choose Placeholder");
                 break;
             case "MeatBoy":
-                _gameManager.PlayerCharacterChoice = 3;
+                _gameManager.PlayerCharacterChoice = 1;
                 // _networkManager.playerPrefab = CharacterPrefabs[3];
                 Debug.Log("Choose MeatBoy");
                 break;
@@ -62,11 +62,12 @@ public class CharacterSelectionScript : MonoBehaviour {
             //Debug.Log("Choose Angle");
             //break;
             default:
-                _gameManager.PlayerCharacterChoice = 0;
+                _gameManager.PlayerCharacterChoice = 4;
                 //_networkManager.playerPrefab = CharacterPrefabs[0];
                 Debug.Log("Choose Test");
                 break;
         }
+        _gameManager.SelectedCharacter = true;
     }
 
 }
