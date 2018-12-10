@@ -5,23 +5,13 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.NetworkSystem;
 
 public class MyNetworkManager : NetworkManager {
-    /// <summary>
-    /// Links for later 
-    /// https://docs.unity3d.com/Manual/NetworkManagerCallbacks.html
-    /// https://docs.unity3d.com/Manual/UNetManager.html?_ga=2.79407635.682158424.1544194853-1590010813.1536928597
-    /// https://answers.unity.com/questions/1137966/onserveraddplayer-is-not-called.html
-    /// https://docs.unity3d.com/2018.3/Documentation/Manual/UNetPlayersCustom.html
-    /// https://docs.unity3d.com/2018.3/Documentation/Manual/UNetManager.html
-    /// </summary>
-    /// <param name="conn"></param>
-    /// <param name="playerControllerId"></param>
-    /// 
-    public int curPlayer;
 
+    public int curPlayer;
 
     //Called on client when connect
     public override void OnClientConnect(NetworkConnection conn)
     {
+        Debug.Log("OnClientConnect");
         curPlayer = GameObject.Find("GameManager").GetComponent<GameManager>().PlayerCharacterChoice;
 
         // Create message to set the player
@@ -34,9 +24,10 @@ public class MyNetworkManager : NetworkManager {
     // Server
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId, NetworkReader extraMessageReader)
     {
+        Debug.Log("On Server Add Player Was called");
         // Read client message and receive index
 
-            var stream = extraMessageReader.ReadMessage<IntegerMessage>();
+        var stream = extraMessageReader.ReadMessage<IntegerMessage>();
             curPlayer = stream.value;
 
         //Select the prefab from the spawnable objects list
@@ -44,7 +35,7 @@ public class MyNetworkManager : NetworkManager {
 
         // Create player object with prefab
         GameObject player = (GameObject)Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-
+        Debug.Log("Spawning");
         // Add player object for connection
         NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
     }
