@@ -35,10 +35,10 @@ public class Skill_Chicken : MonoBehaviour {
         {
             GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", false);
         }
-        else
+        /*else
         {
             GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", false);
-        }
+        }*/
         if (currStamina <= staminaCost)
         {
             currCD = 1;

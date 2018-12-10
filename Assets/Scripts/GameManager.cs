@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
+    private string _hostaddress;
     private string _levelChoice;
     private string _playerName;
     private NetworkManager _networkManager;
@@ -69,6 +70,19 @@ public class GameManager : MonoBehaviour {
         set
         {
             _selectedCharacter = value;
+        }
+    }
+
+    public string Hostaddress
+    {
+        get
+        {
+            return _hostaddress;
+        }
+
+        set
+        {
+            _hostaddress = value;
         }
     }
 
@@ -150,6 +164,10 @@ public class GameManager : MonoBehaviour {
     {
         _prepareNetWorkManager();
         _networkManager.onlineScene = _levelChoice;
+        if (_hostaddress != null)
+        {
+            _networkManager.networkAddress = _hostaddress;
+        }
         _networkManager.StartClient();
     }
     public void ChangedSettings()

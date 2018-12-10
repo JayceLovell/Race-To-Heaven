@@ -88,6 +88,7 @@ public class MainMenuScript : MonoBehaviour {
     }
     public void JoinGame()
     {
+        _gameManager.Hostaddress = HostAddress;
         _gameManager.LevelChoice = _selectedlevel;
         _gameManager.PlayerName = PlayerName;
         _gameManager.JoinGame();
