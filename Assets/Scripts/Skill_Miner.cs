@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Skill_Miner : MonoBehaviour {
+public class Skill_Miner : NetworkBehaviour
+{
 
     public float cooldown; // must be more than 1, since our previous slash gameobject takes 1 sec to despawn
     public AudioSource TakeDamage;

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Skill_Placeholder : MonoBehaviour {
+public class Skill_Placeholder : NetworkBehaviour
+{
     public float staminaCost;
     public GameObject portalPrefab;
     private SkillBarScript _skillbar;

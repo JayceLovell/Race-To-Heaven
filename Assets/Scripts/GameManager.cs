@@ -16,10 +16,6 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 
-    [Header("Obsticles Prefabs")]
-    public GameObject[] TestObsticles;
-    public GameObject[] AetherObsticles;
-    public GameObject[] LimboObsticles;
     public GameSettings GameSettings;
     public string LevelChoice
     {

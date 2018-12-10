@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Skill_Cube : MonoBehaviour {
+public class Skill_Cube : NetworkBehaviour {
 
     public float staminaCost;
     public float jumpForce;

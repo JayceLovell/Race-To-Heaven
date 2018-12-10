@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Skill_Chicken : MonoBehaviour {
+public class Skill_Chicken : NetworkBehaviour
+{
     public float staminaCost;
     public float currCD = 0;
     public AudioSource TakeDamage;
