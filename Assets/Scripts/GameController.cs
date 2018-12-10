@@ -11,8 +11,8 @@ public class GameController : NetworkBehaviour {
     [SyncVar] public int PlayersReady;
     [SyncVar] public bool GameActive;
     [SyncVar] public int PlayersAlive;
-    public float Timer;
-    [SyncVar]public float Speed;
+    [SyncVar] public float Timer;
+    [SyncVar] public float Speed;
     public GameObject[] Players;
 
     private Text _txtamountOfPlayers;
@@ -57,7 +57,7 @@ public class GameController : NetworkBehaviour {
             if (GameActive)
             {
                 Timer += Time.deltaTime;
-                IncreaseDiffculty(Timer);
+                RpcIncreaseDiffculty(Timer);
                 TxtClock(Timer);
             }
             if ((PlayersReady >= PlayersConnected) && !GameActive && !_playingWinner)
@@ -123,7 +123,8 @@ public class GameController : NetworkBehaviour {
         float seconds = timer % 60;
         _txtClock.text = "Time: " + minutes + ":" + Mathf.RoundToInt(seconds);
     }
-    void IncreaseDiffculty(float _timer)
+    [ClientRpc]
+    void RpcIncreaseDiffculty(float _timer)
     {
             if (_timer >= (_previousTime+10))
             {

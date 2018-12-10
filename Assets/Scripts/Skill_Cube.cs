@@ -40,7 +40,7 @@ public class Skill_Cube : NetworkBehaviour {
         {
             GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
             CmdAddForce();
-            NetworkIdentity.Destroy(collision.gameObject);
+            NetworkServer.Destroy(collision.gameObject);
             StartCoroutine(Timer(0.1f));
         }
         
