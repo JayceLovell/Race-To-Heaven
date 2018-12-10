@@ -71,7 +71,7 @@ public class Skill_Miner : MonoBehaviour {
     [Command]
     void CmdAddForce()
     {
-        rb.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
+        _rigibody.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
     }
 
 }
