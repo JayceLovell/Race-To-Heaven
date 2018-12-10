@@ -63,10 +63,15 @@ public class Skill_Miner : MonoBehaviour {
         {
             this.gameObject.GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
             StartCoroutine(Timer(0.1f));
-            _rigibody.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
+            CmdAddForce();
             NetworkIdentity.Destroy(collision.gameObject);
             TakeDamage.Play();
         }
+    }
+    [Command]
+    void CmdAddForce()
+    {
+        rb.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
     }
 
 }

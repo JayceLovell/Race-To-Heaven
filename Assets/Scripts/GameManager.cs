@@ -127,42 +127,13 @@ public class GameManager : MonoBehaviour {
     void Update() {
 
     }
-    private void _prepareNetWorkManager()
-    {
-        switch (_levelChoice)
-        {
-            case "Test":
-                foreach(var prefab in TestObsticles)
-                {
-                    _networkManager.spawnPrefabs.Add(prefab);
-                    ClientScene.RegisterPrefab(prefab);
-                }
-                break;
-            case "Aether":
-                foreach (var prefab in AetherObsticles)
-                {
-                    _networkManager.spawnPrefabs.Add(prefab);
-                    ClientScene.RegisterPrefab(prefab);
-                }
-                break;
-            case "Limbo":
-                foreach (var prefab in LimboObsticles)
-                {
-                    _networkManager.spawnPrefabs.Add(prefab);
-                    ClientScene.RegisterPrefab(prefab);
-                }
-                break;
-        }
-    }
     public void HostGame()
     {
         _networkManager.onlineScene = _levelChoice;
-        _prepareNetWorkManager();
         _networkManager.StartHost();
     }
     public void JoinGame()
     {
-        _prepareNetWorkManager();
         _networkManager.onlineScene = _levelChoice;
         if (_hostaddress != null)
         {

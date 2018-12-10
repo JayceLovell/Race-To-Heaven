@@ -50,7 +50,7 @@ public class Skill_Chicken : MonoBehaviour {
         if (collision.gameObject.tag == "Obsticle2")
         {
             GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
-            rb.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
+            CmdAddForce();
             NetworkIdentity.Destroy(collision.gameObject);
             StartCoroutine(Timer(0.1f));
             TakeDamage.Play();
@@ -62,5 +62,8 @@ public class Skill_Chicken : MonoBehaviour {
         GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", false);
         GetComponent<PlayerController>().Animator.SetBool("IsStruck", false);
     }
-
+    void CmdAddForce()
+    {
+        rb.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
+    }
 }

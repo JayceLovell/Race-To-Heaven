@@ -46,11 +46,16 @@ public class Skill_Placeholder : MonoBehaviour {
         if (collision.gameObject.tag == "Obsticle2")
         {
             GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
-            rb.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
+            CmdAddForce();
             NetworkIdentity.Destroy(collision.gameObject);
             StartCoroutine(Timer(0.1f));
         }
 
+    }
+    [Command]
+    void CmdAddForce()
+    {
+        rb.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
     }
     IEnumerator Timer(float counter)
     {

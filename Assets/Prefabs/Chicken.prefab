@@ -405,6 +405,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   staminaCost: 30
+  currCD: 0
+  TakeDamage: {fileID: 82971729336325918}
 --- !u!114 &114309290087038068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -518,6 +520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd4c825090e55154e8fd897d024e7fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerReady: 0
   PlayerNameText: {fileID: 114482722982121310}
   gameMangerPrefab: {fileID: 1752932883271752, guid: bad9379adf97d4843826b63a409dbc4d,
     type: 2}
