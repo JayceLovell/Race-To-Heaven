@@ -117,6 +117,7 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start() {
         _networkManager = GameObject.Find("NetworkManager").GetComponent<MyNetworkManager>();
+        LoadSettings();
     }
 
     // Update is called once per frame
@@ -140,6 +141,13 @@ public class GameManager : MonoBehaviour {
     public void ChangedSettings()
     {
         GameSettings = JsonUtility.FromJson<GameSettings>(File.ReadAllText(Application.persistentDataPath + "/gamesettings.json"));
+    }
+    void LoadSettings()
+    {
+        QualitySettings.antiAliasing = GameSettings.Antialiasing;
+        QualitySettings.vSyncCount = GameSettings.VSync;
+        QualitySettings.masterTextureLimit = GameSettings.TextureQuality;
+        Screen.fullScreen = GameSettings.Fullscreen;
     }
 
 }
