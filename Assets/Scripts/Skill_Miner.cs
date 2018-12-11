@@ -58,14 +58,14 @@ public class Skill_Miner : NetworkBehaviour
     {
         if ((collision.gameObject.tag == "Obsticle1" || collision.gameObject.tag == "Obsticle2") && isUsingSkill)
         {
-            NetworkServer.Destroy(collision.gameObject);
+            CmdDeleteObject(collision.gameObject);
         }
         else if(collision.gameObject.tag == "Obsticle2")
         {
             this.gameObject.GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
             StartCoroutine(Timer(0.1f));
             CmdAddForce();
-            NetworkServer.Destroy(collision.gameObject);
+            CmdDeleteObject(collision.gameObject);
             TakeDamage.Play();
         }
     }
@@ -73,6 +73,11 @@ public class Skill_Miner : NetworkBehaviour
     void CmdAddForce()
     {
         _rigibody.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
+    }
+    [Command]
+    void CmdDeleteObject(GameObject delete)
+    {
+        NetworkServer.Destroy(delete);
     }
 
 }

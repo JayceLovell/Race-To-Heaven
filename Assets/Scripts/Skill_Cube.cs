@@ -40,7 +40,7 @@ public class Skill_Cube : NetworkBehaviour {
         {
             GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
             CmdAddForce();
-            NetworkServer.Destroy(collision.gameObject);
+            CmdDeleteObject(collision.gameObject);
             StartCoroutine(Timer(0.1f));
         }
         
@@ -49,6 +49,11 @@ public class Skill_Cube : NetworkBehaviour {
     void CmdAddForce()
     {
         rb.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
+    }
+    [Command]
+    void CmdDeleteObject(GameObject delete)
+    {
+        NetworkServer.Destroy(delete);
     }
     IEnumerator Timer(float counter)
     {
