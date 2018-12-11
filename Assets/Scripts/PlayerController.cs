@@ -64,7 +64,7 @@ public class PlayerController : NetworkBehaviour
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _rigidBody = GetComponent<Rigidbody2D>();
         PlayerAnimator = GetComponent<Animator>();
-        _gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         _groundCheck = this.gameObject.transform;
         WhatIsGround = LayerMask.GetMask("Ground");
         _startGame = GameObject.Find("StartGame");
@@ -123,7 +123,7 @@ public class PlayerController : NetworkBehaviour
                 //and your counter hasn't reached zero...
                 if (JumpTimeCounter > 0)
                 {
-                //keep jumping!
+                //keep jumping!   
                 _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
                 JumpTimeCounter -= Time.deltaTime;
                 }
@@ -135,7 +135,7 @@ public class PlayerController : NetworkBehaviour
                 JumpTimeCounter = 0;
                 StoppedJumping = true;
             }
-        if ((Input.GetButtonDown("Submit")||Input.GetKeyDown(KeyCode.Space)) && !_gameController.GameActive && !PlayerReady)
+        if (Input.GetButtonDown("Submit") && !_gameController.GameActive && !PlayerReady)
         {
             _startGame.SetActive(false);
             CmdThisPlayerReady();

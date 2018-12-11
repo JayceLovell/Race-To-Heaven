@@ -24,7 +24,11 @@ public class Skill_Placeholder : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (!isLocalPlayer)
+        {
+            // exit from update if this is not the local player
+            return;
+        }
         currStamina = _skillbar.StaminaAmount;
 
         if (currStamina > staminaCost && Input.GetButtonDown("Skill") && portal == null)
@@ -57,6 +61,7 @@ public class Skill_Placeholder : NetworkBehaviour
     [Command]
     void CmdAddForce()
     {
+        rb = GetComponent<Rigidbody2D>();
         rb.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
     }
     IEnumerator Timer(float counter)

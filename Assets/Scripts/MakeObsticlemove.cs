@@ -17,7 +17,7 @@ public class MakeObsticlemove : NetworkBehaviour {
 
     // Use this for initialization
     void Start () {
-        _gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         verticalChangeTimer = _gameController.Speed;
 
         switch (obsticleType)

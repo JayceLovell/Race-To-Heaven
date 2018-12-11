@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1979760979404064}
+  m_IsPrefabAsset: 1
+--- !u!1 &1979760979404064
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4459471120035880}
+  - component: {fileID: 114466097130939560}
+  - component: {fileID: 114965381291555362}
+  m_Layer: 0
+  m_Name: SpawnSetAether2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4459471120035880
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1979760979404064}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 10, y: -2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114466097130939560
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1979760979404064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5cae9c1fc66ad4aa5363a055d2a963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 1061702554097630, guid: 8d639c41c003e0c4287f1ac67a576bbf, type: 2}
+  - {fileID: 1142229704509928, guid: b6da664669ed03f409ae839739bf0049, type: 2}
+  spawnHeightAdjustment:
+  - 0
+  - 2
+  spawnedObject: {fileID: 0}
+  obstacleMinWidth: 10
+  obstacleMaxWidth: 30
+  speedMultipliler: 0.1
+--- !u!114 &114965381291555362
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1979760979404064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 55
+    i1: 82
+    i2: 69
+    i3: 54
+    i4: 56
+    i5: 158
+    i6: 179
+    i7: 52
+    i8: 41
+    i9: 243
+    i10: 141
+    i11: 88
+    i12: 16
+    i13: 201
+    i14: 127
+    i15: 80
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
