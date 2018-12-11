@@ -394,8 +394,9 @@ MonoBehaviour:
   Speed: 0
   Players: []
   objects: []
+  aSource: {fileID: 205383839}
   aClips:
-  - {fileID: 8300000, guid: d6943ec43443f1c4b86b859aadf19041, type: 3}
+  - {fileID: 8300000, guid: 49aae72af04ef0643bcc20c518879425, type: 3}
   - {fileID: 8300000, guid: 390632ba41550a7458e7cc2f385a1108, type: 3}
 --- !u!4 &205383838
 Transform:

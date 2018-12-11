@@ -24,7 +24,7 @@ public class GameController : NetworkBehaviour {
     private NetworkManager _networkManager;
     private GameManager _gameManager;
 
-    AudioSource aSource;
+    public AudioSource aSource;
     public AudioClip[] aClips;
 
 
