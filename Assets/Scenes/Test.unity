@@ -1553,7 +1553,6 @@ GameObject:
   - component: {fileID: 1418206537}
   - component: {fileID: 1418206540}
   - component: {fileID: 1418206539}
-  - component: {fileID: 1418206538}
   m_Layer: 5
   m_Name: StartGame
   m_TagString: Untagged
@@ -1579,18 +1578,6 @@ RectTransform:
   m_AnchoredPosition: {x: -5.3, y: 137.5}
   m_SizeDelta: {x: 150, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1418206538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1418206536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bb2d82eff80b1f46a029c7916b0869c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gc: {fileID: 0}
 --- !u!114 &1418206539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1725,6 +1712,7 @@ MonoBehaviour:
   Speed: 0
   Players: []
   objects: []
+  aSource: {fileID: 0}
   aClips:
   - {fileID: 8300000, guid: d6943ec43443f1c4b86b859aadf19041, type: 3}
   - {fileID: 8300000, guid: 390632ba41550a7458e7cc2f385a1108, type: 3}

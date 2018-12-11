@@ -18,7 +18,7 @@ public class PlayerController : NetworkBehaviour
     public bool StoppedJumping;
     public float GroundCheckRadius;
     [Header("Animator")]
-    public Animator Animator;
+    public Animator PlayerAnimator;
     public AudioSource GameOver;
 
     // Private variables
@@ -63,7 +63,7 @@ public class PlayerController : NetworkBehaviour
     {
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _rigidBody = GetComponent<Rigidbody2D>();
-        Animator = GetComponent<Animator>();
+        PlayerAnimator = GetComponent<Animator>();
         _gameController = GameObject.Find("GameController").GetComponent<GameController>();
         _groundCheck = this.gameObject.transform;
         WhatIsGround = LayerMask.GetMask("Ground");
@@ -82,20 +82,20 @@ public class PlayerController : NetworkBehaviour
         Grounded = Physics2D.OverlapCircle(_groundCheck.position, GroundCheckRadius, WhatIsGround);
         if (Grounded)
         {
-                Animator.SetBool("IsGrounded", true);
+                PlayerAnimator.SetBool("IsGrounded", true);
                 JumpTimeCounter = JumpTime;
         }
         else
         {
-                Animator.SetBool("IsGrounded", false);
+                PlayerAnimator.SetBool("IsGrounded", false);
         }
         if (_gameController.GameActive)
         {
-                Animator.SetBool("IsRunning", true);
+                PlayerAnimator.SetBool("IsRunning", true);
         }
         else
         {
-            Animator.SetBool("IsRunning", false);
+            PlayerAnimator.SetBool("IsRunning", false);
         }
     }
         // Update is called once per frame
@@ -112,9 +112,9 @@ public class PlayerController : NetworkBehaviour
                 //and you are on the ground...
                 if (Grounded)
                 {
-                    //jump!
-                    _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
-                    StoppedJumping = false;
+                //jump!
+                _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
+                StoppedJumping = false;
                 }
             }
             //if you keep holding down the jump button...
@@ -123,9 +123,9 @@ public class PlayerController : NetworkBehaviour
                 //and your counter hasn't reached zero...
                 if (JumpTimeCounter > 0)
                 {
-                    //keep jumping!
-                    _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
-                    JumpTimeCounter -= Time.deltaTime;
+                //keep jumping!
+                _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, JumpForce);
+                JumpTimeCounter -= Time.deltaTime;
                 }
             }
             //if you stop holding down the jump button...
@@ -154,8 +154,8 @@ public class PlayerController : NetworkBehaviour
     }
     public void Winner()
     {
-        Animator.SetBool("Winner", true);
-        Animator.speed = 5;
+        PlayerAnimator.SetBool("Winner", true);
+        PlayerAnimator.speed = 5;
         this.gameObject.transform.position = Vector3.zero;
         _rigidBody.gravityScale = 0;
         _rigidBody.velocity = new Vector3(0, 0.5f, 0);

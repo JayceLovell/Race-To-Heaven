@@ -29,14 +29,14 @@ public class Skill_Placeholder : NetworkBehaviour
 
         if (currStamina > staminaCost && Input.GetButtonDown("Skill") && portal == null)
         {
-            GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", true);
+            GetComponent<PlayerController>().PlayerAnimator.SetBool("IsUsingSkill", true);
             StartCoroutine(Timer(0.5f));
             _skillbar.StaminaAmount -= staminaCost;
             portal = Instantiate(portalPrefab, this.transform.position, Quaternion.identity);
         }
         else if ( Input.GetButtonDown("Skill") && portal != null)
         {
-            GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", true);
+            GetComponent<PlayerController>().PlayerAnimator.SetBool("IsUsingSkill", true);
             this.transform.position = portal.transform.position;
             Destroy(portal);
             StartCoroutine(Timer(0.5f));
@@ -48,9 +48,8 @@ public class Skill_Placeholder : NetworkBehaviour
 
         if (collision.gameObject.tag == "Obsticle2")
         {
-            GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
+            GetComponent<PlayerController>().PlayerAnimator.SetBool("IsStruck", true);
             CmdAddForce();
-            CmdDeleteObject(collision.gameObject);
             StartCoroutine(Timer(0.1f));
         }
 
@@ -60,15 +59,10 @@ public class Skill_Placeholder : NetworkBehaviour
     {
         rb.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
     }
-    [Command]
-    void CmdDeleteObject(GameObject delete)
-    {
-        NetworkServer.Destroy(delete);
-    }
     IEnumerator Timer(float counter)
     {
         yield return new WaitForSeconds(counter);
-        GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", false);
-        GetComponent<PlayerController>().Animator.SetBool("IsStruck", false);
+        GetComponent<PlayerController>().PlayerAnimator.SetBool("IsUsingSkill", false);
+        GetComponent<PlayerController>().PlayerAnimator.SetBool("IsStruck", false);
     }
 }

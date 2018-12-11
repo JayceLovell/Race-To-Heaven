@@ -39,7 +39,7 @@ public class Skill_Angle : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Obsticle2")
         {
-            GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
+            GetComponent<PlayerController>().PlayerAnimator.SetBool("IsStruck", true);
             rb.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
             Destroy(collision.gameObject);
         }

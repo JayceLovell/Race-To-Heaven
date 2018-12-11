@@ -500,10 +500,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 2
-  m_SendInterval: 0.1
+  m_SendInterval: 0.09090909
   m_SyncRotationAxis: 3
   m_RotationSyncCompression: 0
-  m_SyncSpin: 0
+  m_SyncSpin: 1
   m_MovementTheshold: 0.001
   m_VelocityThreshold: 0.0001
   m_SnapThreshold: 5
@@ -522,8 +522,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerReady: 0
   PlayerNameText: {fileID: 114482722982121310}
-  gameMangerPrefab: {fileID: 1752932883271752, guid: bad9379adf97d4843826b63a409dbc4d,
-    type: 2}
   JumpTime: 10
   JumpTimeCounter: 10
   Grounded: 1
@@ -532,7 +530,7 @@ MonoBehaviour:
     m_Bits: 256
   StoppedJumping: 0
   GroundCheckRadius: 1
-  Animator: {fileID: 0}
+  PlayerAnimator: {fileID: 95002255414347072}
   GameOver: {fileID: 82680508943619350}
 --- !u!114 &114721245803589232
 MonoBehaviour:

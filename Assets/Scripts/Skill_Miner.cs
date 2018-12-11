@@ -41,7 +41,7 @@ public class Skill_Miner : NetworkBehaviour
         {
             _skillbar.StaminaAmount -= _staminaCost;
             currCD = cooldown;
-            GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", true);
+            GetComponent<PlayerController>().PlayerAnimator.SetBool("IsUsingSkill", true);
             isUsingSkill = true;
             StartCoroutine(Timer(1));
         }
@@ -52,21 +52,21 @@ public class Skill_Miner : NetworkBehaviour
     {
         yield return new WaitForSeconds(counter);
         isUsingSkill = false;
-        GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", false);
-        GetComponent<PlayerController>().Animator.SetBool("IsStruck", false);
+        GetComponent<PlayerController>().PlayerAnimator.SetBool("IsUsingSkill", false);
+        GetComponent<PlayerController>().PlayerAnimator.SetBool("IsStruck", false);
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.gameObject.tag == "Obsticle1" || collision.gameObject.tag == "Obsticle2") && isUsingSkill)
+        /*if ((collision.gameObject.tag == "Obsticle1" || collision.gameObject.tag == "Obsticle2") && isUsingSkill)
         {
             CmdDeleteObject(collision.gameObject);
-        }
-        else if(collision.gameObject.tag == "Obsticle2")
+        }*/
+        if(collision.gameObject.tag == "Obsticle2" && !isUsingSkill)
         {
-            this.gameObject.GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
+            this.gameObject.GetComponent<PlayerController>().PlayerAnimator.SetBool("IsStruck", true);
             StartCoroutine(Timer(0.1f));
             CmdAddForce();
-            CmdDeleteObject(collision.gameObject);
+            //CmdDeleteObject(collision.gameObject);
             TakeDamage.Play();
         }
     }
@@ -75,10 +75,10 @@ public class Skill_Miner : NetworkBehaviour
     {
         _rigibody.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
     }
-    [Command]
+    /*[Command]
     void CmdDeleteObject(GameObject delete)
     {
         NetworkServer.Destroy(delete);
-    }
+    }*/
 
 }

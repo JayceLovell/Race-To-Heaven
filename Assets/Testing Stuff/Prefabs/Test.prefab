@@ -439,8 +439,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerReady: 0
   PlayerNameText: {fileID: 114651948520815188}
-  gameMangerPrefab: {fileID: 1752932883271752, guid: bad9379adf97d4843826b63a409dbc4d,
-    type: 2}
   JumpTime: 10
   JumpTimeCounter: 10
   Grounded: 1
@@ -449,7 +447,7 @@ MonoBehaviour:
     m_Bits: 256
   StoppedJumping: 0
   GroundCheckRadius: 1
-  Animator: {fileID: 95600769671455852}
+  PlayerAnimator: {fileID: 95600769671455852}
   GameOver: {fileID: 82503057571828976}
 --- !u!114 &114470325683871802
 MonoBehaviour:

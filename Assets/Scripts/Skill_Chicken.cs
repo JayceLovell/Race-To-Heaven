@@ -30,13 +30,13 @@ public class Skill_Chicken : NetworkBehaviour
 
         if (currStamina > staminaCost && rb.velocity.y < -0.5f && Input.GetButton("Skill") && currCD <= 0)
         {
-            GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", true);
+            GetComponent<PlayerController>().PlayerAnimator.SetBool("IsUsingSkill", true);
             _skillbar.StaminaAmount -= staminaCost * Time.deltaTime;
             rb.velocity = new Vector2(rb.velocity.x, -0.5f);
         }
         else if(Input.GetButtonUp("Skill"))
         {
-            GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", false);
+            GetComponent<PlayerController>().PlayerAnimator.SetBool("IsUsingSkill", false);
         }
         /*else
         {
@@ -51,9 +51,9 @@ public class Skill_Chicken : NetworkBehaviour
     {
         if (collision.gameObject.tag == "Obsticle2")
         {
-            GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
+            GetComponent<PlayerController>().PlayerAnimator.SetBool("IsStruck", true);
             CmdAddForce();
-            CmdDeleteObject(collision.gameObject);
+            //CmdDeleteObject(collision.gameObject);
             StartCoroutine(Timer(0.1f));
             TakeDamage.Play();
         }
@@ -61,17 +61,17 @@ public class Skill_Chicken : NetworkBehaviour
     IEnumerator Timer(float counter)
     {
         yield return new WaitForSeconds(counter);
-        GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", false);
-        GetComponent<PlayerController>().Animator.SetBool("IsStruck", false);
+        GetComponent<PlayerController>().PlayerAnimator.SetBool("IsUsingSkill", false);
+        GetComponent<PlayerController>().PlayerAnimator.SetBool("IsStruck", false);
     }
     [Command]
     void CmdAddForce()
     {
         rb.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
     }
-    [Command]
+    /*[Command]
     void CmdDeleteObject(GameObject delete)
     {
         NetworkServer.Destroy(delete);
-    }
+    }*/
 }

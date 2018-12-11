@@ -379,7 +379,7 @@ MonoBehaviour:
   m_SendInterval: 0.1
   m_SyncRotationAxis: 3
   m_RotationSyncCompression: 0
-  m_SyncSpin: 0
+  m_SyncSpin: 1
   m_MovementTheshold: 0.001
   m_VelocityThreshold: 0.0001
   m_SnapThreshold: 5
@@ -439,7 +439,7 @@ MonoBehaviour:
     m_Bits: 256
   StoppedJumping: 0
   GroundCheckRadius: 1
-  Animator: {fileID: 0}
+  PlayerAnimator: {fileID: 95877377230142154}
   GameOver: {fileID: 82892294527818002}
 --- !u!114 &114418164114615022
 MonoBehaviour:
