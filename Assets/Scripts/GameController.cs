@@ -148,7 +148,8 @@ public class GameController : NetworkBehaviour {
         }
 
     }
-    public void PlayerDead()
+    [Command]
+    public void CmdPlayerDead()
     {
         PlayersAlive = PlayersAlive-1;
     }

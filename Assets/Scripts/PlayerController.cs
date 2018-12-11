@@ -166,8 +166,8 @@ public class PlayerController : NetworkBehaviour
     {
         _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         GameOver.Play();
-        _gameController.PlayerDead();
-        NetworkIdentity.Destroy(this.gameObject);
+        _gameController.CmdPlayerDead();
+        NetworkServer.Destroy(this.gameObject);
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
