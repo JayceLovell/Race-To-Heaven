@@ -9,7 +9,6 @@ public class PlayerController : NetworkBehaviour
     [SyncVar] public bool PlayerReady;
     // Public variables
     public Text PlayerNameText;
-    public GameObject gameMangerPrefab;
 
     [Header("Jump Settings")]
     public float JumpTime;
@@ -69,6 +68,7 @@ public class PlayerController : NetworkBehaviour
         _groundCheck = this.gameObject.transform;
         WhatIsGround = LayerMask.GetMask("Ground");
         _startGame = GameObject.Find("StartGame");
+        GameOver.volume = _gameManager.GameSettings.MusicVolume;
     }
 
     void Update()

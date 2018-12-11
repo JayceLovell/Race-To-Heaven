@@ -14,14 +14,15 @@ public class GameController : NetworkBehaviour {
     [SyncVar] public float Timer;
     [SyncVar] public float Speed;
     public GameObject[] Players;
+    public List<GameObject> objects;
 
     private Text _txtamountOfPlayers;
     private Text _txtClock;
     private float _previousTime;
     private GameObject _fastfoward;
-    private bool _playingWinner;
-    public List<GameObject> objects;
+    private bool _playingWinner;  
     private NetworkManager _networkManager;
+    private GameManager _gameManager;
 
     AudioSource aSource;
     public AudioClip[] aClips;
@@ -44,6 +45,8 @@ public class GameController : NetworkBehaviour {
         _txtClock = GameObject.Find("TxtClock").GetComponent<Text>();
         _fastfoward = GameObject.Find("FastFoward");
         _networkManager = GameObject.Find("NetworkManager").GetComponent<MyNetworkManager>();
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        aSource.volume = _gameManager.GameSettings.MusicVolume;
     }
 
     // Update is called once per frame
@@ -68,8 +71,6 @@ public class GameController : NetworkBehaviour {
             }
             if (PlayersAlive == 1 && GameActive && !_playingWinner)
             {
-                //Write code to find winner player
-                GameActive = false;
                 objects.Add(GameObject.Find("SpawnSet 1"));
                 objects.Add(GameObject.Find("SpawnSet 2"));
                 //objects.AddRange(GameObject.FindGameObjectsWithTag("spawner"));
@@ -80,17 +81,7 @@ public class GameController : NetworkBehaviour {
                 {
                     NetworkServer.Destroy(Object);
                 }
-                var PlayerLeft = GameObject.FindGameObjectWithTag("Player");
-                PlayerLeft.GetComponent<PlayerController>().Winner();
-                _playingWinner = true;
-                StartCoroutine(CountDownToEndGame());
-                if (aSource.clip != aClips[1])
-                {
-                    aSource.Stop();
-                    aSource.clip = aClips[1];
-                    aSource.Play();
-                }
-                
+                RpcWinner();
             }
         }
         if (!GameActive && !_playingWinner)
@@ -139,6 +130,23 @@ public class GameController : NetworkBehaviour {
                     player.GetComponent<PlayerController>().JumpForce++;
                 }
             }
+    }
+    [ClientRpc]
+    void RpcWinner()
+    {
+        //Write code to find winner player
+        GameActive = false;
+        var PlayerLeft = GameObject.FindGameObjectWithTag("Player");
+        PlayerLeft.GetComponent<PlayerController>().Winner();
+        _playingWinner = true;
+        StartCoroutine(CountDownToEndGame());
+        if (aSource.clip != aClips[1])
+        {
+            aSource.Stop();
+            aSource.clip = aClips[1];
+            aSource.Play();
+        }
+
     }
     public void PlayerDead()
     {

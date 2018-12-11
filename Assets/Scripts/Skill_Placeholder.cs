@@ -7,6 +7,7 @@ public class Skill_Placeholder : NetworkBehaviour
 {
     public float staminaCost;
     public GameObject portalPrefab;
+    public AudioSource TakeDamage;
     private SkillBarScript _skillbar;
     float currStamina;
     GameObject portal = null;
@@ -17,6 +18,7 @@ public class Skill_Placeholder : NetworkBehaviour
         _skillbar = GetComponent<SkillBarScript>();
         currStamina = _skillbar.StaminaAmount;
         rb = GetComponent<Rigidbody2D>();
+        TakeDamage.volume = GameObject.Find("GameManager").GetComponent<GameManager>().GameSettings.MusicVolume;
     }
 
     // Update is called once per frame

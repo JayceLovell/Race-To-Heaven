@@ -23,6 +23,7 @@ public class Skill_Miner : NetworkBehaviour
         _rigibody = GetComponent<Rigidbody2D>();
         _skillbar = GetComponent<SkillBarScript>();
         currStamina = _skillbar.StaminaAmount;
+        TakeDamage.volume = GameObject.Find("GameManager").GetComponent<GameManager>().GameSettings.MusicVolume;
     }
 
 

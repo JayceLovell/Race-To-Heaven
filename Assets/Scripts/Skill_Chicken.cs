@@ -18,6 +18,7 @@ public class Skill_Chicken : NetworkBehaviour
         currStamina = _skillbar.StaminaAmount;
         rb = GetComponent<Rigidbody2D>();
         currCD = 0;
+        TakeDamage.volume = GameObject.Find("GameManager").GetComponent<GameManager>().GameSettings.MusicVolume;
     }
 	
 	void FixedUpdate () {
