@@ -60,10 +60,15 @@ public class MakeObsticlemove : NetworkBehaviour {
         else if(collision.gameObject.tag == "Player" && this.gameObject.tag == "Obsticle2")
         {
             Debug.Log("sending player back");
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
+            RpcKnockBack(collision);
             NetworkServer.Destroy(this.gameObject);
         }
         
+    }
+    [ClientRpc]
+    void RpcKnockBack(Collision2D collision)
+    {
+        collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
     }
     IEnumerator MovingPlatform()
     {
