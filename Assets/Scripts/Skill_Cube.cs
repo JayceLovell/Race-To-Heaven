@@ -41,8 +41,8 @@ public class Skill_Cube : NetworkBehaviour {
         if (collision.gameObject.tag == "Obsticle2")
         {
             GetComponent<PlayerController>().PlayerAnimator.SetBool("IsStruck", true);
-            Debug.Log("Calling cmd");
-            CmdAddForce();
+            rb.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
+            //CmdAddForce();
             //CmdDeleteObject(collision.gameObject);
             StartCoroutine(Timer(0.1f));
         }
