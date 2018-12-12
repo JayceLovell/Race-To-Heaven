@@ -24,6 +24,11 @@ public class Skill_Cube : NetworkBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (!isLocalPlayer)
+        {
+            // exit from update if this is not the local player
+            return;
+        }
         currStamina = _skillbar.StaminaAmount;
         if (currStamina > staminaCost && Input.GetButtonDown("Skill") && rb.velocity.y<5)
         {

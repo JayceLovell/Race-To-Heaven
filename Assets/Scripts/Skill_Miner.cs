@@ -29,7 +29,11 @@ public class Skill_Miner : NetworkBehaviour
 
     void Update()
     {
-
+        if (!isLocalPlayer)
+        {
+            // exit from update if this is not the local player
+            return;
+        }
         currStamina = _skillbar.StaminaAmount;
         if (currCD > 0)
             currCD -= Time.deltaTime;
