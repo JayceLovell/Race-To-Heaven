@@ -57,7 +57,7 @@ public class Skill_Chicken : NetworkBehaviour
         if (collision.gameObject.tag == "Obsticle2")
         {
             GetComponent<PlayerController>().PlayerAnimator.SetBool("IsStruck", true);
-            //rb.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
+            rb.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
             //CmdAddForce();
             //CmdDeleteObject(collision.gameObject);
             StartCoroutine(Timer(0.1f));

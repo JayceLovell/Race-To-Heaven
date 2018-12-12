@@ -31,7 +31,10 @@ public class MakeObsticlemove : NetworkBehaviour {
 	}
 	
 	void Update () {
-
+        if (!isServer)
+        {
+            return;
+        }
         if (_gameController.GameActive)
         {
             transform.Translate(Vector2.left * _gameController.Speed * Time.deltaTime);
@@ -60,15 +63,9 @@ public class MakeObsticlemove : NetworkBehaviour {
         else if(collision.gameObject.tag == "Player" && this.gameObject.tag == "Obsticle2")
         {
             Debug.Log("sending player back");
-            RpcKnockBack(collision);
             NetworkServer.Destroy(this.gameObject);
         }
         
-    }
-    [ClientRpc]
-    void RpcKnockBack(Collision2D collision)
-    {
-        collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
     }
     IEnumerator MovingPlatform()
     {
