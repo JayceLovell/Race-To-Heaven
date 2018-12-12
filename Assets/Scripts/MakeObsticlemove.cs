@@ -55,7 +55,7 @@ public class MakeObsticlemove : NetworkBehaviour {
     {
         //if (collision.gameObject.name == "Off")
         //{
-            NetworkIdentity.Destroy(this.gameObject);
+            NetworkServer.Destroy(this.gameObject);
         //}
         
     }
