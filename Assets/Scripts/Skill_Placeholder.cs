@@ -53,7 +53,8 @@ public class Skill_Placeholder : NetworkBehaviour
         if (collision.gameObject.tag == "Obsticle2")
         {
             GetComponent<PlayerController>().PlayerAnimator.SetBool("IsStruck", true);
-            CmdAddForce();
+            rb.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
+            //CmdAddForce();
             StartCoroutine(Timer(0.1f));
         }
 
