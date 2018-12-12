@@ -53,7 +53,7 @@ public class Skill_Chicken : NetworkBehaviour
         {
             GetComponent<PlayerController>().PlayerAnimator.SetBool("IsStruck", true);
             rb.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
-            //CmdAddForce();
+            CmdAddForce();
             //CmdDeleteObject(collision.gameObject);
             StartCoroutine(Timer(0.1f));
             TakeDamage.Play();
@@ -68,6 +68,7 @@ public class Skill_Chicken : NetworkBehaviour
     [Command]
     void CmdAddForce()
     {
+        rb = GetComponent<Rigidbody2D>();
         rb.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
     }
     /*[Command]
