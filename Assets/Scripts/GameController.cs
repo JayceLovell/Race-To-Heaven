@@ -81,6 +81,8 @@ public class GameController : NetworkBehaviour {
                 {
                     NetworkServer.Destroy(Object);
                 }
+                GameActive = false;
+                Debug.Log("Calling Winner Client RPC");
                 RpcWinner();
             }
         }
@@ -134,8 +136,8 @@ public class GameController : NetworkBehaviour {
     [ClientRpc]
     void RpcWinner()
     {
+        Debug.Log("Inside Winner Client RPC");
         //Write code to find winner player
-        GameActive = false;
         var PlayerLeft = GameObject.FindGameObjectWithTag("Player");
         PlayerLeft.GetComponent<PlayerController>().Winner();
         _playingWinner = true;

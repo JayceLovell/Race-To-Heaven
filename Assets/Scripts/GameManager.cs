@@ -119,11 +119,6 @@ public class GameManager : MonoBehaviour {
         _networkManager = GameObject.Find("NetworkManager").GetComponent<MyNetworkManager>();
         LoadSettings();
     }
-
-    // Update is called once per frame
-    void Update() {
-
-    }
     public void HostGame()
     {
         _networkManager.onlineScene = _levelChoice;

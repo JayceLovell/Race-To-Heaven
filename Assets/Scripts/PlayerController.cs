@@ -154,6 +154,7 @@ public class PlayerController : NetworkBehaviour
     }
     public void Winner()
     {
+        _rigidBody = GetComponent<Rigidbody2D>();
         PlayerAnimator.SetBool("Winner", true);
         PlayerAnimator.speed = 5;
         this.gameObject.transform.position = Vector3.zero;
