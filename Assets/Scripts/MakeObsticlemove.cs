@@ -53,8 +53,14 @@ public class MakeObsticlemove : NetworkBehaviour {
     //eliminate spawned objects on the left when they exit the collision box
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Off" || collision.gameObject.tag=="Player")
+        if (collision.gameObject.name == "Off")
         {
+            NetworkServer.Destroy(this.gameObject);
+        }
+        else if(collision.gameObject.tag == "Player" && this.gameObject.tag == "Obsticle2")
+        {
+            Debug.Log("sending player back");
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
             NetworkServer.Destroy(this.gameObject);
         }
         

@@ -65,7 +65,7 @@ public class Skill_Miner : NetworkBehaviour
         {
             this.gameObject.GetComponent<PlayerController>().PlayerAnimator.SetBool("IsStruck", true);
             StartCoroutine(Timer(0.1f));
-            _rigibody.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
+            //_rigibody.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
             //CmdAddForce();
             //CmdDeleteObject(collision.gameObject);
             TakeDamage.Play();
