@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1129541240665938}
+  m_IsPrefabAsset: 1
+--- !u!1 &1129541240665938
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4486517864979266}
+  - component: {fileID: 114923550438493280}
+  - component: {fileID: 114587343463104550}
+  m_Layer: 0
+  m_Name: SpawnSetLimbo1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4486517864979266
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1129541240665938}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 10, y: -2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114587343463104550
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1129541240665938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 206
+    i1: 83
+    i2: 173
+    i3: 11
+    i4: 64
+    i5: 172
+    i6: 184
+    i7: 228
+    i8: 27
+    i9: 240
+    i10: 4
+    i11: 105
+    i12: 130
+    i13: 104
+    i14: 70
+    i15: 228
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!114 &114923550438493280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1129541240665938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5cae9c1fc66ad4aa5363a055d2a963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 1277479105555726, guid: 2c1cdbf18f5049a4187d9fb3bbc19594, type: 2}
+  - {fileID: 1606014982832154, guid: 6ae6052a952d5de439f24551dc056f5d, type: 2}
+  - {fileID: 1979299918894538, guid: 5d35ac10875feaf409327dffc9e120da, type: 2}
+  - {fileID: 1868398084375990, guid: b2d685517c12afd44883d2ab3303b5f7, type: 2}
+  - {fileID: 1771141486350670, guid: fba488fca625fda43b02e5d6289b7f44, type: 2}
+  spawnHeightAdjustment:
+  - -0.22
+  - 6.26
+  - -0.9
+  - 6.26
+  - -0.32
+  spawnedObject: {fileID: 0}
+  obstacleMinWidth: 8
+  obstacleMaxWidth: 10
+  speedMultipliler: 0.1

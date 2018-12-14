@@ -48,8 +48,7 @@ public class SettingsManager : MonoBehaviour {
     }
     public void OnTextureQualityChange()
     {
-        QualitySettings.masterTextureLimit = GameSettings.TextureQuality = TextureQualityDropdown.value;
-        
+        QualitySettings.masterTextureLimit = GameSettings.TextureQuality = TextureQualityDropdown.value;     
     }
     public void OnAntialiasingChange()
     {

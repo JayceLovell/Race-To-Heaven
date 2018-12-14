@@ -19,7 +19,7 @@ public class LevelGenerationScript : NetworkBehaviour {
 
     void Start()
     {
-        _gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         if (isServer)
         {
             prefabSelection = Random.Range(0, prefabs.Length);

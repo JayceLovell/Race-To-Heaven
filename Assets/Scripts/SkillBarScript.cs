@@ -38,7 +38,7 @@ public class SkillBarScript : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        _gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         _skillbar = GameObject.Find("SkillBar").GetComponent<Slider>();
         _skillbar.value = 0.001f;
 	}

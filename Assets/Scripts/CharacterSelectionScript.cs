@@ -68,6 +68,7 @@ public class CharacterSelectionScript : MonoBehaviour {
                 break;
         }
         _gameManager.SelectedCharacter = true;
+        Back();
     }
 
 }

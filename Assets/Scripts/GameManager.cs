@@ -16,10 +16,6 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
 
-    [Header("Obsticles Prefabs")]
-    public GameObject[] TestObsticles;
-    public GameObject[] AetherObsticles;
-    public GameObject[] LimboObsticles;
     public GameSettings GameSettings;
     public string LevelChoice
     {
@@ -121,48 +117,15 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start() {
         _networkManager = GameObject.Find("NetworkManager").GetComponent<MyNetworkManager>();
-    }
-
-    // Update is called once per frame
-    void Update() {
-
-    }
-    private void _prepareNetWorkManager()
-    {
-        switch (_levelChoice)
-        {
-            case "Test":
-                foreach(var prefab in TestObsticles)
-                {
-                    _networkManager.spawnPrefabs.Add(prefab);
-                    ClientScene.RegisterPrefab(prefab);
-                }
-                break;
-            case "Aether":
-                foreach (var prefab in AetherObsticles)
-                {
-                    _networkManager.spawnPrefabs.Add(prefab);
-                    ClientScene.RegisterPrefab(prefab);
-                }
-                break;
-            case "Limbo":
-                foreach (var prefab in LimboObsticles)
-                {
-                    _networkManager.spawnPrefabs.Add(prefab);
-                    ClientScene.RegisterPrefab(prefab);
-                }
-                break;
-        }
+        LoadSettings();
     }
     public void HostGame()
     {
         _networkManager.onlineScene = _levelChoice;
-        _prepareNetWorkManager();
         _networkManager.StartHost();
     }
     public void JoinGame()
     {
-        _prepareNetWorkManager();
         _networkManager.onlineScene = _levelChoice;
         if (_hostaddress != null)
         {
@@ -173,6 +136,13 @@ public class GameManager : MonoBehaviour {
     public void ChangedSettings()
     {
         GameSettings = JsonUtility.FromJson<GameSettings>(File.ReadAllText(Application.persistentDataPath + "/gamesettings.json"));
+    }
+    void LoadSettings()
+    {
+        QualitySettings.antiAliasing = GameSettings.Antialiasing;
+        QualitySettings.vSyncCount = GameSettings.VSync;
+        QualitySettings.masterTextureLimit = GameSettings.TextureQuality;
+        Screen.fullScreen = GameSettings.Fullscreen;
     }
 
 }

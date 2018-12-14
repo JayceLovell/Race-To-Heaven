@@ -17,7 +17,7 @@ public class MakeObsticlemove : NetworkBehaviour {
 
     // Use this for initialization
     void Start () {
-        _gameController = GameObject.Find("GameController").GetComponent<GameController>();
+        _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         verticalChangeTimer = _gameController.Speed;
 
         switch (obsticleType)
@@ -31,7 +31,10 @@ public class MakeObsticlemove : NetworkBehaviour {
 	}
 	
 	void Update () {
-
+        if (!isServer)
+        {
+            return;
+        }
         if (_gameController.GameActive)
         {
             transform.Translate(Vector2.left * _gameController.Speed * Time.deltaTime);
@@ -55,8 +58,14 @@ public class MakeObsticlemove : NetworkBehaviour {
     {
         if (collision.gameObject.name == "Off")
         {
-            NetworkIdentity.Destroy(this.gameObject);
+            NetworkServer.Destroy(this.gameObject);
         }
+        else if(collision.gameObject.tag == "Player" && this.gameObject.tag == "Obsticle2")
+        {
+            Debug.Log("sending player back");
+            NetworkServer.Destroy(this.gameObject);
+        }
+        
     }
     IEnumerator MovingPlatform()
     {

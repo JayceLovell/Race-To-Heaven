@@ -28,9 +28,9 @@ GameObject:
   - component: {fileID: 82798754931762104}
   - component: {fileID: 82804583542642218}
   - component: {fileID: 114703867700154754}
-  - component: {fileID: 114606233362039494}
   - component: {fileID: 114029919824665390}
   - component: {fileID: 60284142070759086}
+  - component: {fileID: 114583431564542556}
   m_Layer: 9
   m_Name: Miner
   m_TagString: Player
@@ -392,9 +392,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd4c825090e55154e8fd897d024e7fbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerReady: 0
   PlayerNameText: {fileID: 114282804481205856}
-  gameMangerPrefab: {fileID: 1752932883271752, guid: bad9379adf97d4843826b63a409dbc4d,
-    type: 2}
   JumpTime: 10
   JumpTimeCounter: 10
   Grounded: 1
@@ -403,7 +402,7 @@ MonoBehaviour:
     m_Bits: 256
   StoppedJumping: 0
   GroundCheckRadius: 1
-  Animator: {fileID: 0}
+  PlayerAnimator: {fileID: 95445811703052680}
   GameOver: {fileID: 82798754931762104}
 --- !u!114 &114137003744993458
 MonoBehaviour:
@@ -486,7 +485,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Miner
---- !u!114 &114606233362039494
+--- !u!114 &114583431564542556
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -498,8 +497,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TransformSyncMode: 2
-  m_SendInterval: 0.1
-  m_SyncRotationAxis: 3
+  m_SendInterval: 0.033333335
+  m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
   m_SyncSpin: 0
   m_MovementTheshold: 0.001

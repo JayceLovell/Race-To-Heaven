@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Skill_Miner : MonoBehaviour {
+public class Skill_Miner : NetworkBehaviour
+{
 
     public float cooldown; // must be more than 1, since our previous slash gameobject takes 1 sec to despawn
     public AudioSource TakeDamage;
@@ -21,12 +23,17 @@ public class Skill_Miner : MonoBehaviour {
         _rigibody = GetComponent<Rigidbody2D>();
         _skillbar = GetComponent<SkillBarScript>();
         currStamina = _skillbar.StaminaAmount;
+        TakeDamage.volume = GameObject.Find("GameManager").GetComponent<GameManager>().GameSettings.MusicVolume;
     }
 
 
     void Update()
     {
-
+        if (!isLocalPlayer)
+        {
+            // exit from update if this is not the local player
+            return;
+        }
         currStamina = _skillbar.StaminaAmount;
         if (currCD > 0)
             currCD -= Time.deltaTime;
@@ -38,7 +45,7 @@ public class Skill_Miner : MonoBehaviour {
         {
             _skillbar.StaminaAmount -= _staminaCost;
             currCD = cooldown;
-            GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", true);
+            GetComponent<PlayerController>().PlayerAnimator.SetBool("IsUsingSkill", true);
             isUsingSkill = true;
             StartCoroutine(Timer(1));
         }
@@ -49,23 +56,35 @@ public class Skill_Miner : MonoBehaviour {
     {
         yield return new WaitForSeconds(counter);
         isUsingSkill = false;
-        GetComponent<PlayerController>().Animator.SetBool("IsUsingSkill", false);
-        GetComponent<PlayerController>().Animator.SetBool("IsStruck", false);
+        GetComponent<PlayerController>().PlayerAnimator.SetBool("IsUsingSkill", false);
+        GetComponent<PlayerController>().PlayerAnimator.SetBool("IsStruck", false);
     }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.gameObject.tag == "Obsticle1" || collision.gameObject.tag == "Obsticle2") && isUsingSkill)
+        /*if ((collision.gameObject.tag == "Obsticle1" || collision.gameObject.tag == "Obsticle2") && isUsingSkill)
         {
-            Destroy(collision.gameObject);
-        }
-        else if(collision.gameObject.tag == "Obsticle2")
+            CmdDeleteObject(collision.gameObject);
+        }*/
+        if(collision.gameObject.tag == "Obsticle2" && !isUsingSkill)
         {
-            this.gameObject.GetComponent<PlayerController>().Animator.SetBool("IsStruck", true);
+            this.gameObject.GetComponent<PlayerController>().PlayerAnimator.SetBool("IsStruck", true);
             StartCoroutine(Timer(0.1f));
             _rigibody.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
-            Destroy(collision.gameObject);
+            //CmdAddForce();
+            //CmdDeleteObject(collision.gameObject);
             TakeDamage.Play();
         }
     }
+    [Command]
+    void CmdAddForce()
+    {
+        _rigibody = GetComponent<Rigidbody2D>();
+        _rigibody.AddForce(new Vector2(-3, 2), ForceMode2D.Impulse);
+    }
+    /*[Command]
+    void CmdDeleteObject(GameObject delete)
+    {
+        NetworkServer.Destroy(delete);
+    }*/
 
 }
